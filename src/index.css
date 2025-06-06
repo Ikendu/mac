@@ -1,22 +1,29 @@
 @import 'tailwindcss';
 
-.main {
+.main-container {
   background-image: url(../src/assets/bg.jpg);
   background-size: cover;
-  bachground-attachment: fixed;
+  background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
 }
+
+.main {
+  transform: skewX(-15deg);
+  transform-origin: top;
+}
 .form {
   border: 2px solid white;
+  box-shadow: -5px 5px #f7f6f6, -9px 9px #e0ad0f;
+  /* Bend effect */
 }
 input {
   width: 100%;
-  padding: 3px;
+  padding: 5px 20px;
   background-color: white;
   border-radius: 8px;
   border: none;
-  box-shadow: 2px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 2px 2px #0000005c;
 }
 input:focus {
   outline: none;
