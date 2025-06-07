@@ -3,9 +3,12 @@
 .main-container {
   background-image: url(../src/assets/bg.jpg);
   background-size: cover;
-  background-attachment: fixed;
-  background-position: center;
+  /* background-attachment: fixed; */
+
+  background-position: top left 70px;
   background-repeat: no-repeat;
+  padding-bottom: 165px;
+  color: #1f182d;
 }
 
 .main {
@@ -15,6 +18,8 @@
 .form {
   border: 2px solid white;
   box-shadow: -5px 5px #f7f6f6, -9px 9px #e0ad0f;
+  background-color: #d1d2d4;
+  max-width: 320px;
   /* Bend effect */
 }
 input {
@@ -27,4 +32,22 @@ input {
 }
 input:focus {
   outline: none;
+}
+.lastbtn,
+.registerbtn {
+  font-size: 16px;
+  color: black;
+}
+.registerbtn {
+  background-color: #e0ad0f;
+  border-radius: 8px;
+  padding: 5px;
+  font-weight: 600;
+  max-width: 180px;
+}
+.lastbtn:hover {
+  color: rgb(36, 84, 195);
+}
+.last-items {
+  transform: skewX(15deg);
 }

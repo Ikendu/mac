@@ -1,0 +1,22 @@
+@media (max-width: 768px) {
+  .left-title {
+    display: none;
+  }
+  .main {
+    transform: skewX(0deg);
+  }
+  .main-container {
+    background-position: top 0 right 0;
+    height: 500px;
+  }
+  .form {
+    background-color: #d1d2d4cd;
+    width: 300px;
+  }
+  .last-items {
+    transform: skewX(0deg);
+  }
+  footer {
+    font-size: 10px;
+  }
+}
