@@ -6,11 +6,11 @@ export default function Homepage() {
       <header className='flex justify-between items-center p-2 px-22 bg-[#022e64]'>
         <div className=''>
           <a href='https://www.firstbanknigeria.com/'>
-            <img src='../src/assets/logo-DarkBg.png' alt='Firstbank logo' />
+            <img src='image/logo-DarkBg.png' alt='Firstbank logo' />
           </a>
         </div>
         <div className='left-title'>
-          <img src='../src/assets/banksnap.jpg' alt='left title' />
+          <img src='image/banksnap.jpg' alt='left title' />
         </div>
       </header>
       <main>
@@ -44,7 +44,7 @@ export default function Homepage() {
             <div className=' rounded-lg py-3 mt-8 bg-[#e0ad0f] w-[300px]'>
               <div className='last-items'>
                 <div className=' px-3 pl-4 flex items-center gap-3 text-sm'>
-                  <img src='../src/assets/bulb.png' alt='' />
+                  <img src='image/bulb.png' alt='' />
                   <p className='leading-3.5'>
                     Make multiple transfers in one transaction with FirstOnline
                   </p>
