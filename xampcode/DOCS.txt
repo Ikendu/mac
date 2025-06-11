@@ -1,0 +1,8 @@
+1. Landing Page .................................Done
+2. Login
+3. Form for entries
+4. Table of all entries
+5. Edit, Delete buttons
+6. Create individual entry pdf
+7. Create all entries pdf
+8. Send to email
