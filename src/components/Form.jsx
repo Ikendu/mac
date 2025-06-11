@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 export default function Form() {
   const [username, setUsername] = useState('')
@@ -6,21 +8,25 @@ export default function Form() {
   const [verify, setVerify] = useState('')
   const [msg, setMsg] = useState('')
 
+  const navigate = useNavigate()
+
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const res = await fetch('http://localhost/macdon/login.php', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password, verify }),
-    })
-
-    const data = await res.json()
-    console.log('Data', data)
-    setMsg(data.message)
-
-    if (data.status === 'success') {
-      // Redirect to dashboard or store token
-      alert('Logged in successfully')
+    try {
+      const res = await axios.post('http://localhost/macdon/login.php', {
+        username,
+        password,
+        verify,
+      })
+      console.log('Response:', res)
+      if (res.data.status === 'success') {
+        navigate('/dashboard')
+      } else {
+        console.error('Login failed:', res.data.message)
+        alert(res.data.message)
+      }
+    } catch (error) {
+      console.error('Login error:', error)
     }
   }
   return (
@@ -64,11 +70,12 @@ export default function Form() {
             />
           </div>
         </div>
-        <input
+        <button
           type='submit'
-          value={'Next'}
           className='flex justify-start bg-[#e0ad0f] max-w-26 px-8 font-semibold p-1 text-[15px] rounded-lg'
-        />
+        >
+          Next
+        </button>
         <div className='divider'></div>
         <p>New customer ?</p>
         <button className='registerbtn '>Self-Registration</button>
