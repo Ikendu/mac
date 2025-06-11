@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import './styles.css'
 
 export default function Dashboard() {
   const navigate = useNavigate()
@@ -23,11 +24,11 @@ export default function Dashboard() {
             <img src='icons/form.png' alt='' className='m-auto' />
             <p>All Entries</p>
           </div>
-          <div className='p-5 rounded-xl bg-blue-950 inline-block m-3 pr-2.5 text-center text-white cursor-pointer'>
+          <div className='dbicon'>
             <img src='icons/form.png' alt='' className='m-auto' />
             <p>Download Data</p>
           </div>
-          <div className='p-5 rounded-xl bg-blue-950 inline-block m-3 pr-2.5 text-center text-white cursor-pointer'>
+          <div className='dbicon'>
             <img src='icons/form.png' alt='' className='m-auto' />
             <p>Send All</p>
           </div>
