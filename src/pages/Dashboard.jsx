@@ -11,15 +11,15 @@ export default function Dashboard() {
 
   return (
     <>
-      <main className='h-[80vh]'>
+      <main className='h-[80vh] bg-[url(image/bgdb.jpg)] bg-no-repeat bg-cover'>
         <h2>Dashboard</h2>
         <button onClick={logout}>Logout</button>
         <div>
-          <div className='p-5 rounded-xl bg-blue-950 inline-block m-3 pr-2.5 text-center text-white cursor-pointer'>
+          <div className='dbicon'>
             <img src='icons/form.png' alt='' className='m-auto' />
             <p>Enter Details</p>
           </div>
-          <div className='p-5 rounded-xl bg-blue-950 inline-block m-3 pr-2.5 text-center text-white cursor-pointer'>
+          <div className='dbicon'>
             <img src='icons/form.png' alt='' className='m-auto' />
             <p>All Entries</p>
           </div>
