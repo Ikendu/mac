@@ -1,4 +1,39 @@
+.dashboard {
+  height: 80vh;
+  background-image: url('image/bgdb.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: #b2bdee;
+  padding: 0 90px;
+}
+.maintext {
+  font-size: 30px;
+  font-weight: bold;
+  color: #4c4c52;
+}
+.dashcontainer {
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.logoutbtn {
+  color: #dad2d2;
+  cursor: pointer;
+  padding: 5px 20px;
+  background-color: rgb(100, 27, 27);
+  border-radius: 5px;
+}
+.logoutbtn:hover {
+  color: #fcfafa;
+}
+.dbicons {
+  max-width: 800px;
+  display: flex;
+}
 .dbicon {
+  cursor: pointer;
   width: 150px;
   background-color: #0d0d49;
   color: white;
@@ -6,4 +41,5 @@
   margin: 20px;
   padding: 10px;
   text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.411);
 }

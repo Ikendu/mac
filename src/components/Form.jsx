@@ -72,13 +72,13 @@ export default function Form() {
         </div>
         <button
           type='submit'
-          className='flex justify-start bg-[#e0ad0f] max-w-26 px-8 font-semibold p-1 text-[15px] rounded-lg'
+          className='cursor-pointer flex justify-start bg-[#e0ad0f] max-w-26 px-8 font-semibold p-1 text-[15px] rounded-lg'
         >
           Next
         </button>
         <div className='divider'></div>
         <p>New customer ?</p>
-        <button className='registerbtn '>Self-Registration</button>
+        <button className='registerbtn cursor-pointer'>Self-Registration</button>
       </form>
     </div>
   )
