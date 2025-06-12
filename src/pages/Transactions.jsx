@@ -5,8 +5,13 @@ import './form.css'
 
 export default function Transactions() {
   const [transactions, setTransactions] = useState([])
+  const [editTx, setEditTx] = useState(null) // hold data for editing
 
   useEffect(() => {
+    fetchTransactions()
+  }, [])
+
+  const fetchTransactions = () => {
     fetch('http://localhost/macdon/get_transactions.php')
       .then((res) => res.json())
       .then((data) => {
@@ -16,8 +21,45 @@ export default function Transactions() {
           console.error(data.message)
         }
       })
-      .catch((err) => console.error('Error fetching transactions:', err))
-  }, [])
+  }
+
+  const deleteTransaction = (id) => {
+    if (!window.confirm('Are you sure you want to delete this transaction?')) return
+
+    fetch('http://localhost/macdon/delete_transaction.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        alert(data.message)
+        fetchTransactions()
+      })
+  }
+
+  const startEdit = (tx) => {
+    setEditTx(tx)
+  }
+
+  const handleEditChange = (e) => {
+    const { name, value } = e.target
+    setEditTx((prev) => ({ ...prev, [name]: value }))
+  }
+
+  const saveEdit = () => {
+    fetch('http://localhost/macdon/update_transaction.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(editTx),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        alert(data.message)
+        setEditTx(null)
+        fetchTransactions()
+      })
+  }
   return (
     <div className='dashboard'>
       <nav>
@@ -46,25 +88,74 @@ export default function Transactions() {
               <th>Type</th>
               <th>Amount</th>
               <th>Description</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {transactions.length > 0 ? (
-              transactions.map((tx) => (
-                <tr key={tx.id}>
-                  <td>{tx.id}</td>
-                  <td>{tx.date}</td>
-                  <td>{tx.account_number}</td>
-                  <td>{tx.type}</td>
-                  <td>{tx.amount}</td>
-                  <td>{tx.description}</td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan='6'>No transactions found</td>
+            {transactions.map((tx) => (
+              <tr key={tx.id}>
+                <td>{tx.id}</td>
+                <td>
+                  {editTx?.id === tx.id ? (
+                    <input name='date' value={editTx.date} onChange={handleEditChange} />
+                  ) : (
+                    tx.date
+                  )}
+                </td>
+                <td>
+                  {editTx?.id === tx.id ? (
+                    <input
+                      name='account'
+                      value={editTx.account_number}
+                      onChange={handleEditChange}
+                    />
+                  ) : (
+                    tx.account_number
+                  )}
+                </td>
+                <td>
+                  {editTx?.id === tx.id ? (
+                    <select name='type' value={editTx.type} onChange={handleEditChange}>
+                      <option value='deposit'>Deposit</option>
+                      <option value='withdraw'>Withdraw</option>
+                    </select>
+                  ) : (
+                    tx.type
+                  )}
+                </td>
+                <td>
+                  {editTx?.id === tx.id ? (
+                    <input name='amount' value={editTx.amount} onChange={handleEditChange} />
+                  ) : (
+                    tx.amount
+                  )}
+                </td>
+                <td>
+                  {editTx?.id === tx.id ? (
+                    <input
+                      name='description'
+                      value={editTx.description}
+                      onChange={handleEditChange}
+                    />
+                  ) : (
+                    tx.description
+                  )}
+                </td>
+                <td>
+                  {editTx?.id === tx.id ? (
+                    <>
+                      <button onClick={saveEdit}>Save</button>
+                      <button onClick={() => setEditTx(null)}>Cancel</button>
+                    </>
+                  ) : (
+                    <>
+                      <button onClick={() => startEdit(tx)}>Edit</button>
+                      <button onClick={() => deleteTransaction(tx.id)}>Delete</button>
+                    </>
+                  )}
+                </td>
               </tr>
-            )}
+            ))}
           </tbody>
         </table>
       </section>
