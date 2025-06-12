@@ -3,5 +3,35 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  width: 60%;
+  margin: auto;
+}
+
+.dashboard h3 {
+  font-size: 30px;
+  color: #6e6e6e;
+  font-weight: bold;
+  margin: 30px;
+}
+
+.dashboard form input {
+  margin: 10px 0;
+  padding: 10px;
+  width: 90%;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+.selecttype {
+  display: flex;
+  gap: 40px;
+}
+form label {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+form input[type='radio'] {
+  width: 30%;
+  box-shadow: none;
 }

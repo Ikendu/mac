@@ -41,8 +41,8 @@ export default function DashboardForm() {
 
   return (
     <main className='dashboard'>
-      <h3>Transaction Form</h3>
       <form>
+        <h3 className=''>Transaction Form</h3>
         <input type='text' name='' id='' placeholder='Date' value={date} readOnly />
         <input
           type='text'
@@ -50,15 +50,24 @@ export default function DashboardForm() {
           value={account}
           onChange={(e) => setAccount(e.target.value)}
         />
-        <div>
-          <label>Deposit</label>
-          <input type='radio' checked={deposit} onChange={(e) => setDeposit(e.target.checked)} />
-          <label>Withdraw</label>
-          <input type='radio' checked={!deposit} onChange={(e) => setDeposit(!e.target.checked)} />
+        <div className='selecttype'>
+          <label>
+            Deposit:{' '}
+            <input type='radio' checked={deposit} onChange={(e) => setDeposit(e.target.checked)} />
+          </label>
+
+          <label>
+            Withdraw:{' '}
+            <input
+              type='radio'
+              checked={!deposit}
+              onChange={(e) => setDeposit(!e.target.checked)}
+            />
+          </label>
         </div>
         <input
           type='text'
-          placeholder={deposit ? 'Transaction Amount' : 'Withdrawal Amount'}
+          placeholder={deposit ? 'Deposit Amount' : 'Withdrawal Amount'}
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
         />
