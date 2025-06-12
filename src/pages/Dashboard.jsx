@@ -25,7 +25,7 @@ export default function Dashboard() {
               <img src='icons/form.png' alt='' className='m-auto' />
               <p>New Entry</p>
             </div>
-            <div className='dbicon'>
+            <div onClick={() => navigate('/all-transactions')} className='dbicon'>
               <img src='icons/all.png' alt='' className='m-auto' />
               <p>All Entries</p>
             </div>

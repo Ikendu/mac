@@ -1,6 +1,6 @@
 <?php
 // DB connection
-include "connet.php";
+include "connect.php";
 // Allow CORS
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");

@@ -1,7 +1,11 @@
 <?php
+
+// Connect to database
+include "connect.php";
 // Allow CORS (for development only; secure properly in production)
 header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json; charset=UTF-8");
+header("Content-Type: application/json");
+header("Access-Control-Allow-Headers: *");
 
 // Get POST data
 $data = json_decode(file_get_contents("php://input"), true);
@@ -20,8 +24,7 @@ if (
     $amount = $data['amount'];
     $description = $data['description'];
 
-    // Connect to database
-    $conn = new mysqli("localhost", "your_username", "your_password", "your_database");
+
 
     if ($conn->connect_error) {
         echo json_encode(["message" => "Database connection failed"]);
