@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import './form.css'
+import { Link } from 'react-router-dom'
 
 // Date formatting function
 function formatDate(date) {
@@ -65,9 +66,25 @@ export default function DashboardForm() {
 
   return (
     <main className='dashboard'>
+      <nav>
+        <Link to={'/dashboard'}>
+          <div className='dbicon formicons'>
+            <img src='icons/home.png' alt='' className='m-auto' />
+            <p>Home</p>
+          </div>
+        </Link>
+        <Link to={'/all-transactions'}>
+          {' '}
+          <div className='dbicon formicons'>
+            <img src='icons/all.png' alt='' className='m-auto' />
+            <p>All Entries</p>
+          </div>
+        </Link>
+        {/* <Link to={'/dashboard'}>Dashboard</Link> */}
+      </nav>
       <form onSubmit={handleSubmit}>
-        <h3 className=''>Transaction Form</h3>
-        <input type='text' name='' id='' placeholder='Date' value={date} readOnly />
+        <h3>Transaction Form</h3>
+        <input type='text' placeholder='Date' value={date} readOnly />
         <input
           type='text'
           placeholder='Account Number'
@@ -76,17 +93,10 @@ export default function DashboardForm() {
         />
         <div className='selecttype'>
           <label>
-            Deposit:{' '}
-            <input type='radio' checked={deposit} onChange={(e) => setDeposit(e.target.checked)} />
+            Deposit: <input type='radio' checked={deposit} onChange={() => setDeposit(true)} />
           </label>
-
           <label>
-            Withdraw:{' '}
-            <input
-              type='radio'
-              checked={!deposit}
-              onChange={(e) => setDeposit(!e.target.checked)}
-            />
+            Withdraw: <input type='radio' checked={!deposit} onChange={() => setDeposit(false)} />
           </label>
         </div>
         <input
@@ -101,6 +111,9 @@ export default function DashboardForm() {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
+        <button type='submit' className='p-2 px-10 bg-blue-900 text-white rounded-lg m-5 '>
+          Submit
+        </button>
       </form>
     </main>
   )

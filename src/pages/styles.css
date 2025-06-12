@@ -1,5 +1,5 @@
 .dashboard {
-  height: 80vh;
+  /* height: 80vh; */
   background-image: url('image/bgdb.jpg');
   background-repeat: no-repeat;
   background-size: cover;
@@ -36,7 +36,7 @@
   cursor: pointer;
   width: 150px;
   background-color: #0d0d49;
-  color: white;
+  color: rgb(194, 193, 193);
   border-radius: 10px;
   margin: 20px;
   padding: 10px;
