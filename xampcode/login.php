@@ -1,21 +1,23 @@
 <?php
+// DB connection
+include "connet.php";
 // Allow CORS
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
 header("Access-Control-Allow-Headers: *");
 
-header("Access-Control-Allow-Origin: http://localhost:5173");
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
-header("Access-Control-Allow-Credentials: true");
+// header("Access-Control-Allow-Origin: http://localhost:5173");
+// header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+// header("Access-Control-Allow-Credentials: true");
 
-// DB connection
-require "connet.php";
+// $cmd = "INSERT INTO users (email, password) VALUES ('admin', '" . password_hash("123456", PASSWORD_DEFAULT) . "')";
+// $conn->query($cmd);
 
 // Get raw POST data
 $data = json_decode(file_get_contents("php://input"));
 
 
-$username = $password = $verify = "replace";
+$username = $password = $verify = "";
 
 
 // Get data
@@ -23,8 +25,13 @@ $username = $conn->real_escape_string($data->username);
 $password = $conn->real_escape_string($data->password);
 $verify = $conn->real_escape_string($data->verify);
 
+// if ($password !== $verify) {
+//     echo json_encode(["status" => "error", "message" => "Passwords do not match"]);
+//     exit();
+// }
+
 // Check user
-$sql = "SELECT * FROM users WHERE username='$username'";
+$sql = "SELECT * FROM users WHERE email='$username'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {

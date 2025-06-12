@@ -39,9 +39,33 @@ export default function DashboardForm() {
   const [description, setDescription] = useState('')
   const [deposit, setDeposit] = useState(false)
 
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    const formData = {
+      date,
+      account,
+      type: deposit ? 'deposit' : 'withdraw',
+      amount,
+      description,
+    }
+
+    fetch('http://localhost/macdon/submit_transaction.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data)
+        alert(data.message)
+      })
+      .catch((err) => console.error('Error:', err))
+  }
+
   return (
     <main className='dashboard'>
-      <form>
+      <form onSubmit={handleSubmit}>
         <h3 className=''>Transaction Form</h3>
         <input type='text' name='' id='' placeholder='Date' value={date} readOnly />
         <input
