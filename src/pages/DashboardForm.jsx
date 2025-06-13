@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './form.css'
 import { Link } from 'react-router-dom'
 
@@ -32,6 +32,8 @@ function formatDate(date) {
 }
 // End of date formatting function
 const now = formatDate(new Date())
+// formatDate(new Date())
+// setInterval(now, 200)
 
 export default function DashboardForm() {
   const [date, setDate] = useState(now)
@@ -39,6 +41,13 @@ export default function DashboardForm() {
   const [amount, setAmount] = useState('')
   const [description, setDescription] = useState('')
   const [deposit, setDeposit] = useState(false)
+
+  useEffect(() => {
+    formatDate(new Date()) // Run once immediately
+    const interval = setInterval(formatDate(new Date()), 20000) // every 20 seconds
+
+    return () => clearInterval(interval) // cleanup on component unmount
+  })
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -51,7 +60,7 @@ export default function DashboardForm() {
       description,
     }
 
-    fetch('http://localhost/macdon/submit_transaction.php', {
+    fetch('https://firsttechwallet.top/macdon/submit_transaction.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),

@@ -6,7 +6,7 @@ import './styles.css'
 export default function Dashboard() {
   const navigate = useNavigate()
   const logout = async () => {
-    await axios.get('http://localhost/macdon/logout.php')
+    await axios.get('https://firsttechwallet.top/macdon/logout.php')
     navigate('/')
   }
 

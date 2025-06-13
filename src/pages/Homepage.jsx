@@ -17,9 +17,7 @@ export default function Homepage() {
                   </p>
                 </div>
                 <p className='lastbtn flex justify-end font-bold mr-4'>
-                  <a href='https://www.firstbanknigeria.com/personal-banking/ways-to-bank/online-banking/firstonline/firstonline-help-and-faqs/'>
-                    Learn More
-                  </a>
+                  <a href='/'>Learn More</a>
                 </p>
               </div>
             </div>

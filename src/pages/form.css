@@ -45,3 +45,85 @@ form input[type='radio'] {
   width: 30%;
   box-shadow: none;
 }
+
+/* Transaction Tables */
+
+.table-section {
+  min-width: 90%;
+  background-color: #585858;
+  border-radius: 20px;
+  padding: 30px;
+  border: 2px solid rgb(9, 9, 92);
+}
+section h2 {
+  font-size: 30px;
+  text-align: center;
+  margin: 20px;
+  font-weight: bold;
+  color: #292929;
+}
+.table-section table {
+  width: 100%;
+  color: #f1eded;
+  border-radius: 5px;
+  margin-bottom: 30px;
+}
+table,
+td,
+th {
+  border: 1px solid rgb(9, 9, 92);
+}
+td,
+th {
+  padding: 20px;
+  text-align: center;
+}
+td {
+  color: rgb(219, 219, 219);
+}
+table input,
+table textarea,
+table select {
+  background-color: #444444;
+  border-radius: 5px;
+  border: 1px solid rgb(25, 25, 102);
+  padding: 4px;
+}
+textarea {
+  height: 80px;
+}
+table .btn {
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+}
+table button {
+  padding: 3px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+table .edit {
+  background-color: #151561;
+}
+table .edit:hover {
+  background-color: #161644;
+}
+
+table .delete {
+  background-color: #681e1e;
+}
+table .delete:hover {
+  background-color: #3f1717;
+}
+table .savebtn {
+  background-color: #156132;
+}
+table .savebtn:hover {
+  background-color: #123a21;
+}
+table .cancelbtn {
+  background-color: #525151;
+}
+table .cancelbtn:hover {
+  background-color: #3d3d3d;
+}

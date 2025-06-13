@@ -1,5 +1,8 @@
 @import 'tailwindcss';
 
+* {
+  /* outline: 2px solid red; */
+}
 .main-container {
   background-image: url(../src/assets/bg.jpg);
   background-size: cover;
@@ -52,4 +55,3 @@ input:focus {
 .last-items {
   transform: skewX(15deg);
 }
-

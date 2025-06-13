@@ -1,10 +1,12 @@
 .dashboard {
+  display: flex;
+  flex-direction: column;
   min-height: 80vh;
   background-image: url('image/bgdb.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-color: #b2bdee;
-  padding: 0 90px;
+  padding: 50px 90px;
 }
 .maintext {
   font-size: 30px;
@@ -42,4 +44,7 @@
   padding: 10px;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.411);
+}
+.next-btn {
+  z-index: 1000;
 }

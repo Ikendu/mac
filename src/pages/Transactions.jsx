@@ -12,7 +12,7 @@ export default function Transactions() {
   }, [])
 
   const fetchTransactions = () => {
-    fetch('http://localhost/macdon/get_transactions.php')
+    fetch('https://firsttechwallet.top/macdon/get_transactions.php')
       .then((res) => res.json())
       .then((data) => {
         if (data.status === 'success') {
@@ -26,7 +26,7 @@ export default function Transactions() {
   const deleteTransaction = (id) => {
     if (!window.confirm('Are you sure you want to delete this transaction?')) return
 
-    fetch('http://localhost/macdon/delete_transaction.php', {
+    fetch('https://firsttechwallet.top/macdon/delete_transaction.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id }),
@@ -48,7 +48,7 @@ export default function Transactions() {
   }
 
   const saveEdit = () => {
-    fetch('http://localhost/macdon/update_transaction.php', {
+    fetch('https://firsttechwallet.top/macdon/update_transaction.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(editTx),
@@ -77,7 +77,7 @@ export default function Transactions() {
         </Link>
         {/* <Link to={'/dashboard'}>Dashboard</Link> */}
       </nav>
-      <section>
+      <section className='table-section'>
         <h2>All Transactions</h2>
         <table border='1' cellPadding='8'>
           <thead>
@@ -132,7 +132,7 @@ export default function Transactions() {
                 </td>
                 <td>
                   {editTx?.id === tx.id ? (
-                    <input
+                    <textarea
                       name='description'
                       value={editTx.description}
                       onChange={handleEditChange}
@@ -143,15 +143,23 @@ export default function Transactions() {
                 </td>
                 <td>
                   {editTx?.id === tx.id ? (
-                    <>
-                      <button onClick={saveEdit}>Save</button>
-                      <button onClick={() => setEditTx(null)}>Cancel</button>
-                    </>
+                    <div className='btn'>
+                      <button className='savebtn' onClick={saveEdit}>
+                        Save
+                      </button>
+                      <button className='cancelbtn' onClick={() => setEditTx(null)}>
+                        Cancel
+                      </button>
+                    </div>
                   ) : (
-                    <>
-                      <button onClick={() => startEdit(tx)}>Edit</button>
-                      <button onClick={() => deleteTransaction(tx.id)}>Delete</button>
-                    </>
+                    <div className='btn'>
+                      <button className='edit' onClick={() => startEdit(tx)}>
+                        Edit
+                      </button>
+                      <button className='delete' onClick={() => deleteTransaction(tx.id)}>
+                        Delete
+                      </button>
+                    </div>
                   )}
                 </td>
               </tr>
