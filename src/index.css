@@ -19,6 +19,7 @@
   transform-origin: top;
 }
 .form {
+  position: relative;
   border: 2px solid white;
   box-shadow: -5px 5px #f7f6f6, -9px 9px #e0ad0f;
   background-color: #d1d2d4;
@@ -55,7 +56,19 @@ input:focus {
 .last-items {
   transform: skewX(15deg);
 }
+.divider {
+  height: 1px;
+  width: 80%;
+  background-color: rgb(48, 47, 47);
+  margin-top: 50px;
+}
 .next-btn {
-  position: relative;
+  position: absolute;
   z-index: 100 !important;
+  bottom: 110px;
+  max-width: 100px;
+  background-color: #e0ad0f;
+  font-size: 16px;
+  font-weight: bold;
+  /* color: white; */
 }

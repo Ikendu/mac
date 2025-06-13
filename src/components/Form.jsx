@@ -65,13 +65,9 @@ export default function Form() {
             />
           </div>
         </div>
-        <button
-          type='submit'
-          className='next-btn cursor-pointer bg-[#e0ad0f] max-w-26 px-8 font-semibold p-1 text-[15px] rounded-lg'
-        >
-          Next
-        </button>
-        {/* <div className='divider'></div> */}
+        <input type='submit' value='Next' className='next-btn' />
+
+        <div className='divider'></div>
         <p>New customer ?</p>
         <button className='registerbtn cursor-pointer'>Self-Registration</button>
       </form>
