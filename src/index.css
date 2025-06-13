@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 * {
-  /* outline: 2px solid red; */
+  box-sizing: border-box;
 }
 .main-container {
   background-image: url(../src/assets/bg.jpg);
@@ -54,4 +54,8 @@ input:focus {
 }
 .last-items {
   transform: skewX(15deg);
+}
+.next-btn {
+  position: relative;
+  z-index: 100 !important;
 }

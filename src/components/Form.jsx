@@ -30,11 +30,7 @@ export default function Form() {
   }
   return (
     <div>
-      <form
-        onSubmit={handleSubmit}
-        target='_blank'
-        className='form p-3 px-8  rounded-xl flex flex-col gap-4'
-      >
+      <form onSubmit={handleSubmit} className='form p-3 px-8  rounded-xl flex flex-col gap-4'>
         <div className='leading-4'>
           <h3>Log on to Internet Banking</h3>
           <label htmlFor='username'>
@@ -54,7 +50,7 @@ export default function Form() {
           </label>
           <div className='flex flex-col gap-4'>
             <input
-              type='text'
+              type='password'
               id='password'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
