@@ -1,9 +1,11 @@
 .dashheader {
+}
+.dashheader nav {
   width: 100%;
   display: flex;
   gap: 10px;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   /* background-color: rgba(21, 21, 90, 0.411); */
 }
 .dashheader img {
@@ -13,12 +15,26 @@
   border-radius: 50px;
   margin-top: 20px;
   box-shadow: 2px 2px 7px;
+  cursor: pointer;
 }
-.dashheader .history img {
-  background-color: rgb(212, 192, 7);
+.dashheader .different img {
+  background-color: rgb(33, 20, 107);
 }
 .dashheader div {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.dashheader .upper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.dashheader .user {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
 }
