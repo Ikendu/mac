@@ -2,6 +2,7 @@ import axios from 'axios'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import './styles.css'
+import DashboardHeader from '../components/DashboardHeader'
 
 export default function Dashboard() {
   const navigate = useNavigate()
@@ -13,6 +14,7 @@ export default function Dashboard() {
   return (
     <>
       <main className='dashboard'>
+        <DashboardHeader />
         <div className='flex justify-between py-4 align-middle'>
           <h2 className='maintext'>Dashboard</h2>
           <button className='logoutbtn' onClick={logout}>

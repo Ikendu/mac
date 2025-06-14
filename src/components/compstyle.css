@@ -1,4 +1,24 @@
 .dashheader {
+  width: 100%;
   display: flex;
-  
+  gap: 10px;
+  align-items: center;
+  justify-content: space-around;
+  /* background-color: rgba(21, 21, 90, 0.411); */
+}
+.dashheader img {
+  width: 50px;
+  padding: 10px;
+  background-color: aliceblue;
+  border-radius: 50px;
+  margin-top: 20px;
+  box-shadow: 2px 2px 7px;
+}
+.dashheader .history img {
+  background-color: rgb(212, 192, 7);
+}
+.dashheader div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
