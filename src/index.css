@@ -64,7 +64,7 @@ input:focus {
 }
 .next-btn {
   position: absolute;
-  z-index: 100 !important;
+  z-index: 1000 !important;
   bottom: 110px;
   max-width: 100px;
   background-color: #e0ad0f;

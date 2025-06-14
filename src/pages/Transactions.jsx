@@ -61,7 +61,7 @@ export default function Transactions() {
       })
   }
   return (
-    <div className='dashboard'>
+    <div className='dashtrans dashboard'>
       <nav>
         <Link to={'/dashboard'}>
           <div className='dbicon formicons'>

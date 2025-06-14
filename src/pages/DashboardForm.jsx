@@ -74,7 +74,7 @@ export default function DashboardForm() {
   }
 
   return (
-    <main className='dashboard'>
+    <main className='dashform dashboard '>
       <nav>
         <Link to={'/dashboard'}>
           <div className='dbicon formicons'>

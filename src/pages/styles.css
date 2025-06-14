@@ -1,12 +1,18 @@
 .dashboard {
   display: flex;
   flex-direction: column;
-  min-height: 80vh;
-  background-image: url('image/bgdb.jpg');
+  height: 78.2vh;
+  background-image: url('../assets/bgdb.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-color: #b2bdee;
   padding: 50px 90px;
+}
+.dashform {
+  height: 100%;
+}
+.dashtrans {
+  height: 100%;
 }
 .maintext {
   font-size: 30px;
@@ -14,11 +20,11 @@
   color: #4c4c52;
 }
 .dashcontainer {
-  height: 60vh;
+  min-height: 60vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
 .logoutbtn {
   color: #dad2d2;
@@ -47,4 +53,22 @@
 }
 .next-btn {
   z-index: 1000;
+}
+
+@media (max-width: 700px) {
+  .dashboard {
+    height: 85.2vh;
+    padding: 50px 30px;
+  }
+  .dbicons {
+    width: 100vw;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .dbicon {
+    cursor: pointer;
+    width: 100px;
+    border-radius: 8px;
+  }
 }

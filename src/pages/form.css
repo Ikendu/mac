@@ -27,7 +27,7 @@ nav {
 .dashboard form input {
   margin: 10px 0;
   padding: 10px;
-  width: 90%;
+  width: 100%;
   border: 1px solid #ccc;
   border-radius: 8px;
 }
@@ -49,11 +49,12 @@ form input[type='radio'] {
 /* Transaction Tables */
 
 .table-section {
-  min-width: 90%;
-  background-color: #585858;
+  min-width: 95%;
+  background-color: #8fa9ca;
   border-radius: 20px;
   padding: 30px;
   border: 2px solid rgb(9, 9, 92);
+  overflow: auto;
 }
 section h2 {
   font-size: 30px;
@@ -64,7 +65,7 @@ section h2 {
 }
 .table-section table {
   width: 100%;
-  color: #f1eded;
+  /* color: #f1eded; */
   border-radius: 5px;
   margin-bottom: 30px;
 }
@@ -79,7 +80,7 @@ th {
   text-align: center;
 }
 td {
-  color: rgb(219, 219, 219);
+  /* color: rgb(219, 219, 219); */
 }
 table input,
 table textarea,
@@ -101,6 +102,7 @@ table button {
   padding: 3px 20px;
   border-radius: 5px;
   cursor: pointer;
+  color: #b4b3b3;
 }
 table .edit {
   background-color: #151561;
@@ -126,4 +128,19 @@ table .cancelbtn {
 }
 table .cancelbtn:hover {
   background-color: #3d3d3d;
+}
+
+@media (max-width: 700px) {
+  .dashboard {
+    padding: 50px 10px;
+  }
+
+  .dashboard form {
+    width: 100%;
+    margin: auto;
+  }
+  .table-section {
+    min-width: 100%;
+    text-wrap: nowrap;
+  }
 }
