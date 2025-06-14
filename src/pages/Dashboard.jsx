@@ -18,7 +18,7 @@ export default function Dashboard() {
             <div className='flex'>
               <div onClick={() => navigate('/dashboardform')} className='dbicon'>
                 <img src='icons/form.png' alt='' className='m-auto' />
-                <p>New Entry</p>
+                <p>Transaction</p>
               </div>
               <div onClick={() => navigate('/all-transactions')} className='dbicon'>
                 <img src='icons/all.png' alt='' className='m-auto' />

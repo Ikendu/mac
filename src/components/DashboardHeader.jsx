@@ -16,7 +16,7 @@ export default function DashboardHeader() {
           <img src='/public/icons/camera.png' alt='' />
           <p className='pt-5 font-bold'>{'Welcome'} ABANA WAKIR</p>
         </div>
-        <div className='different'>
+        <div onClick={() => navigate('/all-transactions')} className='different'>
           <img src='/public/icons/history.png' alt='' />
           <span>History</span>
         </div>
@@ -25,11 +25,14 @@ export default function DashboardHeader() {
         </button>
       </section>
       <nav>
-        <div>
+        <div onClick={() => navigate('/dashboard')}>
+          <img src='icons/homesub.png' alt='' />
+          <span>Home</span>
+        </div>
+        <div onClick={() => navigate('/dashboardform')}>
           <img src='icons/transfer.png' alt='' />
           <span>Tranfer</span>
         </div>
-
         <div>
           <img src='/public/icons/loan.png' alt='' />
           <span>Loans</span>

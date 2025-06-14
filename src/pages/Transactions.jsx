@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import './styles.css'
 import './form.css'
+import DashboardHeader from '../components/DashboardHeader'
 
 export default function Transactions() {
   const [transactions, setTransactions] = useState([])
@@ -62,7 +63,8 @@ export default function Transactions() {
   }
   return (
     <div className='dashtrans dashboard'>
-      <nav>
+      <DashboardHeader />
+      {/* <nav>
         <Link to={'/dashboard'}>
           <div className='dbicon formicons'>
             <img src='icons/home.png' alt='' className='m-auto' />
@@ -75,8 +77,7 @@ export default function Transactions() {
             <p>New Entry</p>
           </div>
         </Link>
-        {/* <Link to={'/dashboard'}>Dashboard</Link> */}
-      </nav>
+      </nav> */}
       <section className='table-section'>
         <h2>All Transactions</h2>
         <table border='1' cellPadding='8'>

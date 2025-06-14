@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './form.css'
 import { Link } from 'react-router-dom'
+import DashboardHeader from '../components/DashboardHeader'
 
 // Date formatting function
 function formatDate(date) {
@@ -75,7 +76,8 @@ export default function DashboardForm() {
 
   return (
     <main className='dashform dashboard '>
-      <nav>
+      <DashboardHeader />
+      {/* <nav>
         <Link to={'/dashboard'}>
           <div className='dbicon formicons'>
             <img src='icons/home.png' alt='' className='m-auto' />
@@ -89,8 +91,7 @@ export default function DashboardForm() {
             <p>All Entries</p>
           </div>
         </Link>
-        {/* <Link to={'/dashboard'}>Dashboard</Link> */}
-      </nav>
+      </nav> */}
       <form onSubmit={handleSubmit}>
         <h3>Transaction Form</h3>
         <input type='text' placeholder='Date' value={date} readOnly />

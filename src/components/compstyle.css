@@ -14,7 +14,7 @@
   background-color: aliceblue;
   border-radius: 50px;
   margin-top: 20px;
-  box-shadow: 2px 2px 7px;
+  box-shadow: 2px 2px 5px rgb(184, 156, 3);
   cursor: pointer;
 }
 .dashheader .different img {
