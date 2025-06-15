@@ -7,6 +7,7 @@
   background-size: cover;
   background-color: #b2bdee;
   padding: 0 90px 50px;
+  /* overflow: hidden; */
 }
 .dashform {
   height: 100%;
@@ -26,16 +27,7 @@
   align-items: center;
   justify-content: center;
 }
-.logoutbtn {
-  color: #dad2d2;
-  cursor: pointer;
-  padding: 5px 20px;
-  background-color: rgb(100, 27, 27);
-  border-radius: 5px;
-}
-.logoutbtn:hover {
-  color: #fcfafa;
-}
+
 .dbicons {
   max-width: 800px;
   display: flex;
@@ -51,13 +43,16 @@
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.411);
 }
+.dbicon img {
+  width: 70px;
+}
 .next-btn {
   z-index: 1000;
 }
 
 @media (max-width: 700px) {
   .dashboard {
-    height: 85.2vh;
+    /* height: 85.2vh; */
     padding: 50px 30px;
   }
   .dbicons {

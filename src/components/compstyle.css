@@ -1,8 +1,23 @@
-.dashheader {
+* {
+  box-sizing: border-box;
+}
+.nav-container {
+  overflow: auto;
+}
+.logoutbtn {
+  color: #dad2d2;
+  cursor: pointer;
+  padding: 5px 20px;
+  background-color: rgb(100, 27, 27);
+  border-radius: 5px;
+}
+.logoutbtn:hover {
+  color: #fcfafa;
 }
 .dashheader nav {
   width: 100%;
   display: flex;
+  overflow: auto;
   gap: 10px;
   align-items: center;
   justify-content: space-between;
@@ -38,4 +53,23 @@
   gap: 10px;
   align-items: center;
   justify-content: center;
+}
+@media (max-width: 600px) {
+  .logoutbtn {
+    padding: 3px 10px;
+  }
+  .dashheader nav {
+    /* max-width: 580px; */
+    display: flex;
+    white-space: nowrap;
+
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+    /* background-color: rgba(21, 21, 90, 0.411); */
+  }
+  .dashheader img {
+    width: 30px;
+    padding: 5px;
+  }
 }

@@ -17,22 +17,22 @@ export default function Dashboard() {
           <div className='dbicons'>
             <div className='flex'>
               <div onClick={() => navigate('/dashboardform')} className='dbicon'>
-                <img src='icons/form.png' alt='' className='m-auto' />
-                <p>Transaction</p>
+                <img src='icons/transfer.png' alt='' className='m-auto' />
+                <p>Tranfers</p>
               </div>
               <div onClick={() => navigate('/all-transactions')} className='dbicon'>
-                <img src='icons/all.png' alt='' className='m-auto' />
-                <p>All Entries</p>
+                <img src='icons/history.png' alt='' className='m-auto' />
+                <p>History</p>
               </div>
             </div>
             <div className='flex'>
               <div className='dbicon'>
-                <img src='icons/download.png' alt='' className='m-auto' />
-                <p>Download Data</p>
+                <img src='icons/card.png' alt='' className='m-auto' />
+                <p>Card Data</p>
               </div>
               <div className='dbicon'>
-                <img src='icons/form.png' alt='' className='m-auto' />
-                <p>Send Email</p>
+                <img src='icons/loan.png' alt='' className='m-auto' />
+                <p>Request Loan</p>
               </div>
             </div>
           </div>
