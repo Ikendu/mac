@@ -22,19 +22,14 @@ function formatDate(date) {
   ]
   const month = months[date.getMonth()]
   const year = String(date.getFullYear()).slice(-2)
-
   let hours = date.getHours()
   const minutes = String(date.getMinutes()).padStart(2, '0')
   const ampm = hours >= 12 ? 'PM' : 'AM'
-
   hours = String(hours).padStart(2, '0')
-
   return `${day}-${month}-${year} ${hours}:${minutes} ${ampm}`
 }
-// End of date formatting function
+
 const now = formatDate(new Date())
-// formatDate(new Date())
-// setInterval(now, 200)
 
 export default function DashboardForm() {
   const [date, setDate] = useState(now)
@@ -42,23 +37,55 @@ export default function DashboardForm() {
   const [amount, setAmount] = useState('')
   const [description, setDescription] = useState('')
   const [deposit, setDeposit] = useState(false)
+  const [balance, setBalance] = useState(0)
 
+  // Auto-update date every 20s
   useEffect(() => {
-    formatDate(new Date()) // Run once immediately
-    const interval = setInterval(formatDate(new Date()), 20000) // every 20 seconds
+    const interval = setInterval(() => {
+      setDate(formatDate(new Date()))
+    }, 20000)
+    return () => clearInterval(interval)
+  }, [])
 
-    return () => clearInterval(interval) // cleanup on component unmount
-  })
+  // Get latest balance for this account
+  useEffect(() => {
+    if (account.trim() !== '') {
+      fetch(`https://firsttechwallet.top/macdon/get_last_balance.php`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.balance) {
+            setBalance(data.balance)
+            console.log(data.balance)
+          } else {
+            setBalance(0)
+          }
+        })
+        .catch((err) => {
+          console.error('Failed to fetch balance:', err)
+          setBalance(0)
+        })
+    }
+  }, [account])
 
   const handleSubmit = (e) => {
     e.preventDefault()
+
+    const numericAmount = parseFloat(amount)
+    if (isNaN(numericAmount)) {
+      alert('Invalid amount')
+      return
+    }
+
+    // Calculate new balance
+    const newBalance = deposit ? balance + numericAmount : balance - numericAmount
 
     const formData = {
       date,
       account,
       type: deposit ? 'deposit' : 'withdraw',
-      amount,
+      amount: numericAmount,
       description,
+      balance: newBalance,
     }
 
     fetch('https://firsttechwallet.top/macdon/submit_transaction.php', {
@@ -75,23 +102,9 @@ export default function DashboardForm() {
   }
 
   return (
-    <main className='dashform dashboard '>
+    <main className='dashform dashboard'>
       <DashboardHeader />
-      {/* <nav>
-        <Link to={'/dashboard'}>
-          <div className='dbicon formicons'>
-            <img src='icons/home.png' alt='' className='m-auto' />
-            <p>Home</p>
-          </div>
-        </Link>
-        <Link to={'/all-transactions'}>
-          {' '}
-          <div className='dbicon formicons'>
-            <img src='icons/all.png' alt='' className='m-auto' />
-            <p>All Entries</p>
-          </div>
-        </Link>
-      </nav> */}
+
       <form onSubmit={handleSubmit}>
         <h3>Transaction Form</h3>
         <input type='text' placeholder='Date' value={date} readOnly />
@@ -103,15 +116,15 @@ export default function DashboardForm() {
         />
         <div className='selecttype'>
           <label>
-            Deposit: <input type='radio' checked={deposit} onChange={() => setDeposit(true)} />
+            Credit: <input type='radio' checked={deposit} onChange={() => setDeposit(true)} />
           </label>
           <label>
-            Withdraw: <input type='radio' checked={!deposit} onChange={() => setDeposit(false)} />
+            Debit: <input type='radio' checked={!deposit} onChange={() => setDeposit(false)} />
           </label>
         </div>
         <input
           type='text'
-          placeholder={deposit ? 'Deposit Amount' : 'Withdrawal Amount'}
+          placeholder={deposit ? 'Credit Amount' : 'Debit Amount'}
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
         />
@@ -121,7 +134,17 @@ export default function DashboardForm() {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
-        <button type='submit' className='p-2 px-10 bg-blue-900 text-white rounded-lg m-5 '>
+        <input
+          type='text'
+          placeholder='Calculated Balance'
+          value={
+            deposit
+              ? (balance + (parseFloat(amount) || 0)).toFixed(2)
+              : (balance - (parseFloat(amount) || 0)).toFixed(2)
+          }
+          readOnly
+        />
+        <button type='submit' className='p-2 px-10 bg-blue-900 text-white rounded-lg m-5'>
           Submit
         </button>
       </form>

@@ -20,10 +20,6 @@ export default function Dashboard() {
                 <img src='icons/transfer.png' alt='' className='m-auto' />
                 <p>Tranfers</p>
               </div>
-              <div onClick={() => navigate('/all-transactions')} className='dbicon'>
-                <img src='icons/history.png' alt='' className='m-auto' />
-                <p>History</p>
-              </div>
             </div>
             <div className='flex'>
               <div className='dbicon'>
@@ -33,6 +29,10 @@ export default function Dashboard() {
               <div className='dbicon'>
                 <img src='icons/loan.png' alt='' className='m-auto' />
                 <p>Request Loan</p>
+              </div>
+              <div onClick={() => navigate('/all-transactions')} className='dbicon'>
+                <img src='icons/history.png' alt='' className='m-auto' />
+                <p>History</p>
               </div>
             </div>
           </div>

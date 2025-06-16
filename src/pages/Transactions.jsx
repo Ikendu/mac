@@ -24,78 +24,67 @@ export default function Transactions() {
       })
   }
 
-  const deleteTransaction = (id) => {
-    if (!window.confirm('Are you sure you want to delete this transaction?')) return
+  let sn = 1
 
-    fetch('https://firsttechwallet.top/macdon/delete_transaction.php', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        alert(data.message)
-        fetchTransactions()
-      })
-  }
+  // const deleteTransaction = (id) => {
+  //   if (!window.confirm('Are you sure you want to delete this transaction?')) return
 
-  const startEdit = (tx) => {
-    setEditTx(tx)
-  }
+  //   fetch('https://firsttechwallet.top/macdon/delete_transaction.php', {
+  //     method: 'POST',
+  //     headers: { 'Content-Type': 'application/json' },
+  //     body: JSON.stringify({ id }),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       alert(data.message)
+  //       fetchTransactions()
+  //     })
+  // }
+
+  // const startEdit = (tx) => {
+  //   setEditTx(tx)
+  // }
 
   const handleEditChange = (e) => {
     const { name, value } = e.target
     setEditTx((prev) => ({ ...prev, [name]: value }))
   }
 
-  const saveEdit = () => {
-    fetch('https://firsttechwallet.top/macdon/update_transaction.php', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(editTx),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        alert(data.message)
-        setEditTx(null)
-        fetchTransactions()
-      })
-  }
+  // const saveEdit = () => {
+  //   fetch('https://firsttechwallet.top/macdon/update_transaction.php', {
+  //     method: 'POST',
+  //     headers: { 'Content-Type': 'application/json' },
+  //     body: JSON.stringify(editTx),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       alert(data.message)
+  //       setEditTx(null)
+  //       fetchTransactions()
+  //     })
+  // }
   return (
     <div className='dashtrans dashboard'>
       <DashboardHeader />
-      {/* <nav>
-        <Link to={'/dashboard'}>
-          <div className='dbicon formicons'>
-            <img src='icons/home.png' alt='' className='m-auto' />
-            <p>Home</p>
-          </div>
-        </Link>
-        <Link to={'/dashboardform'}>
-          <div className='dbicon formicons'>
-            <img src='icons/form.png' alt='' className='m-auto' />
-            <p>New Entry</p>
-          </div>
-        </Link>
-      </nav> */}
+
       <section className='table-section'>
         <h2>All Transactions</h2>
         <table border='1' cellPadding='8'>
           <thead>
             <tr>
-              <th>ID</th>
+              <th>S/N</th>
               <th>Date</th>
-              <th>Account</th>
-              <th>Type</th>
+              <th>Account No.</th>
               <th>Amount</th>
               <th>Description</th>
-              <th>Actions</th>
+              <th>Transaction</th>
+              <th>Balance</th>
             </tr>
           </thead>
           <tbody>
             {transactions.map((tx) => (
               <tr key={tx.id}>
-                <td>{tx.id}</td>
+                <td>{sn++}</td>
                 <td>
                   {editTx?.id === tx.id ? (
                     <input name='date' value={editTx.date} onChange={handleEditChange} />
@@ -116,19 +105,11 @@ export default function Transactions() {
                 </td>
                 <td>
                   {editTx?.id === tx.id ? (
-                    <select name='type' value={editTx.type} onChange={handleEditChange}>
-                      <option value='deposit'>Deposit</option>
-                      <option value='withdraw'>Withdraw</option>
-                    </select>
-                  ) : (
-                    tx.type
-                  )}
-                </td>
-                <td>
-                  {editTx?.id === tx.id ? (
                     <input name='amount' value={editTx.amount} onChange={handleEditChange} />
+                  ) : tx.type === 'debit' ? (
+                    <span className='text-red-700'>{'-' + tx.amount}</span>
                   ) : (
-                    tx.amount
+                    <span className='text-green-600'>{tx.amount}</span>
                   )}
                 </td>
                 <td>
@@ -143,6 +124,17 @@ export default function Transactions() {
                   )}
                 </td>
                 <td>
+                  {editTx?.id === tx.id ? (
+                    <select name='type' value={editTx.type} onChange={handleEditChange}>
+                      <option value='Credit'>Credit</option>
+                      <option value='Debit'>Debit</option>
+                    </select>
+                  ) : (
+                    tx.type
+                  )}
+                </td>
+                <td>{tx.balance}</td>
+                {/* <td>
                   {editTx?.id === tx.id ? (
                     <div className='btn'>
                       <button className='savebtn' onClick={saveEdit}>
@@ -162,7 +154,7 @@ export default function Transactions() {
                       </button>
                     </div>
                   )}
-                </td>
+                </td> */}
               </tr>
             ))}
           </tbody>
