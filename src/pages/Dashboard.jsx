@@ -15,25 +15,50 @@ export default function Dashboard() {
         </div>
         <div className='dashcontainer'>
           <div className='dbicons'>
-            <div className='flex'>
-              <div onClick={() => navigate('/dashboardform')} className='dbicon'>
-                <img src='icons/transfer.png' alt='' className='m-auto' />
-                <p>Tranfers</p>
-              </div>
+            <div onClick={() => navigate('/dashboardform')} className='dbicon'>
+              <img src='icons/transfer.png' alt='' className='m-auto' />
+              <p>Transfers</p>
             </div>
-            <div className='flex'>
-              <div className='dbicon'>
-                <img src='icons/card.png' alt='' className='m-auto' />
-                <p>Card Data</p>
-              </div>
-              <div className='dbicon'>
-                <img src='icons/loan.png' alt='' className='m-auto' />
-                <p>Request Loan</p>
-              </div>
-              <div onClick={() => navigate('/all-transactions')} className='dbicon'>
-                <img src='icons/history.png' alt='' className='m-auto' />
-                <p>History</p>
-              </div>
+            <div
+              onClick={() => {
+                alert('Service not available ')
+              }}
+              className='dbicon'
+            >
+              <img src='icons/card.png' alt='' className='m-auto' />
+              <p>Card Data</p>
+            </div>
+            <div
+              onClick={() => {
+                alert('Service not available ')
+              }}
+              className='dbicon'
+            >
+              <img src='icons/loan.png' alt='' className='m-auto' />
+              <p>Loan</p>
+            </div>
+            <div onClick={() => navigate('/all-transactions')} className='dbicon'>
+              <img src='icons/history.png' alt='' className='m-auto' />
+              <p>History</p>
+            </div>
+            <div
+              onClick={() => {
+                alert('Service not available ')
+              }}
+              className='dbicon'
+            >
+              <img src='icons/airtime.png' alt='' className='m-auto' />
+              <p>Airtime</p>
+            </div>
+            <div
+              onClick={() => {
+                console.log('Other items are coming soon')
+                alert('Other items are coming soon')
+              }}
+              className='dbicon'
+            >
+              <img src='icons/more.png' alt='' className='m-auto' />
+              <p>More</p>
             </div>
           </div>
         </div>

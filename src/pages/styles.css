@@ -29,8 +29,10 @@
 }
 
 .dbicons {
-  max-width: 800px;
+  max-width: 700px;
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 .dbicon {
   cursor: pointer;
@@ -56,14 +58,11 @@
     padding: 50px 30px;
   }
   .dbicons {
-    width: 100vw;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    max-width: 500px;
+    justify-content: space-around;
   }
   .dbicon {
-    cursor: pointer;
-    width: 100px;
+    max-width: 100px;
     border-radius: 8px;
   }
 }
