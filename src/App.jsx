@@ -14,9 +14,8 @@ function App() {
         <Routes>
           <Route path='/' element={<Homepage />} />
           <Route path='/dashboard' element={<Dashboard />} />
-          <Route path='/dashboard' element={<Dashboard />} />
-          <Route path='/dashboardform' element={<DashboardForm />} />
-          <Route path='/all-transactions' element={<Transactions />} />
+          <Route path='/dashboard/dashboardform' element={<DashboardForm />} />
+          <Route path='/dashboard/all-transactions' element={<Transactions />} />
         </Routes>
         <Footer />
       </BrowserRouter>

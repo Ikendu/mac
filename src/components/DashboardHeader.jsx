@@ -14,7 +14,7 @@ export default function DashboardHeader() {
       <section className='upper'>
         <div className='user different '>
           <img src='icons/camera.png' alt='' />
-          <p className='pt-5 font-bold'>{'Welcome'} ABANA WAKIR</p>
+          <p className='pt-5 font-bold'>{'Welcome'} ABANA WAKIR Mohammed</p>
         </div>
 
         <button className='logoutbtn' onClick={logout}>
