@@ -49,22 +49,20 @@ export default function DashboardForm() {
 
   // Get latest balance for this account
   useEffect(() => {
-    if (account.trim() !== '') {
-      fetch(`https://firsttechwallet.top/macdon/get_last_balance.php`)
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.balance) {
-            setBalance(data.balance)
-            console.log(data.balance)
-          } else {
-            setBalance(0)
-          }
-        })
-        .catch((err) => {
-          console.error('Failed to fetch balance:', err)
+    fetch(`https://firsttechwallet.top/macdon/get_last_balance.php`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.balance) {
+          setBalance(parseFloat(data.balance))
+          console.log(data.balance)
+        } else {
           setBalance(0)
-        })
-    }
+        }
+      })
+      .catch((err) => {
+        console.error('Failed to fetch balance:', err)
+        setBalance(0)
+      })
   }, [account])
 
   const handleSubmit = (e) => {
@@ -77,7 +75,7 @@ export default function DashboardForm() {
     }
 
     // Calculate new balance
-    const newBalance = deposit ? balance + numericAmount : balance - numericAmount
+    const newbalance = deposit ? balance + numericAmount : balance - numericAmount
 
     const formData = {
       date,
@@ -85,7 +83,7 @@ export default function DashboardForm() {
       type: deposit ? 'deposit' : 'withdraw',
       amount: numericAmount,
       description,
-      balance: newBalance,
+      balance: newbalance,
     }
 
     fetch('https://firsttechwallet.top/macdon/submit_transaction.php', {
@@ -138,9 +136,7 @@ export default function DashboardForm() {
           type='text'
           placeholder='Calculated Balance'
           value={
-            deposit
-              ? (balance + (parseFloat(amount) || 0)).toFixed(2)
-              : (balance - (parseFloat(amount) || 0)).toFixed(2)
+            deposit ? balance + (parseFloat(amount) || 0) : balance - (parseFloat(amount) || 0)
           }
           readOnly
         />
