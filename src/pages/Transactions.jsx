@@ -106,7 +106,7 @@ export default function Transactions() {
                 <td>
                   {editTx?.id === tx.id ? (
                     <input name='amount' value={editTx.amount} onChange={handleEditChange} />
-                  ) : tx.type === 'debit' ? (
+                  ) : tx.type === 'debit' || tx.type === 'withdral' || tx.type === 'withdraw' ? (
                     <span className='text-red-700'>{'-' + tx.amount}</span>
                   ) : (
                     <span className='text-green-600'>{tx.amount}</span>
