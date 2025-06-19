@@ -48,7 +48,8 @@ export default function DashboardHeader() {
           </p>
           <p className='pt-5 font-bold text-blue-900 text-sm'>Balance: {balance}</p>
         </div>
-        <div>
+
+        <section className='user-account'>
           <p
             onClick={handleCopy}
             className='text-sm text-blue-700 font-bold mb-1 underline cursor-pointer'
@@ -58,7 +59,7 @@ export default function DashboardHeader() {
           <button className='logoutbtn' onClick={logout}>
             Logout
           </button>
-        </div>
+        </section>
       </section>
       <div className='nav-container'>
         <nav>

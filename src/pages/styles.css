@@ -9,6 +9,11 @@
   padding: 0 90px 50px;
   /* overflow: hidden; */
 }
+.user-account {
+  display: flex;
+  flex-direction: column;
+  margin-top: 8px;
+}
 .dashform {
   height: 100%;
 }

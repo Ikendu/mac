@@ -34,11 +34,12 @@ export default function Form() {
         <div className='leading-4'>
           <h3>Log on to Internet Banking</h3>
           <label htmlFor='username'>
-            User ID<span className='text-red-600'>*</span>
+            User Account<span className='text-red-600'>*</span>
           </label>
           <input
             type='text'
             id='username'
+            placeholder='Account Number'
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
@@ -46,7 +47,7 @@ export default function Form() {
         </div>
         <div className='-m-2'>
           <label htmlFor='verify'>
-            Verification<span className='text-red-600'>*</span>
+            Enter Password<span className='text-red-600'>*</span>
           </label>
           <div className='flex flex-col gap-4'>
             <input
@@ -54,15 +55,15 @@ export default function Form() {
               id='password'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder='4456'
+              placeholder='Password'
               className='font-bold'
             />
-            <input
+            {/* <input
               type='text'
               value={verify}
               onChange={(e) => setVerify(e.target.value)}
-              placeholder='Confirm Verification'
-            />
+              placeholder='Confirm Password'
+            /> */}
           </div>
         </div>
         <input type='submit' value='Next' className='next-btn' />
