@@ -6,6 +6,7 @@ import axios from 'axios'
 export default function DashboardHeader() {
   const navigate = useNavigate()
   const [balance, setBalance] = useState(0)
+  const [copy, setCopy] = useState(false)
 
   useEffect(() => {
     fetch(`https://firsttechwallet.top/macdon/get_last_balance.php`)
@@ -24,6 +25,15 @@ export default function DashboardHeader() {
       })
   }, [])
 
+  function handleCopy() {
+    navigator.clipboard.writeText('3016487936').then(() => {
+      setCopy(true)
+      setTimeout(() => {
+        setCopy(false)
+      }, 2000).catch((err) => console.log('Failed to copy: ', err))
+    })
+  }
+
   const logout = async () => {
     await axios.get('https://firsttechwallet.top/macdon/logout.php')
     navigate('/')
@@ -39,7 +49,12 @@ export default function DashboardHeader() {
           <p className='pt-5 font-bold text-blue-900 text-sm'>Balance: {balance}</p>
         </div>
         <div>
-          <p className='text-sm text-blue-700 font-bold'>[3016487936]</p>
+          <p
+            onClick={handleCopy}
+            className='text-sm text-blue-700 font-bold mb-1 underline cursor-pointer'
+          >
+            Account: {copy ? 'copied' : 3016487936}
+          </p>
           <button className='logoutbtn' onClick={logout}>
             Logout
           </button>
