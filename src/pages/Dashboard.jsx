@@ -19,6 +19,10 @@ export default function Dashboard() {
               <img src='icons/transfer.png' alt='' className='m-auto' />
               <p>Transfers</p>
             </div>
+            <div onClick={() => navigate('/statement')} className='dbicon'>
+              <img src='icons/statement.png' alt='' className='m-auto' />
+              <p>Statement</p>
+            </div>
             <div
               onClick={() => {
                 alert('Service not available ')
