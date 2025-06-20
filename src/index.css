@@ -72,3 +72,15 @@ input:focus {
   font-weight: bold;
   /* color: white; */
 }
+
+@media print {
+  header {
+    display: none;
+  }
+  footer {
+    display: none;
+  }
+  .printbtn {
+    display: none;
+  }
+}

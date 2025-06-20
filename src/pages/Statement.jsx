@@ -15,11 +15,12 @@ export default function Statement() {
   console.log(transactions)
 
   const generateAndUploadPDF = async () => {
-    const element = document.getElementById('pdf-content')
+    // const element = document.getElementById('pdf-content')
 
     // Generate PDF as blob
     // const pdfBlob = await html2pdf().from(element).outputPdf('blob')
-    html2pdf().from(element).save('transactions.pdf')
+    // html2pdf().from(element).save('transactions.pdf')
+    print()
 
     // Upload blob to server
     // const formData = new FormData()
@@ -118,7 +119,12 @@ export default function Statement() {
           </tbody>
         </table>
       </div>
-      <button onClick={generateAndUploadPDF}>Get PDF</button>
+      <button className='printbtn' onClick={generateAndUploadPDF}>
+        Send PDF
+      </button>
+      <button onClick={() => print()} className='printbtn'>
+        Get PDF
+      </button>
     </div>
   )
 }
