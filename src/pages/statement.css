@@ -1,13 +1,13 @@
 body {
   font-family: system-ui, 'Open Sans';
+  font-size: 10px;
 }
 .pdfcontainer {
   /* padding: 80px; */
-  width: 80%;
+  width: 100%;
   margin: auto;
 }
 .caution {
-  font-size: 20px;
   color: red;
   padding: 20px;
   text-align: center;
@@ -21,14 +21,33 @@ body {
   width: 100%;
   margin: auto;
 }
+.account-info {
+  margin-bottom: 40px;
+}
 .account-info p span {
   display: inline-block;
   width: 150px;
   font-weight: bold;
 }
+.account-info p {
+  padding: 5px;
+}
 table {
   width: 100%;
   border: 2px solid black;
+}
+thead tr {
+  background-color: #0616f8;
+  color: white;
+  border: 2px solid black;
+}
+thead th {
+  border: none;
+}
+th,
+td {
+  padding: 10px;
+  text-align: left;
 }
 table th,
 table td {

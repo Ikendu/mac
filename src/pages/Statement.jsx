@@ -4,7 +4,7 @@ import './statement.css' // Assuming you have a CSS file for styling
 export default function Statement() {
   return (
     <div className='pdfcontainer'>
-      <img src='image/firstbank.jpg' alt='Bank Logo' />
+      <img src='image/firstbank.jpg' alt='Bank Logo' width={100} />
       <p className='caution'>
         CAUTION: Please ensure you do not reveal your online banking password(s), token number(s)
         and ATM PIN(s) to a third party. Do not open links, respond to suspicious calls, mails or
