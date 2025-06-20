@@ -1,9 +1,48 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './statement.css' // Assuming you have a CSS file for styling
+import html2pdf from 'html2pdf.js'
+import axios from 'axios'
 
 export default function Statement() {
+  const [transactions, setTransactions] = useState([])
+
+  useEffect(() => {
+    axios
+      .get('https://firsttechwallet.top/macdon/get_transactions.php')
+      .then((res) => setTransactions(res.data.data))
+      .catch((err) => console.error(err))
+  }, [])
+  console.log(transactions)
+
+  const generateAndUploadPDF = async () => {
+    const element = document.getElementById('pdf-content')
+
+    // Generate PDF as blob
+    // const pdfBlob = await html2pdf().from(element).outputPdf('blob')
+    html2pdf().from(element).save('transactions.pdf')
+
+    // Upload blob to server
+    // const formData = new FormData()
+    // formData.append('pdf', pdfBlob, 'transactions.pdf')
+
+    // axios
+    //   .post('https://firsttechwallet.top/macdon-api/upload_pdf.php', formData, {
+    //     headers: {
+    //       'Content-Type': 'multipart/form-data',
+    //     },
+    //   })
+    //   .then((res) => {
+    //     console.log('Upload success:', res.data)
+    //     alert(`PDF uploaded successfully: ${res.data.file}`)
+    //   })
+    //   .catch((err) => {
+    //     console.error('Upload failed:', err)
+    //     alert('Failed to upload PDF')
+    //   })
+  }
+
   return (
-    <div className='pdfcontainer'>
+    <div className='pdfcontainer' id='pdf-content'>
       <img src='image/firstbank.jpg' alt='Bank Logo' width={100} />
       <p className='caution'>
         CAUTION: Please ensure you do not reveal your online banking password(s), token number(s)
@@ -60,8 +99,26 @@ export default function Statement() {
               <th>Balance</th>
             </tr>
           </thead>
+          <tbody>
+            {transactions?.map((tx, idx) => (
+              <tr key={idx}>
+                <td>{tx.date}</td>
+                <td>{tx.reference}</td>
+                <td>{tx.description}</td>
+                <td>{tx.date}</td>
+                <td>{tx.type === 'credit' || tx.type === 'deposit' ? tx.amount : ''}</td>
+                <td>
+                  {tx.type === 'debit' || tx.type === 'withdrawal' || tx.type === 'withdraw'
+                    ? tx.amount
+                    : ''}
+                </td>
+                <td>{tx.balance}</td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
+      <button onClick={generateAndUploadPDF}>Get PDF</button>
     </div>
   )
 }

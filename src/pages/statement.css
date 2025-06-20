@@ -1,9 +1,10 @@
 body {
   font-family: system-ui, 'Open Sans';
   font-size: 10px;
+  color: black;
 }
 .pdfcontainer {
-  /* padding: 80px; */
+  padding: 60px;
   width: 100%;
   margin: auto;
 }
@@ -43,6 +44,10 @@ thead tr {
 }
 thead th {
   border: none;
+}
+td {
+  border: none;
+  border-bottom: 1px solid black;
 }
 th,
 td {
