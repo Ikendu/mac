@@ -5,6 +5,11 @@ import axios from 'axios'
 
 export default function Statement() {
   const [transactions, setTransactions] = useState([])
+  // const [openingbalance, setOpeningBalance] = useState(0)
+  // const [closingbalance, setClosingBalance] = useState(0)
+  // const [totalDeposit, setTotalDeposit] = useState(0)
+  // const [totalWithdrawal, setTotalWithdrawal] = useState(0)
+  const [summary, setSummary] = useState({})
 
   useEffect(() => {
     axios
@@ -12,8 +17,14 @@ export default function Statement() {
       .then((res) => setTransactions(res.data.data))
       .catch((err) => console.error(err))
   }, [])
-  console.log(transactions)
+  useEffect(() => {
+    axios
+      .get('https://firsttechwallet.top/macdon/transaction_summary.php')
+      .then((res) => setSummary(res.data))
+      .catch((err) => console.error(err))
+  }, [])
 
+  console.log('SUMMER', summary)
   const generateAndUploadPDF = async () => {
     const element = document.getElementById('pdf-content')
 
@@ -67,7 +78,7 @@ export default function Statement() {
                 <span>Account Type:</span> SAVINGS A/C-PERSONAL
               </p>
               <p>
-                <span>For the Period of:</span> 01-Jan-2025 to 31-Jan-2025
+                <span>For the Period of:</span> 23-May-2025 to 23-June-2025
               </p>
               <p>
                 <span>Account Name:</span> ABANA wakir Mohammed
@@ -81,16 +92,16 @@ export default function Statement() {
                 <span>Currency:</span> NGN
               </p>
               <p>
-                <span>Opening Balance:</span> 100,000.00
+                <span>Opening Balance:</span> {summary?.opening_balance || '0.00'}
               </p>
               <p>
-                <span>Closing Balance:</span> 150,000.00
+                <span>Closing Balance:</span> {summary?.closing_balance || '0.00'}
               </p>
               <p>
-                <span>Total Credit:</span> 314,600.00
+                <span>Total Deposit:</span> {summary?.total_deposit || '0.00'}
               </p>
               <p>
-                <span>Total Debit:</span> 264,600.00
+                <span>Total Withdrawal:</span> {summary?.total_withdrawal || '0.00'}
               </p>
             </div>
           </div>
@@ -113,12 +124,8 @@ export default function Statement() {
                   <td>{tx.reference}</td>
                   <td>{tx.description}</td>
                   <td>{tx.date}</td>
-                  <td>{tx.type === 'credit' || tx.type === 'deposit' ? tx.amount : ''}</td>
-                  <td>
-                    {tx.type === 'debit' || tx.type === 'withdrawal' || tx.type === 'withdraw'
-                      ? tx.amount
-                      : ''}
-                  </td>
+                  <td>{tx.type === 'Deposit' ? tx.amount : ''}</td>
+                  <td>{tx.type === 'Withdrawal' ? tx.amount : ''}</td>
                   <td>{tx.balance}</td>
                 </tr>
               ))}

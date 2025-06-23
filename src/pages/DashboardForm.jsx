@@ -80,7 +80,7 @@ export default function DashboardForm() {
     const formData = {
       date,
       account,
-      type: deposit ? 'deposit' : 'withdraw',
+      type: deposit ? 'Deposit' : 'Withdrawal',
       amount: numericAmount,
       description,
       balance: newbalance,

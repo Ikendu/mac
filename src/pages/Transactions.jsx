@@ -106,7 +106,7 @@ export default function Transactions() {
                 <td>
                   {editTx?.id === tx.id ? (
                     <input name='amount' value={editTx.amount} onChange={handleEditChange} />
-                  ) : tx.type === 'debit' || tx.type === 'withdral' || tx.type === 'withdraw' ? (
+                  ) : tx.type === 'Withdrawal' ? (
                     <span className='text-red-700'>{'-' + tx.amount}</span>
                   ) : (
                     <span className='text-green-600'>{tx.amount}</span>
@@ -126,8 +126,8 @@ export default function Transactions() {
                 <td>
                   {editTx?.id === tx.id ? (
                     <select name='type' value={editTx.type} onChange={handleEditChange}>
-                      <option value='Credit'>Credit</option>
-                      <option value='Debit'>Debit</option>
+                      <option value='Deposit'>Deposit</option>
+                      <option value='Withdrawal'>Withdrawal</option>
                     </select>
                   ) : (
                     tx.type
