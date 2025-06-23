@@ -5,7 +5,7 @@ header("Content-Type: application/json");
 header("Access-Control-Allow-Headers: *");
 
 // Connect Database
-$conn = new mysqli("localhost", "firsttec_mac", "11111234Aa@!#", "firsttec_macdone");
+$conn = new mysqli("localhost", "root", "", "macdone");
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="pdfcontainer">
+      <img src="image/firstbank.jpg" alt="Bank Logo" />
+      <p class="caution">
+        CAUTION: Please ensure you do not reveal your online banking password(s), token number(s)
+        and ATM PIN(s) to a third party. Do not open links, respond to suspicious calls, mails or
+        letters requesting your banking details. These messages are fraudulent and are not from
+        FirstBank.
+      </p>
+      <div>
+        <div class="accountdetails">
+          <div class="account-info">
+            <p><span>Account No:</span> 3016487936</p>
+            <p><span>Account Type:</span> SAVINGS A/C-PERSONAL</p>
+            <p><span>For the Period of:</span> 01-Jan-2025 to 31-Jan-2025</p>
+            <p><span>Account Name:</span> ABANA wakir Mohammed</p>
+            <p><span>Address:</span> LIFE'S COMPOUND, AKPO STREET, ACHARA, Lagos</p>
+          </div>
+          <div class="account-info">
+            <p><span>Currency:</span> NGN</p>
+            <p><span>Opening Balance:</span> 100,000.00</p>
+            <p><span>Closing Balance:</span> 150,000.00</p>
+            <p><span>Total Credit:</span> 314,600.00</p>
+            <p><span>Total Debit:</span> 264,600.00</p>
+          </div>
+        </div>
+        <table cellspacing="0">
+          <tr style="background-color: #0616f8; color: white">
+            <th>TransDate</th>
+            <th>Reference</th>
+            <th>Transaction Details</th>
+            <th>ValueDate</th>
+            <th>Deposit</th>
+            <th>Withdrawal</th>
+            <th>Balance</th>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
+
+<style>
+  body {
+    font-family: system-ui, 'Open Sans';
+  }
+  .pdfcontainer {
+    padding: 100px;
+    width: 80%;
+    margin: auto;
+  }
+  .caution {
+    font-size: 20px;
+    color: red;
+    padding: 20px;
+    text-align: center;
+    border: 2px solid black;
+    width: 78%;
+    margin: 40px auto;
+  }
+  .accountdetails {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: auto;
+  }
+  .account-info p span {
+    display: inline-block;
+    width: 150px;
+    font-weight: bold;
+  }
+  table {
+    width: 100%;
+    border: 2px solid black;
+  }
+  table th,
+  table td {
+    padding: 10px;
+    text-align: left;
+    margin: -2px;
+  }
+</style>

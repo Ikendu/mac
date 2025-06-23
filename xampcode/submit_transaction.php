@@ -2,10 +2,7 @@
 
 // Connect to database
 include "connect.php";
-// Allow CORS (for development only; secure properly in production)
-header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json");
-header("Access-Control-Allow-Headers: *");
+
 
 // Get POST data
 $data = json_decode(file_get_contents("php://input"), true);
@@ -16,13 +13,15 @@ if (
     isset($data['account']) &&
     isset($data['type']) &&
     isset($data['amount']) &&
-    isset($data['description'])
+    isset($data['description']) &&
+    isset($data['balance'])
 ) {
     $date = $data['date'];
     $account = $data['account'];
     $type = $data['type'];
     $amount = $data['amount'];
     $description = $data['description'];
+    $balance = $data['balance'];
 
 
 
@@ -32,8 +31,8 @@ if (
     }
 
     // Insert into transactions table
-    $stmt = $conn->prepare("INSERT INTO transactions (date, account_number, type, amount, description) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssss", $date, $account, $type, $amount, $description);
+    $stmt = $conn->prepare("INSERT INTO transactions (date, account_number, type, amount, description, balance) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssss", $date, $account, $type, $amount, $description, $balance);
 
     if ($stmt->execute()) {
         echo json_encode(["message" => "Transaction saved successfully"]);

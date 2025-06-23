@@ -1,8 +1,22 @@
 1. Landing Page .................................Done
-2. Login
+2. Login.........................................Done
 3. Form for entries
 4. Table of all entries
 5. Edit, Delete buttons
 6. Create individual entry pdf
 7. Create all entries pdf
 8. Send to email
+9. Host and Domain ..............................Done
+
+
+database password: 11111234Aa@!#
+
+
+CREATE TABLE transactions (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  date VARCHAR(50),
+  account_number VARCHAR(50),
+  type VARCHAR(20),
+  amount DECIMAL(10,2),
+  description TEXT
+);
