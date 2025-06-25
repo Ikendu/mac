@@ -50,6 +50,7 @@ export default function Transactions() {
     setEditTx((prev) => ({ ...prev, [name]: value }))
   }
 
+  const getTransaction = () => {}
   // const saveEdit = () => {
   //   fetch('https://firsttechwallet.top/macdon/update_transaction.php', {
   //     method: 'POST',
@@ -85,7 +86,11 @@ export default function Transactions() {
             {transactions.map((tx) => (
               <tr key={tx.id}>
                 <td>{sn++}</td>
-                <td>
+                <td
+                  onClick={getTransaction}
+                  className='cursor-pointer'
+                  title='Get transaction details'
+                >
                   {editTx?.id === tx.id ? (
                     <input name='date' value={editTx.date} onChange={handleEditChange} />
                   ) : (

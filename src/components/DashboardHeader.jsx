@@ -40,19 +40,29 @@ export default function DashboardHeader() {
   }
   return (
     <div className='dashheader'>
-      <section className='upper '>
-        <div className='user different '>
+      <section className='upper'>
+        <div className='text-sm user different '>
           <img src='icons/camera.png' alt='' />
-          <p className='pt-5 font-bold'>
-            <span className='text-blue-900'>Welcome</span> ABANA WAKIR Mohammed
+          <div>
+            <p className='pt-5 font-bold'>
+              <span className='text-blue-900'>Welcome</span> ABANA WAKIR Mohammed
+            </p>
+            <p
+              onClick={handleCopy}
+              className='text-lg account-num text-blue-700 font-bold mb-1 underline cursor-pointer'
+            >
+              Account: {copy ? 'copied' : 3016487936}
+            </p>
+          </div>
+          <p className='balance'>
+            <span>Balance:</span> {balance}
           </p>
-          <p className='pt-5 font-bold text-blue-900 text-sm'>Balance: {balance}</p>
         </div>
 
-        <section className='user-account'>
+        <section className='user-account text-sm'>
           <p
             onClick={handleCopy}
-            className='text-sm text-blue-700 font-bold mb-1 underline cursor-pointer'
+            className='account-number text-blue-700 font-bold mb-1 underline cursor-pointer'
           >
             Account: {copy ? 'copied' : 3016487936}
           </p>
