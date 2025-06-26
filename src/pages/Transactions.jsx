@@ -50,7 +50,17 @@ export default function Transactions() {
     setEditTx((prev) => ({ ...prev, [name]: value }))
   }
 
-  const getTransaction = () => {}
+  const sendRecipt = async (id) => {
+    console.log('Sending receipt for transaction ID:', id)
+    const res = await fetch(`https://firsttechwallet.top/sendreciept.php?id=${id}`)
+    const data = await res.json()
+    if (data.status === 'success') {
+      alert('Recipt sent')
+      // setTransaction(data.transaction) // Show receipt in modal or preview
+    } else {
+      alert(data.message)
+    }
+  }
   // const saveEdit = () => {
   //   fetch('https://firsttechwallet.top/macdon/update_transaction.php', {
   //     method: 'POST',
@@ -87,7 +97,7 @@ export default function Transactions() {
               <tr key={tx.id}>
                 <td>{sn++}</td>
                 <td
-                  onClick={getTransaction}
+                  onClick={() => sendRecipt(tx.id)}
                   className='cursor-pointer'
                   title='Get transaction details'
                 >
