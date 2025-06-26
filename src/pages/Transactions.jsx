@@ -52,15 +52,22 @@ export default function Transactions() {
 
   const sendRecipt = async (id) => {
     console.log('Sending receipt for transaction ID:', id)
-    const res = await fetch(`https://firsttechwallet.top/sendreciept.php?id=${id}`)
-    const data = await res.json()
-    if (data.status === 'success') {
-      alert('Recipt sent')
-      // setTransaction(data.transaction) // Show receipt in modal or preview
-    } else {
-      alert(data.message)
+    try {
+      const res = await fetch(`https://firsttechwallet.top/macdon/sendreciept.php?id=${id}`, {
+        method: 'GET',
+      })
+      const data = await res.json()
+
+      if (data.status === 'success') {
+        alert('Receipt sent')
+      } else {
+        alert('Error: ' + data.message)
+      }
+    } catch (error) {
+      alert('Network or parsing error: ' + error.message)
     }
   }
+
   // const saveEdit = () => {
   //   fetch('https://firsttechwallet.top/macdon/update_transaction.php', {
   //     method: 'POST',
