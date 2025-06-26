@@ -50,21 +50,25 @@ export default function Transactions() {
     setEditTx((prev) => ({ ...prev, [name]: value }))
   }
 
-  const sendRecipt = async (id) => {
-    console.log('Sending receipt for transaction ID:', id)
-    try {
-      const res = await fetch(`https://firsttechwallet.top/macdon/sendreciept.php?id=${id}`, {
-        method: 'GET',
-      })
-      const data = await res.json()
+  const sendRecipt = async (id, type) => {
+    if (type === 'Withdrawal') {
+      console.log('Sending receipt for transaction ID:', id)
+      try {
+        const res = await fetch(`https://firsttechwallet.top/macdon/sendreciept.php?id=${id}`, {
+          method: 'GET',
+        })
+        const data = await res.json()
 
-      if (data.status === 'success') {
-        alert('Receipt sent')
-      } else {
-        alert('Error: ' + data.message)
+        if (data.status === 'success') {
+          alert('Receipt sent')
+        } else {
+          alert('Error: ' + data.message)
+        }
+      } catch (error) {
+        alert('Network or parsing error: ' + error.message)
       }
-    } catch (error) {
-      alert('Network or parsing error: ' + error.message)
+    } else {
+      alert('Receipt can only be sent for Withdrawal transactions')
     }
   }
 
@@ -104,7 +108,7 @@ export default function Transactions() {
               <tr key={tx.id}>
                 <td>{sn++}</td>
                 <td
-                  onClick={() => sendRecipt(tx.id)}
+                  onClick={() => sendRecipt(tx.id, tx.type)}
                   className='cursor-pointer'
                   title='Get transaction details'
                 >
