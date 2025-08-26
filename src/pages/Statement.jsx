@@ -11,6 +11,7 @@ export default function Statement() {
 
   // Fetch transactions + summary with selected date range
   const fetchData = () => {
+    alert(`${startDate} ${endDate} selected`);
     if (!startDate || !endDate) {
       alert("Please select both start and end dates");
       return;
