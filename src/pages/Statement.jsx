@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./statement.css";
 import html2pdf from "html2pdf.js";
 import axios from "axios";
@@ -8,31 +8,35 @@ export default function Statement() {
   const [summary, setSummary] = useState({});
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const [period, setPeriod] = useState("All transactions");
 
-  // Fetch transactions + summary with selected date range
-  const fetchData = () => {
-    alert(`${startDate} ${endDate} selected`);
-    if (!startDate || !endDate) {
-      alert("Please select both start and end dates");
-      return;
+  const fetchTransactions = () => {
+    let url = "https://firsttechwallet.top/macdon/get_transactions.php";
+
+    if (startDate && endDate) {
+      url += `?start=${startDate}&end=${endDate}`;
+      setPeriod(`${startDate} to ${endDate}`);
+    } else {
+      setPeriod("All transactions");
     }
 
     axios
-      .get(
-        `https://firsttechwallet.top/macdon/get_transactions.php?start=${startDate}&end=${endDate}`
-      )
-      .then((res) => setTransactions(res.data.data))
-      .catch((err) => console.error(err));
-
-    axios
-      .get(
-        `https://firsttechwallet.top/macdon/transaction_summary.php?start=${startDate}&end=${endDate}`
-      )
-      .then((res) => setSummary(res.data))
+      .get(url)
+      .then((res) => setTransactions(res.data.data || []))
       .catch((err) => console.error(err));
   };
 
-  // Generate + upload PDF
+  useEffect(() => {
+    fetchTransactions();
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get("https://firsttechwallet.top/macdon/transaction_summary.php")
+      .then((res) => setSummary(res.data))
+      .catch((err) => console.error(err));
+  }, []);
+
   const generateAndUploadPDF = async () => {
     const element = document.getElementById("pdf-content");
 
@@ -52,9 +56,7 @@ export default function Statement() {
       const res = await axios.post(
         "https://firsttechwallet.top/macdon/upload_pdf.php",
         formData,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-        }
+        { headers: { "Content-Type": "multipart/form-data" } }
       );
 
       console.log("Upload success:", res.data);
@@ -67,34 +69,33 @@ export default function Statement() {
 
   return (
     <main>
+      {/* 🔹 Date Filter Section */}
+      <div className="date-filter">
+        <label>
+          Start Date:{" "}
+          <input
+            type="date"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+            className="date-input"
+          />
+        </label>
+        <label>
+          End Date:{" "}
+          <input
+            type="date"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+            className="date-input"
+          />
+        </label>
+        <button onClick={fetchTransactions} className="date-btn">
+          Get Statement
+        </button>
+      </div>
+
       <div className="pdfcontainer" id="pdf-content">
-        {/* Header */}
         <img src="image/firstbank.jpg" alt="Bank Logo" width={100} />
-
-        {/* 🔹 Date filter section */}
-        <div className="date-filter">
-          <label>
-            Start Date:{" "}
-            <input
-              type="date"
-              value={startDate}
-              onChange={(e) => setStartDate(e.target.value)}
-            />
-          </label>
-          <label>
-            End Date:{" "}
-            <input
-              type="date"
-              value={endDate}
-              onChange={(e) => setEndDate(e.target.value)}
-            />
-          </label>
-          <button className="filterbtn" onClick={fetchData}>
-            Generate Statement
-          </button>
-        </div>
-
-        {/* Caution */}
         <p className="caution">
           CAUTION: Please ensure you do not reveal your online banking
           password(s), token number(s) and ATM PIN(s) to a third party. Do not
@@ -103,86 +104,76 @@ export default function Statement() {
           FirstBank.
         </p>
 
-        {/* Account details */}
-        <div>
-          <div className="accountdetails">
-            <div className="account-info">
-              <p>
-                <span>Account No:</span> 3016487936
-              </p>
-              <p>
-                <span>Account Type:</span> SAVINGS A/C-PERSONAL
-              </p>
-              <p>
-                <span>For the Period of:</span>{" "}
-                {startDate && endDate
-                  ? `${new Date(startDate).toLocaleDateString()} to ${new Date(
-                      endDate
-                    ).toLocaleDateString()}`
-                  : "Select Date Range"}
-              </p>
-              <p>
-                <span>Account Name:</span> ABANA wakir Mohammed
-              </p>
-              <p>
-                <span>Address:</span> LIFE'S COMPOUND, AKPO STREET, ACHARA,
-                Lagos
-              </p>
-            </div>
-
-            <div className="account-info">
-              <p>
-                <span>Currency:</span> NGN
-              </p>
-              <p>
-                <span>Opening Balance:</span>{" "}
-                {summary?.opening_balance || "0.00"}
-              </p>
-              <p>
-                <span>Closing Balance:</span>{" "}
-                {summary?.closing_balance || "0.00"}
-              </p>
-              <p>
-                <span>Total Deposit:</span> {summary?.total_deposit || "0.00"}
-              </p>
-              <p>
-                <span>Total Withdrawal:</span>{" "}
-                {summary?.total_withdrawal || "0.00"}
-              </p>
-            </div>
+        {/* 🔹 Account Info */}
+        <div className="accountdetails">
+          <div className="account-info">
+            <p>
+              <span>Account No:</span> 3016487936
+            </p>
+            <p>
+              <span>Account Type:</span> SAVINGS A/C-PERSONAL
+            </p>
+            <p>
+              <span>For the Period of:</span> {period}
+            </p>
+            <p>
+              <span>Account Name:</span> ABANA wakir Mohammed
+            </p>
+            <p>
+              <span>Address:</span> LIFE'S COMPOUND, AKPO STREET, ACHARA, Lagos
+            </p>
           </div>
 
-          {/* Transactions table */}
-          <table cellSpacing="0">
-            <thead>
-              <tr>
-                <th>TransDate</th>
-                <th>Reference</th>
-                <th>Transaction Details</th>
-                <th>ValueDate</th>
-                <th>Deposit</th>
-                <th>Withdrawal</th>
-                <th>Balance</th>
-              </tr>
-            </thead>
-            <tbody>
-              {transactions?.map((tx, idx) => (
-                <tr key={idx}>
-                  <td>{tx.date}</td>
-                  <td>{tx.reference}</td>
-                  <td>{tx.description}</td>
-                  <td>{tx.date}</td>
-                  <td>{tx.type === "Deposit" ? tx.amount : ""}</td>
-                  <td>{tx.type === "Withdrawal" ? tx.amount : ""}</td>
-                  <td>{tx.balance}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <div className="account-info">
+            <p>
+              <span>Currency:</span> NGN
+            </p>
+            <p>
+              <span>Opening Balance:</span> {summary?.opening_balance || "0.00"}
+            </p>
+            <p>
+              <span>Closing Balance:</span> {summary?.closing_balance || "0.00"}
+            </p>
+            <p>
+              <span>Total Deposit:</span> {summary?.total_deposit || "0.00"}
+            </p>
+            <p>
+              <span>Total Withdrawal:</span>{" "}
+              {summary?.total_withdrawal || "0.00"}
+            </p>
+          </div>
         </div>
+
+        {/* 🔹 Transactions Table */}
+        <table cellSpacing="0">
+          <thead>
+            <tr>
+              <th>TransDate</th>
+              <th>Reference</th>
+              <th>Transaction Details</th>
+              <th>ValueDate</th>
+              <th>Deposit</th>
+              <th>Withdrawal</th>
+              <th>Balance</th>
+            </tr>
+          </thead>
+          <tbody>
+            {transactions?.map((tx, idx) => (
+              <tr key={idx}>
+                <td>{tx.date}</td>
+                <td>{tx.reference}</td>
+                <td>{tx.description}</td>
+                <td>{tx.date}</td>
+                <td>{tx.type === "Deposit" ? tx.amount : ""}</td>
+                <td>{tx.type === "Withdrawal" ? tx.amount : ""}</td>
+                <td>{tx.balance}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
 
-      {/* PDF Buttons */}
+      {/* 🔹 PDF Actions */}
       <button className="printbtn" onClick={() => print()}>
         Get PDF
       </button>

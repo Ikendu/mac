@@ -1,5 +1,5 @@
 body {
-  font-family: system-ui, 'Open Sans';
+  font-family: system-ui, "Open Sans";
   font-size: 10px;
   color: black;
 }
@@ -7,6 +7,25 @@ body {
   padding: 60px;
   width: 100%;
   margin: auto;
+}
+.date-filter {
+  text-align: center;
+}
+.date-input {
+  max-width: 300px;
+  padding: 10px;
+  border: 1px solid gray;
+  margin: 10px;
+}
+.date-btn {
+  padding: 10px 20px;
+  background-color: #053a7a;
+  color: rgb(230, 229, 229);
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 13px;
+  border-radius: 5px;
 }
 .caution {
   color: red;
