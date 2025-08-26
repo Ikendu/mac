@@ -38,6 +38,7 @@ export default function DashboardForm() {
   const [description, setDescription] = useState('')
   const [deposit, setDeposit] = useState(false)
   const [balance, setBalance] = useState(0)
+  const [waiting, setWaiting] = useState(false)
 
   // Auto-update date every 20s
   useEffect(() => {
@@ -67,6 +68,7 @@ export default function DashboardForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    setWaiting(true)
 
     const numericAmount = parseFloat(amount)
     if (isNaN(numericAmount)) {
@@ -95,6 +97,7 @@ export default function DashboardForm() {
       .then((data) => {
         console.log(data)
         alert(data.message)
+        setWaiting(false)
       })
       .catch((err) => console.error('Error:', err))
   }
@@ -140,9 +143,22 @@ export default function DashboardForm() {
           }
           readOnly
         />
-        <button type='submit' className='p-2 px-10 bg-blue-900 text-white rounded-lg m-5'>
-          Submit
-        </button>
+        {waiting ? (
+          <button
+            type='submit'
+            className='p-2 px-10 bg-blue-900 text-white rounded-lg m-5 cursor-not-allowed'
+            disabled
+          >
+            Submit
+          </button>
+        ) : (
+          <button
+            type='submit'
+            className='p-2 px-10 bg-blue-900 text-white rounded-lg m-5 cursor-pointer'
+          >
+            Submit
+          </button>
+        )}
       </form>
     </main>
   )
