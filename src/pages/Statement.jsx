@@ -10,33 +10,39 @@ export default function Statement() {
   const [endDate, setEndDate] = useState("");
   const [period, setPeriod] = useState("All transactions");
 
-  const fetchTransactions = () => {
-    let url = "https://firsttechwallet.top/macdon/get_transactions.php";
+  // 🔹 Fetch Transactions + Summary
+  const fetchData = () => {
+    let txUrl = "https://firsttechwallet.top/macdon/get_transactions.php";
+    let summaryUrl =
+      "https://firsttechwallet.top/macdon/transaction_summary.php";
 
     if (startDate && endDate) {
-      url += `?start=${startDate}&end=${endDate}`;
+      txUrl += `?start=${startDate}&end=${endDate}`;
+      summaryUrl += `?start=${startDate}&end=${endDate}`;
       setPeriod(`${startDate} to ${endDate}`);
     } else {
       setPeriod("All transactions");
     }
 
+    // Get transactions
     axios
-      .get(url)
+      .get(txUrl)
       .then((res) => setTransactions(res.data.data || []))
-      .catch((err) => console.error(err));
+      .catch((err) => console.error("Transactions error:", err));
+
+    // Get summary
+    axios
+      .get(summaryUrl)
+      .then((res) => setSummary(res.data))
+      .catch((err) => console.error("Summary error:", err));
   };
 
+  // Load all on mount
   useEffect(() => {
-    fetchTransactions();
+    fetchData();
   }, []);
 
-  useEffect(() => {
-    axios
-      .get("https://firsttechwallet.top/macdon/transaction_summary.php")
-      .then((res) => setSummary(res.data))
-      .catch((err) => console.error(err));
-  }, []);
-
+  // 🔹 PDF Upload
   const generateAndUploadPDF = async () => {
     const element = document.getElementById("pdf-content");
 
@@ -89,11 +95,12 @@ export default function Statement() {
             className="date-input"
           />
         </label>
-        <button onClick={fetchTransactions} className="date-btn">
+        <button onClick={fetchData} className="date-btn">
           Get Statement
         </button>
       </div>
 
+      {/* 🔹 PDF Content */}
       <div className="pdfcontainer" id="pdf-content">
         <img src="image/firstbank.jpg" alt="Bank Logo" width={100} />
         <p className="caution">
