@@ -2,13 +2,21 @@
   .left-title {
     display: none;
   }
-  .main {
-    transform: skewX(0deg);
-  }
+
   .main-container {
     background-position: top 0 right 0;
-    height: 500px;
+    height: 90vh;
+    width: 100%;
   }
+  .main {
+    transform: skewX(0deg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
   .form {
     background-color: #d1d2d4cd;
     width: 300px;
