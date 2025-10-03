@@ -144,9 +144,21 @@ export default function Transactions() {
                       onChange={handleEditChange}
                     />
                   ) : tx.type === "Withdrawal" ? (
-                    <span className="text-red-700">-₦{tx.amount}</span>
+                    <span className="text-red-700">
+                      -₦
+                      {Number(tx.amount).toLocaleString("en-NG", {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}
+                    </span>
                   ) : (
-                    <span className="text-green-600">₦{tx.amount}</span>
+                    <span className="text-green-600">
+                      ₦
+                      {Number(tx.amount).toLocaleString("en-NG", {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}
+                    </span>
                   )}
                 </td>
                 <td>

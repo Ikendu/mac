@@ -171,8 +171,24 @@ export default function Statement() {
                 <td>{tx.reference}</td>
                 <td>{tx.description}</td>
                 <td>{tx.date}</td>
-                <td>{tx.type === "Deposit" ? tx.amount : ""}</td>
-                <td>{tx.type === "Withdrawal" ? tx.amount : ""}</td>
+                <td>
+                  {tx.type === "Deposit"
+                    ? "₦" +
+                      Number(tx.amount).toLocaleString("en-NG", {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })
+                    : ""}
+                </td>
+                <td>
+                  {tx.type === "Withdrawal"
+                    ? "₦" +
+                      Number(tx.amount).toLocaleString("en-NG", {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })
+                    : ""}
+                </td>
                 <td>
                   ₦
                   {Number(tx.balance).toLocaleString("en-NG", {
