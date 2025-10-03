@@ -173,7 +173,13 @@ export default function Statement() {
                 <td>{tx.date}</td>
                 <td>{tx.type === "Deposit" ? tx.amount : ""}</td>
                 <td>{tx.type === "Withdrawal" ? tx.amount : ""}</td>
-                <td>{tx.balance}</td>
+                <td>
+                  ₦
+                  {Number(tx.balance).toLocaleString("en-NG", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}
+                </td>
               </tr>
             ))}
           </tbody>

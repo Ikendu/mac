@@ -1,30 +1,30 @@
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import './styles.css'
-import './form.css'
-import DashboardHeader from '../components/DashboardHeader'
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import "./styles.css";
+import "./form.css";
+import DashboardHeader from "../components/DashboardHeader";
 
 export default function Transactions() {
-  const [transactions, setTransactions] = useState([])
-  const [editTx, setEditTx] = useState(null) // hold data for editing
+  const [transactions, setTransactions] = useState([]);
+  const [editTx, setEditTx] = useState(null); // hold data for editing
 
   useEffect(() => {
-    fetchTransactions()
-  }, [])
+    fetchTransactions();
+  }, []);
 
   const fetchTransactions = () => {
-    fetch('https://firsttechwallet.top/macdon/get_transactions.php')
+    fetch("https://firsttechwallet.top/macdon/get_transactions.php")
       .then((res) => res.json())
       .then((data) => {
-        if (data.status === 'success') {
-          setTransactions(data.data)
+        if (data.status === "success") {
+          setTransactions(data.data);
         } else {
-          console.error(data.message)
+          console.error(data.message);
         }
-      })
-  }
+      });
+  };
 
-  let sn = 1
+  let sn = 1;
 
   // const deleteTransaction = (id) => {
   //   if (!window.confirm('Are you sure you want to delete this transaction?')) return
@@ -46,31 +46,34 @@ export default function Transactions() {
   // }
 
   const handleEditChange = (e) => {
-    const { name, value } = e.target
-    setEditTx((prev) => ({ ...prev, [name]: value }))
-  }
+    const { name, value } = e.target;
+    setEditTx((prev) => ({ ...prev, [name]: value }));
+  };
 
   const sendRecipt = async (id, type) => {
-    if (type === 'Withdrawal') {
-      console.log('Sending receipt for transaction ID:', id)
+    if (type === "Withdrawal") {
+      console.log("Sending receipt for transaction ID:", id);
       try {
-        const res = await fetch(`https://firsttechwallet.top/macdon/sendreciept.php?id=${id}`, {
-          method: 'GET',
-        })
-        const data = await res.json()
+        const res = await fetch(
+          `https://firsttechwallet.top/macdon/sendreciept.php?id=${id}`,
+          {
+            method: "GET",
+          }
+        );
+        const data = await res.json();
 
-        if (data.status === 'success') {
-          alert('Receipt sent')
+        if (data.status === "success") {
+          alert("Receipt sent");
         } else {
-          alert('Error: ' + data.message)
+          alert("Error: " + data.message);
         }
       } catch (error) {
-        alert('Network or parsing error: ' + error.message)
+        alert("Network or parsing error: " + error.message);
       }
     } else {
-      alert('Receipt can only be sent for Withdrawal transactions')
+      alert("Receipt can only be sent for Withdrawal transactions");
     }
-  }
+  };
 
   // const saveEdit = () => {
   //   fetch('https://firsttechwallet.top/macdon/update_transaction.php', {
@@ -86,12 +89,12 @@ export default function Transactions() {
   //     })
   // }
   return (
-    <div className='dashtrans dashboard'>
+    <div className="dashtrans dashboard">
       <DashboardHeader />
 
-      <section className='table-section'>
+      <section className="table-section">
         <h2>All Transactions</h2>
-        <table border='1' cellPadding='8'>
+        <table border="1" cellPadding="8">
           <thead>
             <tr>
               <th>S/N</th>
@@ -109,11 +112,15 @@ export default function Transactions() {
                 <td>{sn++}</td>
                 <td
                   onClick={() => sendRecipt(tx.id, tx.type)}
-                  className='cursor-pointer'
-                  title='Get transaction details'
+                  className="cursor-pointer"
+                  title="Get transaction details"
                 >
                   {editTx?.id === tx.id ? (
-                    <input name='date' value={editTx.date} onChange={handleEditChange} />
+                    <input
+                      name="date"
+                      value={editTx.date}
+                      onChange={handleEditChange}
+                    />
                   ) : (
                     tx.date
                   )}
@@ -121,7 +128,7 @@ export default function Transactions() {
                 <td>
                   {editTx?.id === tx.id ? (
                     <input
-                      name='account'
+                      name="account"
                       value={editTx.account_number}
                       onChange={handleEditChange}
                     />
@@ -131,17 +138,21 @@ export default function Transactions() {
                 </td>
                 <td>
                   {editTx?.id === tx.id ? (
-                    <input name='amount' value={editTx.amount} onChange={handleEditChange} />
-                  ) : tx.type === 'Withdrawal' ? (
-                    <span className='text-red-700'>{'-' + tx.amount}</span>
+                    <input
+                      name="amount"
+                      value={editTx.amount}
+                      onChange={handleEditChange}
+                    />
+                  ) : tx.type === "Withdrawal" ? (
+                    <span className="text-red-700">-₦{tx.amount}</span>
                   ) : (
-                    <span className='text-green-600'>{tx.amount}</span>
+                    <span className="text-green-600">₦{tx.amount}</span>
                   )}
                 </td>
                 <td>
                   {editTx?.id === tx.id ? (
                     <textarea
-                      name='description'
+                      name="description"
                       value={editTx.description}
                       onChange={handleEditChange}
                     />
@@ -151,15 +162,25 @@ export default function Transactions() {
                 </td>
                 <td>
                   {editTx?.id === tx.id ? (
-                    <select name='type' value={editTx.type} onChange={handleEditChange}>
-                      <option value='Deposit'>Deposit</option>
-                      <option value='Withdrawal'>Withdrawal</option>
+                    <select
+                      name="type"
+                      value={editTx.type}
+                      onChange={handleEditChange}
+                    >
+                      <option value="Deposit">Deposit</option>
+                      <option value="Withdrawal">Withdrawal</option>
                     </select>
                   ) : (
                     tx.type
                   )}
                 </td>
-                <td>{tx.balance}</td>
+                <td>
+                  ₦
+                  {Number(tx.balance).toLocaleString("en-NG", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}
+                </td>
                 {/* <td>
                   {editTx?.id === tx.id ? (
                     <div className='btn'>
@@ -187,5 +208,5 @@ export default function Transactions() {
         </table>
       </section>
     </div>
-  )
+  );
 }
