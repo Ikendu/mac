@@ -10,6 +10,7 @@ body {
 }
 .date-filter {
   text-align: center;
+  margin-top: 50px;
 }
 .date-input {
   max-width: 300px;
