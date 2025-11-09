@@ -1,0 +1,29 @@
+.transaction-detail-page {
+  padding: 20px;
+}
+
+.tx-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+.tx-detail-card {
+  background: #f0efef;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  line-height: 1.8;
+}
+
+.tx-detail-card p strong {
+  color: #333;
+}

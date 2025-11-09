@@ -6,6 +6,7 @@
 }
 .contact-content {
   padding: 20px;
+  font-size: 13px;
 }
 
 .contact-header {
@@ -36,7 +37,7 @@
 }
 
 .contact-section h3 {
-  font-size: 12.5px;
+  font-size: 14px;
   font-weight: 700;
   margin-bottom: 12px;
   text-align: left;

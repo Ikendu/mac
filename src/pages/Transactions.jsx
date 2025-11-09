@@ -1,223 +1,64 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import "./styles.css";
+import { useNavigate } from "react-router-dom";
+
 import "./form.css";
+import "./styles.css";
+
 import DashboardHeader from "../components/DashboardHeader";
 
 export default function Transactions() {
   const [transactions, setTransactions] = useState([]);
-  const [editTx, setEditTx] = useState(null); // hold data for editing
+  const navigate = useNavigate();
 
   useEffect(() => {
-    fetchTransactions();
-  }, []);
-
-  const fetchTransactions = () => {
     fetch("https://firsttechwallet.top/macdon/get_transactions.php")
       .then((res) => res.json())
       .then((data) => {
-        if (data.status === "success") {
-          setTransactions(data.data);
-        } else {
-          console.error(data.message);
-        }
+        if (data.status === "success") setTransactions(data.data);
+        else console.error(data.message);
       });
-  };
+  }, []);
 
-  let sn = 1;
-
-  // const deleteTransaction = (id) => {
-  //   if (!window.confirm('Are you sure you want to delete this transaction?')) return
-
-  //   fetch('https://firsttechwallet.top/macdon/delete_transaction.php', {
-  //     method: 'POST',
-  //     headers: { 'Content-Type': 'application/json' },
-  //     body: JSON.stringify({ id }),
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       alert(data.message)
-  //       fetchTransactions()
-  //     })
-  // }
-
-  // const startEdit = (tx) => {
-  //   setEditTx(tx)
-  // }
-
-  const handleEditChange = (e) => {
-    const { name, value } = e.target;
-    setEditTx((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const sendRecipt = async (id, type) => {
-    if (type === "Withdrawal") {
-      console.log("Sending receipt for transaction ID:", id);
-      try {
-        const res = await fetch(
-          `https://firsttechwallet.top/macdon/sendreciept.php?id=${id}`,
-          {
-            method: "GET",
-          }
-        );
-        const data = await res.json();
-
-        if (data.status === "success") {
-          alert("Receipt sent");
-        } else {
-          alert("Error: " + data.message);
-        }
-      } catch (error) {
-        alert("Network or parsing error: " + error.message);
-      }
-    } else {
-      alert("Receipt can only be sent for Withdrawal transactions");
-    }
-  };
-
-  // const saveEdit = () => {
-  //   fetch('https://firsttechwallet.top/macdon/update_transaction.php', {
-  //     method: 'POST',
-  //     headers: { 'Content-Type': 'application/json' },
-  //     body: JSON.stringify(editTx),
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       alert(data.message)
-  //       setEditTx(null)
-  //       fetchTransactions()
-  //     })
-  // }
   return (
-    <div className="dashtrans dashboard">
+    <div className="dashboard">
       <DashboardHeader />
 
-      <section className="table-section">
-        <h2>All Transactions</h2>
-        <table border="1" cellPadding="8">
-          <thead>
-            <tr>
-              <th>S/N</th>
-              <th>Date</th>
-              <th>Account No.</th>
-              <th>Amount</th>
-              <th>Description</th>
-              <th>Transaction</th>
-              <th>Balance</th>
-            </tr>
-          </thead>
-          <tbody>
-            {transactions.map((tx) => (
-              <tr key={tx.id}>
-                <td>{sn++}</td>
-                <td
-                  onClick={() => sendRecipt(tx.id, tx.type)}
-                  className="cursor-pointer"
-                  title="Get transaction details"
-                >
-                  {editTx?.id === tx.id ? (
-                    <input
-                      name="date"
-                      value={editTx.date}
-                      onChange={handleEditChange}
-                    />
-                  ) : (
-                    tx.date
-                  )}
-                </td>
-                <td>
-                  {editTx?.id === tx.id ? (
-                    <input
-                      name="account"
-                      value={editTx.account_number}
-                      onChange={handleEditChange}
-                    />
-                  ) : (
-                    tx.account_number
-                  )}
-                </td>
-                <td>
-                  {editTx?.id === tx.id ? (
-                    <input
-                      name="amount"
-                      value={editTx.amount}
-                      onChange={handleEditChange}
-                    />
-                  ) : tx.type === "Withdrawal" ? (
-                    <span className="text-red-700">
-                      -₦
-                      {Number(tx.amount).toLocaleString("en-NG", {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2,
-                      })}
-                    </span>
-                  ) : (
-                    <span className="text-green-600">
-                      ₦
-                      {Number(tx.amount).toLocaleString("en-NG", {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2,
-                      })}
-                    </span>
-                  )}
-                </td>
-                <td>
-                  {editTx?.id === tx.id ? (
-                    <textarea
-                      name="description"
-                      value={editTx.description}
-                      onChange={handleEditChange}
-                    />
-                  ) : (
-                    tx.description
-                  )}
-                </td>
-                <td>
-                  {editTx?.id === tx.id ? (
-                    <select
-                      name="type"
-                      value={editTx.type}
-                      onChange={handleEditChange}
-                    >
-                      <option value="Deposit">Deposit</option>
-                      <option value="Withdrawal">Withdrawal</option>
-                    </select>
-                  ) : (
-                    tx.type
-                  )}
-                </td>
-                <td>
-                  ₦
-                  {Number(tx.balance).toLocaleString("en-NG", {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2,
-                  })}
-                </td>
-                {/* <td>
-                  {editTx?.id === tx.id ? (
-                    <div className='btn'>
-                      <button className='savebtn' onClick={saveEdit}>
-                        Save
-                      </button>
-                      <button className='cancelbtn' onClick={() => setEditTx(null)}>
-                        Cancel
-                      </button>
-                    </div>
-                  ) : (
-                    <div className='btn'>
-                      <button className='edit' onClick={() => startEdit(tx)}>
-                        Edit
-                      </button>
-                      <button className='delete' onClick={() => deleteTransaction(tx.id)}>
-                        Delete
-                      </button>
-                    </div>
-                  )}
-                </td> */}
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <section className="transactions-section">
+        <h2>Transaction History</h2>
+
+        <div className="transactions-list">
+          {transactions.map((tx) => (
+            <div
+              key={tx.id}
+              className={` transaction-card ${
+                tx.type === "Withdrawal" ? "debit" : "credit"
+              } gap-3 `}
+              onClick={() => navigate(`/transaction/${tx.id}`, { state: tx })}
+            >
+              {tx.type === "Withdrawal" ? (
+                <i class="fa-solid fa-arrow-down text-red-500 rounded-full p-2  bg-white"></i>
+              ) : (
+                <i class="fa-solid fa-arrow-up  text-green-600 rounded-full p-2  bg-white"></i>
+              )}
+              <div className="tx-left">
+                <p className="tx-desc">{tx.description}</p>
+                <span className="tx-date">{tx.date}</span>
+              </div>
+
+              <div className="tx-right">
+                <div className="tx-amount ">
+                  <p>
+                    {tx.type === "Withdrawal" ? "-" : "+"}&nbsp;₦&nbsp;
+                    {Number(tx.amount).toLocaleString("en-NG", {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    })}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </section>
     </div>
   );

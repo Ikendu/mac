@@ -38,7 +38,9 @@ export default function ContactInfo() {
             className="contact-card"
           >
             <span className="dot"></span>
-            <span>firstcontact@firstbanknigeria.com</span>
+            <span style={{ fontSize: "13px" }}>
+              firstcontact@firstbanknigeria.com
+            </span>
           </a>
         </div>
 
