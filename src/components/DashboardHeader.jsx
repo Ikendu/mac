@@ -46,7 +46,7 @@ export default function DashboardHeader() {
           <div>
             <p className="pt-5 font-bold">
               <span className="text-blue-900">Welcome</span> Mohammed Abana
-              Wakir
+              Wakin
             </p>
             <p
               onClick={handleCopy}
