@@ -26,7 +26,7 @@ export default function DashboardHeader() {
   }, []);
 
   function handleCopy() {
-    navigator.clipboard.writeText("3016487936").then(() => {
+    navigator.clipboard.writeText("3229166953").then(() => {
       setCopy(true);
       setTimeout(() => {
         setCopy(false);
@@ -45,14 +45,14 @@ export default function DashboardHeader() {
           <img src="icons/camera.png" alt="" />
           <div>
             <p className="pt-5 font-bold">
-              <span className="text-blue-900">Welcome</span> ABANA WAKIR
-              Mohammed
+              <span className="text-blue-900">Welcome</span> Mohammed Abana
+              Wakir
             </p>
             <p
               onClick={handleCopy}
               className="text-lg account-num text-blue-700 font-bold mb-1 underline cursor-pointer"
             >
-              Account: {copy ? "copied" : 3016487936}
+              Account: {copy ? "copied" : 3229166953}
             </p>
           </div>
           <p className="balance">
@@ -69,7 +69,7 @@ export default function DashboardHeader() {
             onClick={handleCopy}
             className="account-number text-blue-700 font-bold mb-1 underline cursor-pointer"
           >
-            Account: {copy ? "copied" : 3016487936}
+            Account: {copy ? "copied" : 3229166953}
           </p>
           <button className="logoutbtn" onClick={logout}>
             Logout

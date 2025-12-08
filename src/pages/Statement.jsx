@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import "./statement.css";
 import html2pdf from "html2pdf.js";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Statement() {
   const [transactions, setTransactions] = useState([]);
@@ -12,6 +13,7 @@ export default function Statement() {
   const [email, setEmail] = useState("");
   const [isSending, setIsSending] = useState(false);
   const [hasFetched, setHasFetched] = useState(false); // 🔹 Control visibility
+  const navigate = useNavigate();
 
   // 🔹 Fetch Transactions + Summary (only after clicking button)
   const fetchData = () => {
@@ -87,6 +89,9 @@ export default function Statement() {
   return (
     <main>
       {/* 🔹 Date Filter */}
+      <div className=" cursor-pointer p-5 text-xl" onClick={() => navigate(-1)}>
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+      </div>
       <div className="date-filter">
         <label>
           Start Date:{" "}
@@ -97,6 +102,7 @@ export default function Statement() {
             className="date-input"
           />
         </label>
+        <br></br>
         <label>
           End Date:{" "}
           <input
@@ -125,7 +131,7 @@ export default function Statement() {
             <div className="accountdetails">
               <div className="account-info">
                 <p>
-                  <span>Account No:</span> 3016487936
+                  <span>Account No:</span> 3229166953
                 </p>
                 <p>
                   <span>Account Type:</span> SAVINGS A/C-PERSONAL
@@ -134,7 +140,7 @@ export default function Statement() {
                   <span>For the Period of:</span> {period}
                 </p>
                 <p>
-                  <span>Account Name:</span> ABANA wakir Mohammed
+                  <span>Account Name:</span> Mohammed Abana Wakir
                 </p>
                 <p>
                   <span>Address:</span> LIFE'S COMPOUND, AKPO STREET, ACHARA,
@@ -241,9 +247,9 @@ export default function Statement() {
           </div>
 
           {/* 🔹 Action Buttons */}
-          <button className="printbtn" onClick={() => print()}>
+          {/* <button className="printbtn" onClick={() => print()}>
             Print Statement
-          </button>
+          </button> */}
 
           <button
             className="printbtn"

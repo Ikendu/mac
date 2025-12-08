@@ -30,10 +30,11 @@ $html = '
       <div>
         <div style="display: flex; justify-content: space-between; width: 100%; margin: auto;">
           <div class="account-info">
-            <p><span>Account No:</span> 3016487936</p>
+            <p><span>Account No:</span> 3229166953</p>
             <p><span>Account Type:</span> SAVINGS A/C-PERSONAL</p>
             <p><span>For the Period of:</span> 01-Jan-2025 to 31-Jan-2025</p>
-            <p><span>Account Name:</span> ABANA wakir Mohammed</p>
+            <p><span>Account Name:</span>  Mohammed Abana
+              Wakir</p>
             <p><span>Address:</span> LIFE\'S COMPOUND, AKPO STREET, ACHARA, Lagos</p>
           </div>
           <div class="account-info">
