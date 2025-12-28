@@ -199,7 +199,7 @@ export default function Manager() {
                           >
                             <option value="Deposit">Deposit</option>
                             <option value="Withdrawal">Withdrawal</option>
-                            <option value="Transfer">Transfer</option>
+                            {/* <option value="Transfer">Transfer</option> */}
                           </select>
                         </td>
                         <td>
