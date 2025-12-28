@@ -255,7 +255,7 @@ export default function Manager() {
                       </>
                     ) : (
                       <>
-                        <td className="w-32">{tx.date}</td>
+                        <td className="min-w-32">{tx.date}</td>
                         {/* <td>{tx.time || "-"}</td> */}
                         <td>{tx.account_number}</td>
                         <td>
