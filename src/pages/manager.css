@@ -1,0 +1,251 @@
+.manager-section {
+  padding: 20px;
+  background: #f5f5f5;
+  min-height: calc(100vh - 200px);
+}
+
+.manager-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.manager-header h2 {
+  margin: 0;
+  font-size: 24px;
+  color: #333;
+  flex: 1;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  padding: 5px 10px;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+  color: #007bff;
+  transform: scale(1.1);
+}
+
+.error-message {
+  background: #f8d7da;
+  border: 1px solid #f5c6cb;
+  color: #721c24;
+  padding: 12px 15px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  font-size: 18px;
+  color: #666;
+}
+
+.no-transactions {
+  text-align: center;
+  padding: 40px;
+  background: white;
+  border-radius: 8px;
+  color: #999;
+  font-size: 16px;
+}
+
+.manager-table-container {
+  background: white;
+  border-radius: 8px;
+  overflow-x: auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.manager-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.manager-table thead {
+  background: #007bff;
+  color: white;
+}
+
+.manager-table th {
+  padding: 12px 10px;
+  text-align: left;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.manager-table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.manager-table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+.manager-table tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
+.manager-table tbody tr.editing {
+  background-color: #fffbea;
+}
+
+.type-badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.type-badge.deposit {
+  background: #d4edda;
+  color: #155724;
+}
+
+.type-badge.withdrawal {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.type-badge.transfer {
+  background: #d1ecf1;
+  color: #0c5460;
+}
+
+.action-cell {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.edit-input {
+  width: 100%;
+  min-width: 120px;
+  padding: 6px 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 13px;
+  font-family: inherit;
+  color: wheat;
+}
+
+.edit-input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+.btn-edit,
+.btn-delete,
+.btn-save,
+.btn-cancel {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.btn-edit {
+  background: #007bff;
+  color: white;
+}
+
+.btn-edit:hover {
+  background: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+}
+
+.btn-delete {
+  background: #dc3545;
+  color: white;
+}
+
+.btn-delete:hover {
+  background: #c82333;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
+}
+
+.btn-save {
+  background: #28a745;
+  color: white;
+}
+
+.btn-save:hover {
+  background: #218838;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
+}
+
+.btn-cancel {
+  background: #6c757d;
+  color: white;
+}
+
+.btn-cancel:hover {
+  background: #5a6268;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(108, 117, 125, 0.3);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .manager-section {
+    padding: 10px;
+  }
+
+  .manager-header {
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .manager-header h2 {
+    font-size: 18px;
+  }
+
+  .manager-table {
+    font-size: 12px;
+  }
+
+  .manager-table th,
+  .manager-table td {
+    padding: 8px 5px;
+  }
+
+  .btn-edit,
+  .btn-delete,
+  .btn-save,
+  .btn-cancel {
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+
+  .action-cell {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .edit-input {
+    padding: 4px 6px;
+    font-size: 12px;
+  }
+}

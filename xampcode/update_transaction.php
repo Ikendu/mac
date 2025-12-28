@@ -11,18 +11,21 @@ $data = json_decode(file_get_contents("php://input"), true);
 if (
     isset($data['id']) &&
     isset($data['date']) &&
-    isset($data['account']) &&
+    isset($data['account_number']) &&
     isset($data['type']) &&
     isset($data['amount']) &&
+    isset($data['balance']) &&
     isset($data['description'])
+    
 ) {
-    $stmt = $conn->prepare("UPDATE transactions SET date=?, account_number=?, type=?, amount=?, description=? WHERE id=?");
+    $stmt = $conn->prepare("UPDATE transactions SET date=?,  account_number=?, type=?, amount=?, balance=?, description=? WHERE id=?");
     $stmt->bind_param(
-        "sssssi",
+        "ssssssi",
         $data['date'],
-        $data['account'],
+        $data['account_number'],
         $data['type'],
         $data['amount'],
+        $data['balance'],
         $data['description'],
         $data['id']
     );

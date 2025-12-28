@@ -8,6 +8,7 @@ import Transactions from "./pages/Transactions";
 import Statement from "./pages/Statement";
 import ContactInfo from "./pages/ContactUs";
 import TransactionDetail from "./pages/TransactionDetail";
+import Manager from "./pages/Manager";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/statement" element={<Statement />} />
           <Route path="/contact-info" element={<ContactInfo />} />
           <Route path="/transaction/:id" element={<TransactionDetail />} />
+          <Route path="/manager" element={<Manager />} />
         </Routes>
         <Footer />
       </BrowserRouter>
