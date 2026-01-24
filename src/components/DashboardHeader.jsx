@@ -45,14 +45,14 @@ export default function DashboardHeader() {
           <img src="icons/camera.png" alt="" />
           <div>
             <p className="pt-5 font-bold">
-              <span className="text-blue-900">Welcome</span> Mohammed Abana
-              Wakir
+              <span className="text-blue-900">Welcome</span> Dansuleimon Samuel
+              Eyiojo
             </p>
             <p
               onClick={handleCopy}
               className="text-lg account-num text-blue-700 font-bold mb-1 underline cursor-pointer"
             >
-              Account: {copy ? "copied" : 3229166953}
+              Account: {copy ? "copied" : 3230350703}
             </p>
           </div>
           <p className="balance">
