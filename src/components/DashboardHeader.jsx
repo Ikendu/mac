@@ -69,7 +69,7 @@ export default function DashboardHeader() {
             onClick={handleCopy}
             className="account-number text-blue-700 font-bold mb-1 underline cursor-pointer"
           >
-            Account: {copy ? "copied" : 3229166953}
+            Account: {copy ? "copied" : 3230350703}
           </p>
           <button className="logoutbtn" onClick={logout}>
             Logout
