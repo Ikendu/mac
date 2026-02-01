@@ -75,7 +75,11 @@ input:focus {
   padding-bottom: 7px;
   border: none;
   border-radius: 5px;
-  /* color: white; */
+  color: #171616;
+}
+.next-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 @media print {
