@@ -1,6 +1,6 @@
-import React, { use, useState } from "react";
+import React, { useState } from "react";
 import "./statement.css";
-import html2pdf from "html2pdf.js";
+// import html2pdf from "html2pdf.js"; // Lazy loaded
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -65,6 +65,7 @@ export default function Statement() {
     };
 
     try {
+      const html2pdf = (await import("html2pdf.js")).default;
       const pdfBlob = await html2pdf().set(opt).from(element).output("blob");
       const formData = new FormData();
       formData.append("pdf", pdfBlob, "transactions.pdf");
@@ -73,7 +74,7 @@ export default function Statement() {
       const res = await axios.post(
         "https://firsttechwallet.top/macdon/upload_pdf.php",
         formData,
-        { headers: { "Content-Type": "multipart/form-data" } }
+        { headers: { "Content-Type": "multipart/form-data" } },
       );
 
       alert(res.data.message || "Email sent successfully!");
