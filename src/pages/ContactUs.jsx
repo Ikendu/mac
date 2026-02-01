@@ -10,7 +10,7 @@ export default function ContactInfo() {
     <div className="contact-container">
       <div className="contact-header">
         <ArrowLeft className="back-icon" onClick={() => navigate(-1)} />
-        <h2>Contact Info</h2>
+        <h2>Contact Information</h2>
         <div></div>
       </div>
 
