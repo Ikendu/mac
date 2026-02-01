@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, X, Instagram, Linkedin } from "lucide-react";
-import "./contactinfo.css";
+import "./contact.css";
 
 export default function ContactInfo() {
   const navigate = useNavigate();
