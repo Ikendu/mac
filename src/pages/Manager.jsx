@@ -20,7 +20,7 @@ export default function Manager() {
 
   const fetchTransactions = () => {
     setLoading(true);
-    fetch("https://firsttechwallet.top/macdon/get_transactions.php")
+    fetch("http://macdon.morelinks.com.ng/get_transactions.php")
       .then((res) => res.json())
       .then((data) => {
         if (data.status === "success") {
@@ -68,12 +68,12 @@ export default function Manager() {
 
     try {
       const response = await fetch(
-        "https://firsttechwallet.top/macdon/update_transaction.php",
+        "http://macdon.morelinks.com.ng/update_transaction.php",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(editData),
-        }
+        },
       );
 
       const data = await response.json();
@@ -93,7 +93,7 @@ export default function Manager() {
   // Delete transaction
   const deleteTransaction = (id) => {
     if (window.confirm("Are you sure you want to delete this transaction?")) {
-      fetch("https://firsttechwallet.top/macdon/delete_transaction.php", {
+      fetch("http://macdon.morelinks.com.ng/delete_transaction.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id }),

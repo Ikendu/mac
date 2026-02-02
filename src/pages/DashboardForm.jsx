@@ -53,7 +53,7 @@ export default function DashboardForm() {
 
   // Get latest balance for this account
   useEffect(() => {
-    fetch(`https://firsttechwallet.top/macdon/get_last_balance.php`)
+    fetch(`http://macdon.morelinks.com.ng/get_last_balance.php`)
       .then((res) => res.json())
       .then((data) => {
         if (data.balance) {
@@ -93,7 +93,7 @@ export default function DashboardForm() {
       balance: newbalance,
     };
 
-    fetch("https://firsttechwallet.top/macdon/submit_transaction.php", {
+    fetch("http://macdon.morelinks.com.ng/submit_transaction.php", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),

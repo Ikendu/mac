@@ -22,8 +22,8 @@ export default function Statement() {
       return;
     }
 
-    let txUrl = `https://firsttechwallet.top/macdon/get_transactions.php?start=${startDate}&end=${endDate}`;
-    let summaryUrl = `https://firsttechwallet.top/macdon/transaction_summary.php?start=${startDate}&end=${endDate}`;
+    let txUrl = `http://macdon.morelinks.com.ng/get_transactions.php?start=${startDate}&end=${endDate}`;
+    let summaryUrl = `http://macdon.morelinks.com.ng/transaction_summary.php?start=${startDate}&end=${endDate}`;
 
     setPeriod(`${startDate} to ${endDate}`);
 
@@ -72,7 +72,7 @@ export default function Statement() {
       formData.append("email", email);
 
       const res = await axios.post(
-        "https://firsttechwallet.top/macdon/upload_pdf.php",
+        "http://macdon.morelinks.com.ng/upload_pdf.php",
         formData,
         { headers: { "Content-Type": "multipart/form-data" } },
       );
