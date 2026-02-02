@@ -20,7 +20,7 @@ export default function Manager() {
 
   const fetchTransactions = () => {
     setLoading(true);
-    fetch("http://macdon.morelinks.com.ng/get_transactions.php")
+    fetch("https://macdon.morelinks.com.ng/get_transactions.php")
       .then((res) => res.json())
       .then((data) => {
         if (data.status === "success") {
@@ -68,7 +68,7 @@ export default function Manager() {
 
     try {
       const response = await fetch(
-        "http://macdon.morelinks.com.ng/update_transaction.php",
+        "https://macdon.morelinks.com.ng/update_transaction.php",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -93,7 +93,7 @@ export default function Manager() {
   // Delete transaction
   const deleteTransaction = (id) => {
     if (window.confirm("Are you sure you want to delete this transaction?")) {
-      fetch("http://macdon.morelinks.com.ng/delete_transaction.php", {
+      fetch("https://macdon.morelinks.com.ng/delete_transaction.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id }),

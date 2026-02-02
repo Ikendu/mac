@@ -14,10 +14,13 @@ export default function Form() {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const res = await axios.post("http://macdon.morelinks.com.ng/login.php", {
-        username,
-        password,
-      });
+      const res = await axios.post(
+        "https://macdon.morelinks.com.ng/login.php",
+        {
+          username,
+          password,
+        },
+      );
       console.log("Response:", res);
       if (res.data.status === "success") {
         navigate("/dashboard");

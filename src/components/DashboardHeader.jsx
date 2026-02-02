@@ -9,7 +9,7 @@ export default function DashboardHeader() {
   const [copy, setCopy] = useState(false);
 
   useEffect(() => {
-    fetch(`http://macdon.morelinks.com.ng/get_last_balance.php`)
+    fetch(`https://macdon.morelinks.com.ng/get_last_balance.php`)
       .then((res) => res.json())
       .then((data) => {
         if (data.balance) {
@@ -35,7 +35,7 @@ export default function DashboardHeader() {
   }
 
   const logout = async () => {
-    await axios.get("http://macdon.morelinks.com.ng/logout.php");
+    await axios.get("https://macdon.morelinks.com.ng/logout.php");
     navigate("/");
   };
   return (
