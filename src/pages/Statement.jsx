@@ -3,6 +3,7 @@ import "./statement.css";
 // import html2pdf from "html2pdf.js"; // Lazy loaded
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Modal from "../components/Modal";
 
 export default function Statement() {
   const [transactions, setTransactions] = useState([]);
@@ -13,12 +14,31 @@ export default function Statement() {
   const [email, setEmail] = useState("");
   const [isSending, setIsSending] = useState(false);
   const [hasFetched, setHasFetched] = useState(false); // 🔹 Control visibility
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalTitle, setModalTitle] = useState("");
+  const [modalMessage, setModalMessage] = useState("");
+  const [modalType, setModalType] = useState("info");
   const navigate = useNavigate();
+
+  const showModal = (title, message, type = "info") => {
+    setModalTitle(title);
+    setModalMessage(message);
+    setModalType(type);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   // 🔹 Fetch Transactions + Summary (only after clicking button)
   const fetchData = () => {
     if (!startDate || !endDate) {
-      alert("Please select both start and end dates before fetching.");
+      showModal(
+        "Invalid Dates",
+        "Please select both start and end dates before fetching.",
+        "warning",
+      );
       return;
     }
 
@@ -44,12 +64,20 @@ export default function Statement() {
   // 🔹 Generate and Upload PDF (Send Email)
   const generateAndUploadPDF = async () => {
     if (!email) {
-      alert("Please enter a recipient email before sending.");
+      showModal(
+        "Missing Email",
+        "Please enter a recipient email before sending.",
+        "warning",
+      );
       return;
     }
 
     if (!hasFetched) {
-      alert("Please generate a statement first before sending.");
+      showModal(
+        "No Statement",
+        "Please generate a statement first before sending.",
+        "warning",
+      );
       return;
     }
 
@@ -77,11 +105,15 @@ export default function Statement() {
         { headers: { "Content-Type": "multipart/form-data" } },
       );
 
-      alert(res.data.message || "Email sent successfully!");
+      showModal(
+        "Success",
+        res.data.message || "Email sent successfully!",
+        "success",
+      );
       console.log("Upload success:", res.data);
     } catch (err) {
       console.error("Upload failed:", err);
-      alert("Failed to send statement.");
+      showModal("Error", "Failed to send statement.", "error");
     } finally {
       setIsSending(false);
     }
@@ -298,6 +330,14 @@ export default function Statement() {
           100% { transform: rotate(360deg); }
         }
       `}</style>
+
+      <Modal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        title={modalTitle}
+        message={modalMessage}
+        type={modalType}
+      />
     </main>
   );
 }
