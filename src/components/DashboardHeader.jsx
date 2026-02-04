@@ -26,7 +26,7 @@ export default function DashboardHeader() {
   }, []);
 
   function handleCopy() {
-    navigator.clipboard.writeText("3229166953").then(() => {
+    navigator.clipboard.writeText("3230350703").then(() => {
       setCopy(true);
       setTimeout(() => {
         setCopy(false);
@@ -35,9 +35,16 @@ export default function DashboardHeader() {
   }
 
   const logout = async () => {
-    await axios.get("https://macdon.morelinks.com.ng/logout.php");
+    // const response = await axios.post(
+    //   "https://macdon.morelinks.com.ng/logout.php",
+    //   {},
+    //   { withCredentials: true },
+    // );
+
+    // console.log(response.data);
     navigate("/");
   };
+
   return (
     <div className="dashheader">
       <section className="upper">
