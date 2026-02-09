@@ -1,6 +1,6 @@
 export default function RoadingIcon() {
   return (
-    <div className="fixed inset-0 flex flex-col items-center justify-center gap-4 bg-blue-800 z-50">
+    <div className="fixed inset-0 flex flex-col items-center justify-center gap-4 bg-blue-900 z-50">
       <style>{`
         @keyframes spin {
           from {
