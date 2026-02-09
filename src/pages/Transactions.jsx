@@ -5,19 +5,36 @@ import "./form.css";
 import "./styles.css";
 
 import DashboardHeader from "../components/DashboardHeader";
+import RoadingIcon from "../components/RoadingIcon";
 
 export default function Transactions() {
   const [transactions, setTransactions] = useState([]);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     fetch("https://macdon.morelinks.com.ng/get_transactions.php")
       .then((res) => res.json())
       .then((data) => {
-        if (data.status === "success") setTransactions(data.data);
-        else console.error(data.message);
+        if (data.status === "success") {
+          setTransactions(data.data);
+        } else console.error(data.message);
+        // setLoading(false);
       });
   }, []);
+
+  if (loading) {
+    return (
+      <div className="dashboard">
+        <DashboardHeader />
+        <div className="flex justify-center items-center h-[70vh]">
+          {/* <p className="text-2xl text-gray-500">Loading transactions...</p> */}
+          <RoadingIcon />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="dashboard">
