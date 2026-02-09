@@ -20,20 +20,16 @@ export default function Transactions() {
         if (data.status === "success") {
           setTransactions(data.data);
         } else console.error(data.message);
-        // setLoading(false);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching transactions:", error);
+        setLoading(false);
       });
   }, []);
 
   if (loading) {
-    return (
-      <div className="dashboard">
-        <DashboardHeader />
-        <div className="flex justify-center items-center h-[70vh]">
-          {/* <p className="text-2xl text-gray-500">Loading transactions...</p> */}
-          <RoadingIcon />
-        </div>
-      </div>
-    );
+    return <RoadingIcon />;
   }
 
   return (

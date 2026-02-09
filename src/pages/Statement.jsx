@@ -4,6 +4,7 @@ import "./statement.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Modal from "../components/Modal";
+import RoadingIcon from "../components/RoadingIcon";
 
 export default function Statement() {
   const [transactions, setTransactions] = useState([]);
@@ -13,6 +14,7 @@ export default function Statement() {
   const [period, setPeriod] = useState("");
   const [email, setEmail] = useState("");
   const [isSending, setIsSending] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [hasFetched, setHasFetched] = useState(false); // 🔹 Control visibility
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalTitle, setModalTitle] = useState("");
@@ -46,14 +48,19 @@ export default function Statement() {
     let summaryUrl = `https://macdon.morelinks.com.ng/transaction_summary.php?start=${startDate}&end=${endDate}`;
 
     setPeriod(`${startDate} to ${endDate}`);
+    setIsLoading(true);
 
     axios
       .get(txUrl)
       .then((res) => {
         setTransactions(res.data.data || []);
         setHasFetched(true);
+        setIsLoading(false);
       })
-      .catch((err) => console.error("Transactions error:", err));
+      .catch((err) => {
+        console.error("Transactions error:", err);
+        setIsLoading(false);
+      });
 
     axios
       .get(summaryUrl)
@@ -150,8 +157,11 @@ export default function Statement() {
         </button>
       </div>
 
+      {/* 🔹 Loading indicator */}
+      {isLoading && <RoadingIcon />}
+
       {/* 🔹 Conditional rendering */}
-      {hasFetched ? (
+      {!isLoading && hasFetched ? (
         <>
           {/* 🔹 PDF Content */}
           <div className="pdfcontainer" id="pdf-content">

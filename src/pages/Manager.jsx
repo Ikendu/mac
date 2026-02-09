@@ -4,6 +4,7 @@ import "./form.css";
 import "./styles.css";
 import "./manager.css";
 import DashboardHeader from "../components/DashboardHeader";
+import RoadingIcon from "../components/RoadingIcon";
 
 export default function Manager() {
   const [transactions, setTransactions] = useState([]);
@@ -127,7 +128,7 @@ export default function Manager() {
         </header>
 
         {error && <div className="error-message">{error}</div>}
-        {loading && <div className="loading">Loading transactions...</div>}
+        {loading && <RoadingIcon />}
 
         {!loading && transactions.length === 0 && (
           <div className="no-transactions">No transactions found</div>
