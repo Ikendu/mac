@@ -16,28 +16,34 @@ export default function OtherBankTransfer() {
 
   function handleContinue(e) {
     e.preventDefault();
-    // For now just log and navigate back to transfer page
-    console.log({ fromAccount, bank, destAccount, amount, narration });
-    navigate("/transfer");
+    const payload = { fromAccount, bank, destAccount, amount, narration };
+    navigate("/transfer/confirm", { state: payload });
   }
 
   return (
     <div className="other-transfer-page">
       <header className="other-header">
-        <button className="back" onClick={handleBack} aria-label="back">◀</button>
+        <button className="back" onClick={handleBack} aria-label="back">
+          ◀
+        </button>
         <h2>To Other Bank</h2>
         <div className="header-spacer" />
       </header>
 
       <main className="other-main">
-        <div className="limit">Available Daily Transaction Limit:<span> ₦1,000,000.00</span></div>
+        <div className="limit">
+          Available Daily Transaction Limit:<span> ₦1,000,000.00</span>
+        </div>
 
         <form className="transfer-form" onSubmit={handleContinue}>
           <h3>Enter Transfer Details</h3>
 
           <label className="field">
             <div className="label">From Account</div>
-            <select value={fromAccount} onChange={(e) => setFromAccount(e.target.value)}>
+            <select
+              value={fromAccount}
+              onChange={(e) => setFromAccount(e.target.value)}
+            >
               <option value="">Select account to debit</option>
               <option value="acc1">3230350703 - Main</option>
             </select>
@@ -53,22 +59,38 @@ export default function OtherBankTransfer() {
 
           <label className="field">
             <div className="label">Or Enter Destination Account</div>
-            <input value={destAccount} onChange={(e) => setDestAccount(e.target.value)} placeholder="" />
+            <input
+              value={destAccount}
+              onChange={(e) => setDestAccount(e.target.value)}
+              placeholder=""
+            />
           </label>
 
-          <button type="button" className="beneficiary-btn">Select from Beneficiary</button>
+          <button type="button" className="beneficiary-btn">
+            Select from Beneficiary
+          </button>
 
           <label className="field">
             <div className="label">Enter Amount</div>
-            <input value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="" />
+            <input
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+              placeholder=""
+            />
           </label>
 
           <label className="field">
             <div className="label">Enter Narration</div>
-            <input value={narration} onChange={(e) => setNarration(e.target.value)} placeholder="" />
+            <input
+              value={narration}
+              onChange={(e) => setNarration(e.target.value)}
+              placeholder=""
+            />
           </label>
 
-          <button className="continue-btn" type="submit">CONTINUE</button>
+          <button className="continue-btn" type="submit">
+            CONTINUE
+          </button>
         </form>
       </main>
 

@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import icon1 from "../assets/icons/i1.jpg";
 import icon2 from "../assets/icons/i2.jpg";
 import icon3 from "../assets/icons/i3.jpg";
@@ -16,6 +17,7 @@ const transferItems = [
 ];
 
 function TransferPage() {
+  const navigate = useNavigate();
   return (
     <div className="transfer-page">
       <header className="transfer-header">
@@ -41,7 +43,13 @@ function TransferPage() {
           <h3>LOCAL CURRENCY TRANSFERS</h3>
           <div className="list">
             {transferItems.map((it) => (
-              <button className="list-item" key={it.id}>
+              <button
+                className="list-item"
+                key={it.id}
+                onClick={() => {
+                  if (it.id === 4) navigate("/transfer/other-bank");
+                }}
+              >
                 <div className="left">
                   {/* <div className="icon-circle">{it.icon}</div> */}
                   <img src={it.icon} alt={it.title} />

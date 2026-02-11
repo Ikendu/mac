@@ -10,6 +10,8 @@ import ContactInfo from "./pages/ContactUs";
 import TransactionDetail from "./pages/TransactionDetail";
 import Manager from "./pages/Manager";
 import TransferPage from "./pages/TransferPage";
+import OtherBankTransfer from "./pages/OtherBankTransfer";
+import ConfirmTransfer from "./pages/ConfirmTransfer";
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/dashboardform" element={<DashboardForm />} />
           <Route path="/transfer" element={<TransferPage />} />
+          <Route path="/transfer/other-bank" element={<OtherBankTransfer />} />
+          <Route path="/transfer/confirm" element={<ConfirmTransfer />} />
           <Route path="/all-transactions" element={<Transactions />} />
           <Route path="/statement" element={<Statement />} />
           <Route path="/contact-info" element={<ContactInfo />} />
