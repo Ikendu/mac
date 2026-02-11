@@ -43,18 +43,21 @@
   display: flex;
   justify-content: space-between;
   padding: 8px 0;
-  border-bottom: 1px dashed #d7dde6;
+  border-bottom: 1.8px dashed #929393;
 }
 .summary .row.amount .value {
   color: #f6a800;
   font-weight: 900;
 }
 .summary .label {
-  color: #6f7b8b;
-  font-weight: 700;
+  color: #252525;
+  font-weight: 900;
+  font-size: 15px;
 }
 .summary .value {
-  color: #2b3949;
+  color: #919191;
+  font-weight: 700;
+  font-size: 13px;
 }
 .confirm-form {
   max-width: 720px;

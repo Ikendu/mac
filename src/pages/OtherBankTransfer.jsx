@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./OtherBankTransfer.css";
+import banks from "../data/nigerianBanks";
 
 export default function OtherBankTransfer() {
   const navigate = useNavigate();
@@ -53,7 +54,11 @@ export default function OtherBankTransfer() {
             <div className="label">To Bank</div>
             <select value={bank} onChange={(e) => setBank(e.target.value)}>
               <option value="">Select Bank</option>
-              <option value="firstbank">First Bank</option>
+              {banks.map((b) => (
+                <option key={b.code} value={b.code}>
+                  {b.name}
+                </option>
+              ))}
             </select>
           </label>
 

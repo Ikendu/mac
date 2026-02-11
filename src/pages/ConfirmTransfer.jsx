@@ -67,7 +67,7 @@ export default function ConfirmTransfer() {
           </div>
           <div className="row amount">
             <div className="label">Amount:</div>
-            <div className="value highlight">
+            <div className="value " style={{ fontSize: "16px" }}>
               ₦{" "}
               {Number(data.amount || 1000).toLocaleString(undefined, {
                 minimumFractionDigits: 2,
