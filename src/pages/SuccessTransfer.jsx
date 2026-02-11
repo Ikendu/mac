@@ -28,7 +28,7 @@ export default function SuccessTransfer() {
           <button
             className="action-btn"
             onClick={() => {
-              navigate("/transfer");
+              navigate("/dashboard");
             }}
           >
             CONTINUE
