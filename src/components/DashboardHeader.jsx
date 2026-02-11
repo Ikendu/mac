@@ -14,7 +14,7 @@ export default function DashboardHeader() {
       .then((data) => {
         if (data.balance) {
           setBalance(data.balance);
-          console.log(data.balance);
+          // console.log(data.balance);
         } else {
           setBalance(0);
         }
@@ -89,9 +89,13 @@ export default function DashboardHeader() {
             <img src="icons/homesub.png" alt="" />
             <span>Home</span>
           </div>
-          <div onClick={() => navigate("/dashboardform")}>
+          <div onClick={() => navigate("/transfer")}>
             <img src="icons/transfer.png" alt="" />
-            <span>Tranfer</span>
+            <span>Transfer</span>
+          </div>
+          <div onClick={() => navigate("/dashboardform")}>
+            <img src="icons/card.png" alt="" />
+            <span>Cards</span>
           </div>
           <div>
             <img src="icons/loan.png" alt="" />
@@ -100,10 +104,6 @@ export default function DashboardHeader() {
           <div>
             <img src="icons/airtime.png" alt="" />
             <span>Airtime</span>
-          </div>
-          <div>
-            <img src="icons/card.png" alt="" />
-            <span>Cards</span>
           </div>
           {/* <div>
           <img src='/public/icons/code.png' alt='' />

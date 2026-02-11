@@ -9,6 +9,7 @@ import Statement from "./pages/Statement";
 import ContactInfo from "./pages/ContactUs";
 import TransactionDetail from "./pages/TransactionDetail";
 import Manager from "./pages/Manager";
+import TransferPage from "./pages/TransferPage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/" element={<Homepage />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/dashboardform" element={<DashboardForm />} />
+          <Route path="/transfer" element={<TransferPage />} />
           <Route path="/all-transactions" element={<Transactions />} />
           <Route path="/statement" element={<Statement />} />
           <Route path="/contact-info" element={<ContactInfo />} />

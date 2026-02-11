@@ -1,0 +1,99 @@
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./OtherBankTransfer.css";
+
+export default function OtherBankTransfer() {
+  const navigate = useNavigate();
+  const [fromAccount, setFromAccount] = useState("");
+  const [bank, setBank] = useState("");
+  const [destAccount, setDestAccount] = useState("");
+  const [amount, setAmount] = useState("");
+  const [narration, setNarration] = useState("");
+
+  function handleBack() {
+    navigate(-1);
+  }
+
+  function handleContinue(e) {
+    e.preventDefault();
+    // For now just log and navigate back to transfer page
+    console.log({ fromAccount, bank, destAccount, amount, narration });
+    navigate("/transfer");
+  }
+
+  return (
+    <div className="other-transfer-page">
+      <header className="other-header">
+        <button className="back" onClick={handleBack} aria-label="back">◀</button>
+        <h2>To Other Bank</h2>
+        <div className="header-spacer" />
+      </header>
+
+      <main className="other-main">
+        <div className="limit">Available Daily Transaction Limit:<span> ₦1,000,000.00</span></div>
+
+        <form className="transfer-form" onSubmit={handleContinue}>
+          <h3>Enter Transfer Details</h3>
+
+          <label className="field">
+            <div className="label">From Account</div>
+            <select value={fromAccount} onChange={(e) => setFromAccount(e.target.value)}>
+              <option value="">Select account to debit</option>
+              <option value="acc1">3230350703 - Main</option>
+            </select>
+          </label>
+
+          <label className="field">
+            <div className="label">To Bank</div>
+            <select value={bank} onChange={(e) => setBank(e.target.value)}>
+              <option value="">Select Bank</option>
+              <option value="firstbank">First Bank</option>
+            </select>
+          </label>
+
+          <label className="field">
+            <div className="label">Or Enter Destination Account</div>
+            <input value={destAccount} onChange={(e) => setDestAccount(e.target.value)} placeholder="" />
+          </label>
+
+          <button type="button" className="beneficiary-btn">Select from Beneficiary</button>
+
+          <label className="field">
+            <div className="label">Enter Amount</div>
+            <input value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="" />
+          </label>
+
+          <label className="field">
+            <div className="label">Enter Narration</div>
+            <input value={narration} onChange={(e) => setNarration(e.target.value)} placeholder="" />
+          </label>
+
+          <button className="continue-btn" type="submit">CONTINUE</button>
+        </form>
+      </main>
+
+      <nav className="bottom-nav">
+        <button className="nav-btn active">
+          <div className="nav-icon">🏠</div>
+          <div className="nav-label">Dashboard</div>
+        </button>
+        <button className="nav-btn">
+          <div className="nav-icon">👥</div>
+          <div className="nav-label">Beneficiary</div>
+        </button>
+        <button className="nav-btn">
+          <div className="nav-icon">❤</div>
+          <div className="nav-label">Frequent</div>
+        </button>
+        <button className="nav-btn">
+          <div className="nav-icon">💬</div>
+          <div className="nav-label">Feedback</div>
+        </button>
+        <button className="nav-btn">
+          <div className="nav-icon">⚙️</div>
+          <div className="nav-label">Settings</div>
+        </button>
+      </nav>
+    </div>
+  );
+}
