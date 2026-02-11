@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./OtherBankTransfer.css";
 import banks from "../data/nigerianBanks";
+import { useBalance } from "../context/BalanceContext";
 
 export default function OtherBankTransfer() {
   const navigate = useNavigate();
@@ -10,6 +11,7 @@ export default function OtherBankTransfer() {
   const [destAccount, setDestAccount] = useState("");
   const [amount, setAmount] = useState("");
   const [narration, setNarration] = useState("");
+  const { balance } = useBalance();
 
   function handleBack() {
     navigate(-1);
@@ -46,7 +48,13 @@ export default function OtherBankTransfer() {
               onChange={(e) => setFromAccount(e.target.value)}
             >
               <option value="">Select account to debit</option>
-              <option value="acc1">3230350703 - Main</option>
+              <option value="acc1">
+                3230350703 - SAVINGS ACCOUNT -{" "}
+                {balance.toLocaleString("en-NG", {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}
+              </option>
             </select>
           </label>
 

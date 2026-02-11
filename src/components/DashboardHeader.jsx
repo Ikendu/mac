@@ -1,29 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useState } from "react";
 import "./compstyle.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useBalance } from "../context/BalanceContext";
 
 export default function DashboardHeader() {
   const navigate = useNavigate();
-  const [balance, setBalance] = useState(0);
+  const { balance } = useBalance();
   const [copy, setCopy] = useState(false);
-
-  useEffect(() => {
-    fetch(`https://macdon.morelinks.com.ng/get_last_balance.php`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.balance) {
-          setBalance(data.balance);
-          // console.log(data.balance);
-        } else {
-          setBalance(0);
-        }
-      })
-      .catch((err) => {
-        console.error("Failed to fetch balance:", err);
-        setBalance(0);
-      });
-  }, []);
 
   function handleCopy() {
     navigator.clipboard.writeText("3230350703").then(() => {
