@@ -13,6 +13,7 @@ import TransferPage from "./pages/TransferPage";
 import OtherBankTransfer from "./pages/OtherBankTransfer";
 import ConfirmTransfer from "./pages/ConfirmTransfer";
 import SuccessTransfer from "./pages/SuccessTransfer";
+import LoanRequest from "./pages/LoanRequest";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/transfer/other-bank" element={<OtherBankTransfer />} />
           <Route path="/transfer/confirm" element={<ConfirmTransfer />} />
           <Route path="/transfer/success" element={<SuccessTransfer />} />
+          <Route path="/loan-request" element={<LoanRequest />} />
           <Route path="/all-transactions" element={<Transactions />} />
           <Route path="/statement" element={<Statement />} />
           <Route path="/contact-info" element={<ContactInfo />} />
