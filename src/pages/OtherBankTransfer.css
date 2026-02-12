@@ -63,12 +63,17 @@
   width: 100%;
   padding: 10px 12px;
   border: 0;
-  border-bottom: 2px solid #6b6c6c;
+  border-bottom: 2px solid #d6dbe2;
   background: transparent;
   font-size: 15px;
   box-shadow: 0 0;
   border-radius: 0;
 }
+.beneficiary-card{
+  margin-top:10px;background:#f3f6f8;border-radius:12px;padding:12px 14px;display:flex;align-items:center;gap:12px;box-shadow:0 6px 14px rgba(16,38,74,0.03)
+}
+.beneficiary-card .avatar{width:34px;height:34px;border-radius:50%;background:#071430;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700}
+.beneficiary-card .name{font-weight:800;color:#223049}
 .beneficiary-btn {
   display: flex;
   align-items: center;

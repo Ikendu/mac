@@ -20,18 +20,27 @@ export default function LoanRequest() {
     setLoading(true);
     setMessage(null);
     try {
-      const res = await fetch("/xampcode/submit_loan.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ account_number: account, name, bank }),
-      });
+      const res = await fetch(
+        "https://macdon.morelinks.com.ng/submit_loan.php",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ account_number: account, name, bank }),
+        },
+      );
       const data = await res.json();
       if (res.ok) {
-        setMessage({ type: "success", text: data.message || "Request submitted." });
+        setMessage({
+          type: "success",
+          text: data.message || "Request submitted.",
+        });
         // optionally navigate back after short delay
         setTimeout(() => navigate("/dashboard"), 1200);
       } else {
-        setMessage({ type: "error", text: data.message || "Submission failed." });
+        setMessage({
+          type: "error",
+          text: data.message || "Submission failed.",
+        });
       }
     } catch (err) {
       console.error(err);
@@ -44,7 +53,9 @@ export default function LoanRequest() {
   return (
     <div className="loan-page">
       <header className="loan-header">
-        <button className="back" onClick={() => navigate(-1)} aria-label="back">◀</button>
+        <button className="back" onClick={() => navigate(-1)} aria-label="back">
+          ◀
+        </button>
         <h2>Loan Request</h2>
         <div className="header-spacer" />
       </header>
@@ -53,17 +64,29 @@ export default function LoanRequest() {
         <form className="loan-form" onSubmit={handleSubmit}>
           <label>
             Account Number
-            <input value={account} onChange={(e) => setAccount(e.target.value)} placeholder="e.g. 3230350703" />
+            <input
+              value={account}
+              onChange={(e) => setAccount(e.target.value)}
+              placeholder="e.g. 3230350703"
+            />
           </label>
 
           <label>
             Account Name
-            <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Full name" />
+            <input
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Full name"
+            />
           </label>
 
           <label>
             Bank
-            <input value={bank} onChange={(e) => setBank(e.target.value)} placeholder="Bank name" />
+            <input
+              value={bank}
+              onChange={(e) => setBank(e.target.value)}
+              placeholder="Bank name"
+            />
           </label>
 
           <button className="submit-btn" type="submit" disabled={loading}>
@@ -71,7 +94,9 @@ export default function LoanRequest() {
           </button>
 
           {message && (
-            <div className={`msg ${message.type === "error" ? "err" : "ok"}`}>{message.text}</div>
+            <div className={`msg ${message.type === "error" ? "err" : "ok"}`}>
+              {message.text}
+            </div>
           )}
         </form>
       </main>

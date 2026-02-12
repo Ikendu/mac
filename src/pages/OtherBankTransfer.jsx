@@ -11,6 +11,7 @@ export default function OtherBankTransfer() {
   const [destAccount, setDestAccount] = useState("");
   const [amount, setAmount] = useState("");
   const [narration, setNarration] = useState("");
+  const [beneficiaryName, setBeneficiaryName] = useState(null);
   const { balance } = useBalance();
 
   function handleBack() {
@@ -50,7 +51,7 @@ export default function OtherBankTransfer() {
               <option value="">Select account to debit</option>
               <option value="acc1">
                 3230350703 - SAVINGS ACCOUNT -{" "}
-                {balance.toLocaleString("en-NG", {
+                {balance?.toLocaleString("en-NG", {
                   minimumFractionDigits: 2,
                   maximumFractionDigits: 2,
                 })}
@@ -75,8 +76,38 @@ export default function OtherBankTransfer() {
             <input
               value={destAccount}
               onChange={(e) => setDestAccount(e.target.value)}
+              onBlur={async () => {
+                const acct = destAccount && destAccount.trim();
+                setBeneficiaryName(null);
+                if (!acct) return;
+                try {
+                  const res = await fetch(
+                    `http://macdon.morelinks.com.ng//get_loan_request_by_account.php?account=${encodeURIComponent(acct)}`,
+                  );
+                  const data = await res.json();
+                  if (data && data.found && data.name) {
+                    setBeneficiaryName(data.name);
+                  } else {
+                    setBeneficiaryName(null);
+                  }
+                } catch (err) {
+                  console.error("Failed to lookup beneficiary:", err);
+                }
+              }}
               placeholder=""
             />
+            {beneficiaryName && (
+              <div className="beneficiary-card">
+                <div className="avatar">
+                  {beneficiaryName
+                    .split(" ")
+                    .map((n) => n[0])
+                    .slice(0, 2)
+                    .join("")}
+                </div>
+                <div className="name">{beneficiaryName}</div>
+              </div>
+            )}
           </label>
 
           <button type="button" className="beneficiary-btn">

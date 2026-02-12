@@ -82,7 +82,10 @@ export default function DashboardHeader() {
             <img src="icons/card.png" alt="" />
             <span>Cards</span>
           </div>
-          <div onClick={() => navigate('/loan-request')} style={{cursor:'pointer'}}>
+          <div
+            onClick={() => navigate("/loan-request")}
+            style={{ cursor: "pointer" }}
+          >
             <img src="icons/loan.png" alt="" />
             <span>Loans</span>
           </div>

@@ -2,6 +2,12 @@
 // Endpoint to receive loan requests and store in DB
 include "connect.php";
 
+header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json");
+
+header("Access-Control-Allow-Methods: POST, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
 $data = json_decode(file_get_contents('php://input'), true);
 
 if (isset($data['account_number']) && isset($data['name']) && isset($data['bank'])) {
