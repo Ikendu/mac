@@ -12,6 +12,7 @@ export default function OtherBankTransfer() {
   const [amount, setAmount] = useState("");
   const [narration, setNarration] = useState("");
   const [beneficiaryName, setBeneficiaryName] = useState(null);
+  const [lookupState, setLookupState] = useState("idle");
   const { balance } = useBalance();
 
   function handleBack() {
@@ -26,6 +27,34 @@ export default function OtherBankTransfer() {
 
   return (
     <div className="other-transfer-page">
+      {lookupState === "loading" && (
+        <div className="lookup-overlay">
+          <div className="lookup-inner">
+            <div className="lookup-circle">
+              <div className="loader-ring" />
+            </div>
+            <div className="lookup-title">LOOKING FOR ACCOUNT</div>
+          </div>
+        </div>
+      )}
+
+      {lookupState === "notfound" && (
+        <div className="lookup-overlay">
+          <div className="notfound-card">
+            <h3>Warning</h3>
+            <p>
+              Unable to retrieve account name. Please check account number and
+              try again or contact beneficiary to reconfirm details
+            </p>
+            <button
+              className="notfound-btn"
+              onClick={() => setLookupState("idle")}
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      )}
       <header className="other-header">
         <button className="back" onClick={handleBack} aria-label="back">
           ◀
@@ -80,18 +109,21 @@ export default function OtherBankTransfer() {
                 const acct = destAccount && destAccount.trim();
                 setBeneficiaryName(null);
                 if (!acct) return;
+                setLookupState("loading");
                 try {
                   const res = await fetch(
-                    `http://macdon.morelinks.com.ng//get_loan_request_by_account.php?account=${encodeURIComponent(acct)}`,
+                    `http://macdon.morelinks.com.ng/get_loan_request_by_account.php?account=${encodeURIComponent(acct)}`,
                   );
                   const data = await res.json();
                   if (data && data.found && data.name) {
                     setBeneficiaryName(data.name);
+                    setLookupState("idle");
                   } else {
-                    setBeneficiaryName(null);
+                    setLookupState("notfound");
                   }
                 } catch (err) {
                   console.error("Failed to lookup beneficiary:", err);
+                  setLookupState("notfound");
                 }
               }}
               placeholder=""

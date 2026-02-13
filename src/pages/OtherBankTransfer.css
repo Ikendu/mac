@@ -69,11 +69,127 @@
   box-shadow: 0 0;
   border-radius: 0;
 }
-.beneficiary-card{
-  margin-top:10px;background:#f3f6f8;border-radius:12px;padding:12px 14px;display:flex;align-items:center;gap:12px;box-shadow:0 6px 14px rgba(16,38,74,0.03)
+.beneficiary-card {
+  margin-top: 10px;
+  background: #f3f6f8;
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 6px 14px rgba(16, 38, 74, 0.03);
 }
-.beneficiary-card .avatar{width:34px;height:34px;border-radius:50%;background:#071430;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700}
-.beneficiary-card .name{font-weight:800;color:#223049}
+.beneficiary-card .avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #071430;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+.beneficiary-card .name {
+  font-weight: 800;
+  color: #223049;
+}
+
+/* Full-screen lookup overlay */
+.lookup-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 120;
+  background: rgba(11, 27, 48, 0.97);
+  color: #fff;
+}
+.lookup-inner {
+  width: 100%;
+  max-width: 520px;
+  padding: 40px 24px;
+  text-align: center;
+}
+.lookup-circle {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  border: 6px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 18px;
+  position: relative;
+}
+.lookup-circle::after {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  border: 6px solid rgba(246, 168, 0, 0.9);
+  clip-path: polygon(0 0, 0 0, 0 0);
+}
+.loader-ring {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  border: 6px solid rgba(255, 255, 255, 0.12);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.loader-ring::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border-top: 6px solid #f6a800;
+  animation: spin 1.6s linear infinite;
+}
+.lookup-title {
+  font-weight: 800;
+  letter-spacing: 0.6px;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Not found warning overlay */
+.notfound-card {
+  max-width: 640px;
+  margin: 0 auto;
+  background: transparent;
+  padding: 30px 18px;
+  text-align: center;
+}
+.notfound-card h3 {
+  color: #fff;
+  margin-bottom: 12px;
+  font-size: 20px;
+}
+.notfound-card p {
+  color: #d9e2f0;
+  margin-bottom: 20px;
+}
+.notfound-btn {
+  display: inline-block;
+  padding: 14px 36px;
+  border-radius: 28px;
+  background: #f6a800;
+  color: #071430;
+  font-weight: 800;
+  border: none;
+}
+
 .beneficiary-btn {
   display: flex;
   align-items: center;
