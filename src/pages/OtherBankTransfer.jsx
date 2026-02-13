@@ -57,7 +57,7 @@ export default function OtherBankTransfer() {
       )}
       <header className="other-header">
         <button className="back" onClick={handleBack} aria-label="back">
-          ◀
+          <i class="fa fa-arrow-left" aria-hidden="true"></i>
         </button>
         <h2>To Other Bank</h2>
         <div className="header-spacer" />

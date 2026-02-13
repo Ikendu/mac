@@ -34,7 +34,7 @@ export default function DashboardHeader() {
     <div className="dashheader">
       <section className="upper">
         <div className="text-sm user different ">
-          <img src="icons/camera.png" alt="" />
+          <img src="icons/camera.png" alt="User Image" />
           <div>
             <p className="pt-5 font-bold">
               <span className="text-blue-900">Welcome</span> Tijani Barakat

@@ -102,7 +102,7 @@ export default function ConfirmTransfer() {
     <div className="confirm-page">
       <header className="other-header">
         <button className="back" onClick={() => navigate(-1)} aria-label="back">
-          ◀
+          <i class="fa fa-arrow-left" aria-hidden="true"></i>
         </button>
         <h2>To Other Bank</h2>
         <div className="header-spacer" />
