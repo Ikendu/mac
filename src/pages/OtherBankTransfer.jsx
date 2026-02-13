@@ -10,7 +10,7 @@ export default function OtherBankTransfer() {
   const [bank, setBank] = useState("");
   const [destAccount, setDestAccount] = useState("");
   const [amount, setAmount] = useState("");
-  const [narration, setNarration] = useState("");
+  // const [narration, setNarration] = useState("");
   const [beneficiaryName, setBeneficiaryName] = useState(null);
   const [lookupState, setLookupState] = useState("idle");
   const { balance } = useBalance();
@@ -21,7 +21,7 @@ export default function OtherBankTransfer() {
 
   function handleContinue(e) {
     e.preventDefault();
-    const payload = { fromAccount, bank, destAccount, amount, narration };
+    const payload = { fromAccount, bank, destAccount, amount };
     navigate("/transfer/confirm", { state: payload });
   }
 
@@ -112,7 +112,7 @@ export default function OtherBankTransfer() {
                 setLookupState("loading");
                 try {
                   const res = await fetch(
-                    `http://macdon.morelinks.com.ng/get_loan_request_by_account.php?account=${encodeURIComponent(acct)}`,
+                    `https://macdon.morelinks.com.ng/get_loan_request_by_account.php?account=${encodeURIComponent(acct)}`,
                   );
                   const data = await res.json();
                   if (data && data.found && data.name) {
@@ -158,8 +158,8 @@ export default function OtherBankTransfer() {
           <label className="field">
             <div className="label">Enter Narration</div>
             <input
-              value={narration}
-              onChange={(e) => setNarration(e.target.value)}
+              // value={narration}
+              // onChange={(e) => setNarration(e.target.value)}
               placeholder=""
             />
           </label>
