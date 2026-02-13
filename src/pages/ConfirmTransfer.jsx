@@ -10,21 +10,92 @@ export default function ConfirmTransfer() {
   const [saveBeneficiary, setSaveBeneficiary] = useState(false);
 
   const fee = 10.75;
-  const dateStr = new Date().toLocaleDateString("en-GB");
+  function formatDateTime(d) {
+    const day = String(d.getDate()).padStart(2, "0");
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    const month = months[d.getMonth()];
+    const year = String(d.getFullYear()).slice(-2);
+    let hours = d.getHours();
+    const ampm = hours >= 12 ? "PM" : "AM";
+    hours = hours % 12;
+    if (hours === 0) hours = 12;
+    const minutes = String(d.getMinutes()).padStart(2, "0");
+    return `${day}-${month}-${year} ${hours}:${minutes} ${ampm}`;
+  }
 
-  function handleConfirm(e) {
+  const dateStr = formatDateTime(new Date());
+  const [submitting, setSubmitting] = React.useState(false);
+
+  async function handleConfirm(e) {
     e.preventDefault();
-    // Build payload and navigate to success page (would call API in real app)
-    const payload = {
-      ...data,
-      pin: pin ? "***" : "",
-      saveBeneficiary,
-      fee,
-      date: dateStr,
-      amount: data.amount || 1000,
-    };
-    console.log("confirming", payload);
-    navigate("/transfer/success", { state: payload });
+    setSubmitting(true);
+
+    try {
+      // fetch latest balance
+      const balRes = await fetch(
+        "https://macdon.morelinks.com.ng/get_last_balance.php",
+      );
+      const balData = await balRes.json();
+      const currentBal =
+        balData && balData.balance ? Number(balData.balance) : 0;
+
+      const amountNum = Number(data.amount || 0) || 0;
+      const newBalance = currentBal - amountNum;
+
+      const accountNumber =
+        data.fromAccount && data.fromAccount !== "acc1"
+          ? data.fromAccount
+          : "3230350703";
+
+      const formData = {
+        date: dateStr,
+        account: accountNumber,
+        type: "Withdrawal",
+        amount: amountNum,
+        description: data.narration || "",
+        balance: newBalance,
+      };
+
+      const res = await fetch(
+        "https://macdon.morelinks.com.ng/submit_transaction.php",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        },
+      );
+
+      const result = await res.json();
+      if (res.ok) {
+        const payload = {
+          ...data,
+          fee,
+          date: dateStr,
+          amount: amountNum,
+        };
+        navigate("/transfer/success", { state: payload });
+      } else {
+        alert(result.message || "Failed to submit transaction");
+      }
+    } catch (err) {
+      console.error("Error submitting transaction:", err);
+      alert("Network or server error while submitting transaction");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -50,7 +121,7 @@ export default function ConfirmTransfer() {
           <div className="row">
             <div className="label">To:</div>
             <div className="value">
-              {data.destAccount || "CHIBUNDU DAVID ANIEDE 8061632276"}
+              {data.destAccount || "Tijani Barakat Olayinka 8061632276"}
             </div>
           </div>
           <div className="row">

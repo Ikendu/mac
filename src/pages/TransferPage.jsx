@@ -29,6 +29,12 @@ function TransferPage() {
       </header>
 
       <main className="transfer-main">
+        <div
+          className=" cursor-pointer p-1 text-lg"
+          onClick={() => navigate(-1)}
+        >
+          <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        </div>
         <section className="favorites">
           <h3>MY FAVORITES</h3>
           <div className="fav-grid">

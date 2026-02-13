@@ -174,7 +174,7 @@ export default function Statement() {
             <div className="accountdetails">
               <div className="account-info">
                 <p>
-                  <span>Account No:</span> 3230350703
+                  <span>Account No:</span> 3231362275
                 </p>
                 <p>
                   <span>Account Type:</span> SAVINGS A/C-PERSONAL
@@ -183,7 +183,7 @@ export default function Statement() {
                   <span>For the Period of:</span> {period}
                 </p>
                 <p>
-                  <span>Account Name:</span> Dansuleimon Samuel Eyiojo
+                  <span>Account Name:</span> Tijani Barakat Olayinka
                 </p>
                 <p>
                   <span>Address:</span> 20 AJORE STREET, IKEJA, Lagos
