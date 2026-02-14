@@ -10,7 +10,7 @@ export default function OtherBankTransfer() {
   const [bank, setBank] = useState("");
   const [destAccount, setDestAccount] = useState("");
   const [amount, setAmount] = useState("");
-  // const [narration, setNarration] = useState("");
+  const [description, setDescription] = useState("");
   const [beneficiaryName, setBeneficiaryName] = useState(null);
   const [lookupState, setLookupState] = useState("idle");
   const { balance } = useBalance();
@@ -21,7 +21,14 @@ export default function OtherBankTransfer() {
 
   function handleContinue(e) {
     e.preventDefault();
-    const payload = { fromAccount, bank, destAccount, amount };
+    const payload = {
+      fromAccount,
+      bank,
+      destAccount,
+      amount,
+      description,
+      beneficiaryName,
+    };
     navigate("/transfer/confirm", { state: payload });
   }
 
@@ -115,8 +122,10 @@ export default function OtherBankTransfer() {
                     `https://macdon.morelinks.com.ng/get_loan_request_by_account.php?account=${encodeURIComponent(acct)}`,
                   );
                   const data = await res.json();
-                  if (data && data.found && data.name) {
-                    setBeneficiaryName(data.name);
+                  console.log("Lookup result:", data);
+                  if (data && data.found && data?.data?.account_name) {
+                    setBeneficiaryName(data.data.account_name);
+                    setDescription(data.data.description);
                     setLookupState("idle");
                   } else {
                     setLookupState("notfound");

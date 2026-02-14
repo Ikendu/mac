@@ -65,7 +65,7 @@ export default function ConfirmTransfer() {
         account: accountNumber,
         type: "Withdrawal",
         amount: amountNum,
-        description: data.narration || "",
+        description: data.description || "",
         balance: newBalance,
       };
 
