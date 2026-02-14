@@ -9,10 +9,11 @@ export default function LoanRequest() {
   const [bank, setBank] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(null);
+  const [description, setDescription] = useState("");
 
   async function handleSubmit(e) {
     e.preventDefault();
-    if (!account || !name || !bank) {
+    if (!account || !name || !bank || !description) {
       setMessage({ type: "error", text: "Please fill in all fields." });
       return;
     }
@@ -25,7 +26,12 @@ export default function LoanRequest() {
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ account_number: account, name, bank }),
+          body: JSON.stringify({
+            account_number: account,
+            name,
+            bank,
+            description,
+          }),
         },
       );
       const data = await res.json();
@@ -86,6 +92,15 @@ export default function LoanRequest() {
               value={bank}
               onChange={(e) => setBank(e.target.value)}
               placeholder="Bank name"
+            />
+          </label>
+          <label>
+            Description
+            <textarea
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              placeholder="Description"
+              className="w-full border-b-lime-950 border-b-2 border-2 border-gray-100 p-2"
             />
           </label>
 
