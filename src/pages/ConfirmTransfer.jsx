@@ -147,7 +147,7 @@ export default function ConfirmTransfer() {
           </div>
           <div className="row">
             <div className="label">Narration:</div>
-            <div className="value">{data.narration || "Food"}</div>
+            <div className="value">{data.narration || ""}</div>
           </div>
         </div>
 

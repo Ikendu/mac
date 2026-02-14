@@ -11,6 +11,7 @@ export default function OtherBankTransfer() {
   const [destAccount, setDestAccount] = useState("");
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
+  const [narration, setNarration] = useState("");
   const [beneficiaryName, setBeneficiaryName] = useState(null);
   const [lookupState, setLookupState] = useState("idle");
   const { balance } = useBalance();
@@ -27,6 +28,7 @@ export default function OtherBankTransfer() {
       destAccount,
       amount,
       description,
+      narration,
       beneficiaryName,
     };
     navigate("/transfer/confirm", { state: payload });
@@ -167,8 +169,8 @@ export default function OtherBankTransfer() {
           <label className="field">
             <div className="label">Enter Narration</div>
             <input
-              // value={narration}
-              // onChange={(e) => setNarration(e.target.value)}
+              value={narration}
+              onChange={(e) => setNarration(e.target.value)}
               placeholder=""
             />
           </label>
