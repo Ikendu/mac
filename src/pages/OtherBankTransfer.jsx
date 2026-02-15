@@ -74,7 +74,8 @@ export default function OtherBankTransfer() {
 
       <main className="other-main">
         <div className="limit">
-          Available Daily Transaction Limit:<span> ₦1,000,000.00</span>
+          Available Daily Transaction limit Remaining:
+          <span> ₦9,120,000.00</span>
         </div>
 
         <form className="transfer-form" onSubmit={handleContinue}>
