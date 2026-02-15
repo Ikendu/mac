@@ -8,6 +8,7 @@ export default function ConfirmTransfer() {
   const data = state || {};
   const [pin, setPin] = useState("");
   const [saveBeneficiary, setSaveBeneficiary] = useState(false);
+  console.log("ConfirmTransfer received data:", data);
 
   const fee = 10.75;
   function formatDateTime(d) {
@@ -55,10 +56,7 @@ export default function ConfirmTransfer() {
       const amountNum = Number(data.amount || 0) || 0;
       const newBalance = currentBal - amountNum;
 
-      const accountNumber =
-        data.fromAccount && data.fromAccount !== "acc1"
-          ? data.fromAccount
-          : "3230350703";
+      const accountNumber = data?.destAccount;
 
       const formData = {
         date: dateStr,
@@ -114,19 +112,15 @@ export default function ConfirmTransfer() {
         <div className="summary">
           <div className="row">
             <div className="label">From:</div>
-            <div className="value">
-              {data.fromAccount || "SAVINGS ACCOUNT 3091645703"}
-            </div>
+            <div className="value">{"SAVINGS ACCOUNT 3231362275"}</div>
           </div>
           <div className="row">
             <div className="label">To:</div>
-            <div className="value">
-              {data.destAccount || "Tijani Barakat Olayinka 8061632276"}
-            </div>
+            <div className="value">{data.destAccount}</div>
           </div>
           <div className="row">
             <div className="label">Bank:</div>
-            <div className="value">{data.bank || "OPAY"}</div>
+            <div className="value">{data.bank?.toUpperCase()}</div>
           </div>
           <div className="row">
             <div className="label">Date:</div>
@@ -140,7 +134,7 @@ export default function ConfirmTransfer() {
             <div className="label">Amount:</div>
             <div className="value " style={{ fontSize: "16px" }}>
               ₦{" "}
-              {Number(data.amount || 1000).toLocaleString(undefined, {
+              {Number(data.amount).toLocaleString(undefined, {
                 minimumFractionDigits: 2,
               })}
             </div>

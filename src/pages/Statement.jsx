@@ -165,7 +165,7 @@ export default function Statement() {
         <>
           {/* 🔹 PDF Content */}
           <div className="pdfcontainer" id="pdf-content">
-            <img src="image/firstbank.jpg" alt="Bank Logo" width={100} />
+            <img src="images/firstbank.jpg" alt="Bank Logo" width={100} />
             <p className="caution">
               CAUTION: Please ensure you do not reveal your online banking
               password(s), token number(s), or ATM PIN(s) to a third party.

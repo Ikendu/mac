@@ -87,8 +87,8 @@ export default function OtherBankTransfer() {
               onChange={(e) => setFromAccount(e.target.value)}
             >
               <option value="">Select account to debit</option>
-              <option value="acc1">
-                3230350703 - SAVINGS ACCOUNT -{" "}
+              <option value="3231362275 - SAVINGS ACCOUNT">
+                3231362275 - SAVINGS ACCOUNT -{" "}
                 {balance?.toLocaleString("en-NG", {
                   minimumFractionDigits: 2,
                   maximumFractionDigits: 2,
