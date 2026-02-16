@@ -73,13 +73,13 @@ export default function OtherBankTransfer() {
       </header>
 
       <main className="other-main">
-        <div className="limit">
-          Available Daily Transaction limit Remaining:
-          <span> ₦9,120,000.00</span>
+        <div className="text-lg limit">
+          Available Daily Transaction limit:
+          <span> ₦780,500.00</span>
         </div>
 
         <form className="transfer-form" onSubmit={handleContinue}>
-          <h3>Enter Transfer Details</h3>
+          <h3 className="font-bold">Enter Transfer Details</h3>
 
           <label className="field">
             <div className="label">From Account</div>

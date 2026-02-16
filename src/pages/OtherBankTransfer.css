@@ -43,11 +43,12 @@
 .transfer-form {
   max-width: 720px;
   margin: 0 auto;
+  margin-top: 40px;
 }
 .transfer-form h3 {
   text-align: center;
   margin: 8px 0 18px;
-  font-size: 18px;
+  font-size: 20px;
 }
 .field {
   display: block;
