@@ -18,6 +18,18 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      window.addEventListener("load", () => {
+        if (
+          window.ReactNativeWebView &&
+          window.ReactNativeWebView.postMessage
+        ) {
+          window.ReactNativeWebView.postMessage(
+            JSON.stringify({ type: "PAGE_READY" }),
+          );
+        }
+      });
+    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
