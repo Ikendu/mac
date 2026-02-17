@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useBalance } from "../context/BalanceContext";
 import "./form.css";
 import { Link } from "react-router-dom";
 import DashboardHeader from "../components/DashboardHeader";
@@ -35,6 +36,7 @@ function formatDate(date) {
 const now = formatDate(new Date());
 
 export default function DashboardForm() {
+  const { refresh } = useBalance();
   const [date, setDate] = useState(now);
   const [account, setAccount] = useState("");
   const [amount, setAmount] = useState("");
@@ -103,6 +105,11 @@ export default function DashboardForm() {
         console.log(data);
         alert(data.message);
         setWaiting(false);
+        // refresh global balance and notify other views to reload transactions
+        try {
+          refresh();
+        } catch (e) {}
+        window.dispatchEvent(new Event("transactionsUpdated"));
       })
       .catch((err) => console.error("Error:", err));
   };

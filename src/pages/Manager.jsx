@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useBalance } from "../context/BalanceContext";
 import { useNavigate } from "react-router-dom";
 import "./form.css";
 import "./styles.css";
@@ -18,6 +19,15 @@ export default function Manager() {
   useEffect(() => {
     fetchTransactions();
   }, []);
+
+  // Listen for global transactions updates
+  useEffect(() => {
+    const handler = () => fetchTransactions();
+    window.addEventListener("transactionsUpdated", handler);
+    return () => window.removeEventListener("transactionsUpdated", handler);
+  }, []);
+
+  const { refresh } = useBalance();
 
   const fetchTransactions = () => {
     setLoading(true);
@@ -82,6 +92,10 @@ export default function Manager() {
         setError("");
         setEditingId(null);
         fetchTransactions();
+        try {
+          refresh();
+        } catch (e) {}
+        window.dispatchEvent(new Event("transactionsUpdated"));
       } else {
         setError(data.message || "Failed to update transaction");
       }
@@ -104,6 +118,10 @@ export default function Manager() {
           if (data.status === "success") {
             setError("");
             fetchTransactions();
+            try {
+              refresh();
+            } catch (e) {}
+            window.dispatchEvent(new Event("transactionsUpdated"));
           } else {
             setError(data.message || "Failed to delete transaction");
           }

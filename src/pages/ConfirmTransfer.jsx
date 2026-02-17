@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useBalance } from "../context/BalanceContext";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./ConfirmTransfer.css";
 
@@ -39,6 +40,7 @@ export default function ConfirmTransfer() {
 
   const dateStr = formatDateTime(new Date());
   const [submitting, setSubmitting] = React.useState(false);
+  const { refresh } = useBalance();
 
   async function handleConfirm(e) {
     e.preventDefault();
@@ -84,6 +86,11 @@ export default function ConfirmTransfer() {
           date: dateStr,
           amount: amountNum,
         };
+        // update balance & notify transactions list, then navigate
+        try {
+          refresh();
+        } catch (e) {}
+        window.dispatchEvent(new Event("transactionsUpdated"));
         navigate("/transfer/success", { state: payload });
       } else {
         alert(result.message || "Failed to submit transaction");

@@ -13,19 +13,28 @@ export default function Transactions() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true);
-    fetch("https://macdon.morelinks.com.ng/get_transactions.php")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.status === "success") {
-          setTransactions(data.data);
-        } else console.error(data.message);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching transactions:", error);
-        setLoading(false);
-      });
+    const fetchTransactions = () => {
+      setLoading(true);
+      fetch("https://macdon.morelinks.com.ng/get_transactions.php")
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.status === "success") {
+            setTransactions(data.data);
+          } else console.error(data.message);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error("Error fetching transactions:", error);
+          setLoading(false);
+        });
+    };
+
+    fetchTransactions();
+
+    // Listen for global updates and refresh list
+    const handler = () => fetchTransactions();
+    window.addEventListener("transactionsUpdated", handler);
+    return () => window.removeEventListener("transactionsUpdated", handler);
   }, []);
 
   if (loading) {
