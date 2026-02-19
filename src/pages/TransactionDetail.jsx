@@ -9,7 +9,7 @@ export default function TransactionDetail() {
   if (!tx) return <div>No transaction data</div>;
 
   return (
-    <div className="border-gray-500 transaction-detail-page bg-yellow-200 ">
+    <div className="border-gray-500 transaction-detail-page bg-wite">
       <header className="tx-header">
         <button className="back-btn text-xl" onClick={() => navigate(-1)}>
           ←

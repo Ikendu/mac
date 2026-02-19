@@ -3,6 +3,9 @@
 * {
   box-sizing: border-box;
 }
+body {
+  background-color: #f7f7f9;
+}
 .main-container {
   background-image: url(../src/assets/bg.jpg);
   background-size: cover;
@@ -12,6 +15,7 @@
   background-repeat: no-repeat;
   padding-bottom: 165px;
   color: #1f182d;
+  /* background-color: #560c0c; */
 }
 
 .main {
