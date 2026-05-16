@@ -19,8 +19,8 @@ require_once 'connect.php';
 $input = file_get_contents('php://input');
 $data = json_decode($input, true);
 
-if (!is_array($data) || empty($data['account']) || empty($data['password'])) {
-    echo json_encode(["success" => false, "message" => "Account and password are required."]);
+if (!is_array($data) || empty($data['username']) || empty($data['password'])) {
+    echo json_encode(["success" => false, "message" => "Username and password are required."]);
     exit;
 }
 
@@ -30,7 +30,7 @@ if ($user_id <= 0) {
     exit;
 }
 
-$email = $conn->real_escape_string(trim($data['account']));
+$username = $conn->real_escape_string(trim($data['username']));
 $password = password_hash(trim($data['password']), PASSWORD_DEFAULT);
 
 // Update existing user or insert if the record does not exist.
@@ -44,14 +44,14 @@ if (!$stmt) {
     exit;
 }
 
-$stmt->bind_param("iss", $user_id, $email, $password);
+$stmt->bind_param("iss", $user_id, $username, $password);
 
 if ($stmt->execute()) {
     echo json_encode([
         "success" => true,
         "message" => "Login details updated successfully.",
         "details" => [
-            "account" => $email,
+            "username" => $username,
         ],
     ]);
 } else {
