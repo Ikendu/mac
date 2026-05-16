@@ -62,6 +62,13 @@
   color: rgb(47, 32, 184);
   font-weight: bold;
 }
+.nav-container nav div{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+
+}
 
 @media (max-width: 600px) {
   .logoutbtn {
