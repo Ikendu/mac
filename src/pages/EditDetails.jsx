@@ -45,7 +45,7 @@ export default function EditDetails() {
 
     setLoadingLogin(true);
     try {
-      const response = await fetch("https://macdon.morelinks.com.ng/login.php", {
+      const response = await fetch("https://macdon.morelinks.com.ng/update_login_details.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(loginDetails),
