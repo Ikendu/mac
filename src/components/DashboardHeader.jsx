@@ -1,17 +1,41 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./compstyle.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useBalance } from "../context/BalanceContext";
+import { fetchAccountDetails } from "../utils/accountUtils";
 
 export default function DashboardHeader() {
   const navigate = useNavigate();
   const { balance } = useBalance();
   const [copy, setCopy] = useState(false);
+  const [accountNumber, setAccountNumber] = useState("3230350703");
+  const [accountName, setAccountName] = useState("Tijani Barakat Olayinka");
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Load account details from database
+    const loadDetails = async () => {
+      const details = await fetchAccountDetails();
+      if (details) {
+        setAccountNumber(details.account_number);
+        setAccountName(details.account_name);
+      }
+      setLoading(false);
+    };
+    loadDetails();
+
+    // Listen for account details updates
+    const handleUpdate = () => {
+      loadDetails();
+    };
+    window.addEventListener("accountDetailsUpdated", handleUpdate);
+    return () => window.removeEventListener("accountDetailsUpdated", handleUpdate);
+  }, []);
 
   function handleCopy() {
-    navigator.clipboard.writeText("3230350703").then(() => {
+    navigator.clipboard.writeText(accountNumber).then(() => {
       setCopy(true);
       setTimeout(() => {
         setCopy(false);
@@ -37,14 +61,13 @@ export default function DashboardHeader() {
           <img src="icons/camera.png" alt="User Image" />
           <div>
             <p className="pt-5 font-bold">
-              <span className="text-blue-900">Welcome</span> Tijani Barakat
-              Olayinka
+              <span className="text-blue-900">Welcome</span> {loading ? "Loading..." : accountName}
             </p>
             <p
               onClick={handleCopy}
               className="text-lg account-num text-blue-700 font-bold mb-1 underline cursor-pointer"
             >
-              Account: {copy ? "copied" : 3231362275}
+              Account: {copy ? "copied" : accountNumber}
             </p>
           </div>
           <p className="balance">
@@ -61,7 +84,7 @@ export default function DashboardHeader() {
             onClick={handleCopy}
             className="account-number text-blue-700 font-bold mb-1 underline cursor-pointer"
           >
-            Account: {copy ? "copied" : 3231362275}
+            Account: {copy ? "copied" : accountNumber}
           </p>
           <button className="logoutbtn" onClick={logout}>
             Logout

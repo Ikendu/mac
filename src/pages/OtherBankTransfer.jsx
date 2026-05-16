@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./OtherBankTransfer.css";
 import banks from "../data/nigerianBanks";
 import { useBalance } from "../context/BalanceContext";
+import { fetchAccountDetails } from "../utils/accountUtils";
 
 export default function OtherBankTransfer() {
   const navigate = useNavigate();
@@ -15,6 +16,17 @@ export default function OtherBankTransfer() {
   const [beneficiaryName, setBeneficiaryName] = useState(null);
   const [lookupState, setLookupState] = useState("idle");
   const { balance } = useBalance();
+  const [accountNumber, setAccountNumber] = useState("");
+
+  useEffect(() => {
+    const loadAccountNumber = async () => {
+      const details = await fetchAccountDetails();
+      if (details) {
+        setAccountNumber(details.account_number);
+      }
+    };
+    loadAccountNumber();
+  }, []);
 
   function handleBack() {
     navigate(-1);
@@ -88,8 +100,8 @@ export default function OtherBankTransfer() {
               onChange={(e) => setFromAccount(e.target.value)}
             >
               <option value="">Select account to debit</option>
-              <option value="3231362275 - SAVINGS ACCOUNT">
-                3231362275 - SAVINGS ACCOUNT -{" "}
+              <option value={`${accountNumber} - SAVINGS ACCOUNT`}>
+                {accountNumber} - SAVINGS ACCOUNT -{" "}
                 {balance?.toLocaleString("en-NG", {
                   minimumFractionDigits: 2,
                   maximumFractionDigits: 2,

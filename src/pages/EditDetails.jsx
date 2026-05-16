@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DashboardHeader from "../components/DashboardHeader";
+import { fetchAccountDetails, saveAccountDetails } from "../utils/accountUtils";
 import "./form.css";
-
-const PROFILE_STORAGE_KEY = "userProfileDetails";
-const LOGIN_STORAGE_KEY = "userLoginDetails";
 
 export default function EditDetails() {
   const navigate = useNavigate();
@@ -13,36 +11,27 @@ export default function EditDetails() {
   const [loginAccount, setLoginAccount] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [loginStatus, setLoginStatus] = useState("");
+  const [loadingLogin, setLoadingLogin] = useState(false);
 
   // Account Details State
   const [account, setAccount] = useState("");
   const [name, setName] = useState("");
   const [accountStatus, setAccountStatus] = useState("");
+  const [loadingAccount, setLoadingAccount] = useState(true);
 
   useEffect(() => {
-    // Load profile details
-    const storedProfile = window.localStorage.getItem(PROFILE_STORAGE_KEY);
-    if (storedProfile) {
-      try {
-        const parsed = JSON.parse(storedProfile);
-        setAccount(parsed.account || "");
-        setName(parsed.name || "");
-      } catch (err) {
-        console.error("Failed to parse saved profile details", err);
+    // Load account details from database
+    const loadAccountDetails = async () => {
+      const details = await fetchAccountDetails();
+      if (details) {
+        setAccount(details.account_number || "");
+        setName(details.account_name || "");
+      } else {
+        setAccountStatus("Failed to load account details from server.");
       }
-    }
-
-    // Load login details
-    const storedLogin = window.localStorage.getItem(LOGIN_STORAGE_KEY);
-    if (storedLogin) {
-      try {
-        const parsed = JSON.parse(storedLogin);
-        setLoginAccount(parsed.account || "");
-        setLoginPassword(parsed.password || "");
-      } catch (err) {
-        console.error("Failed to parse saved login details", err);
-      }
-    }
+      setLoadingAccount(false);
+    };
+    loadAccountDetails();
   }, []);
 
   const handleLoginSubmit = async (event) => {
@@ -54,9 +43,7 @@ export default function EditDetails() {
       return;
     }
 
-    window.localStorage.setItem(LOGIN_STORAGE_KEY, JSON.stringify(loginDetails));
-    setLoginStatus("Login details saved locally.");
-
+    setLoadingLogin(true);
     try {
       const response = await fetch("https://macdon.morelinks.com.ng/login.php", {
         method: "POST",
@@ -67,11 +54,13 @@ export default function EditDetails() {
       if (data.success) {
         setLoginStatus("Login details updated successfully.");
       } else {
-        setLoginStatus(data.message || "Saved locally. Server response was not successful.");
+        setLoginStatus(data.message || "Failed to update login details.");
       }
     } catch (error) {
       console.warn("Server save failed", error);
-      setLoginStatus("Saved locally. Server not reachable.");
+      setLoginStatus("Server not reachable.");
+    } finally {
+      setLoadingLogin(false);
     }
   };
 
@@ -84,25 +73,17 @@ export default function EditDetails() {
       return;
     }
 
-    window.localStorage.setItem(PROFILE_STORAGE_KEY, JSON.stringify(details));
-    setAccountStatus("Account details saved locally.");
-
-    try {
-      const response = await fetch("https://macdon.morelinks.com.ng/save_account_details.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(details),
-      });
-      const data = await response.json();
-      if (data.success) {
-        setAccountStatus("Account details saved to server successfully.");
-      } else {
-        setAccountStatus(data.message || "Saved locally. Server response was not successful.");
-      }
-    } catch (error) {
-      console.warn("Server save failed", error);
-      setAccountStatus("Saved locally. Server not reachable.");
+    setLoadingAccount(true);
+    const result = await saveAccountDetails(details.account, details.name);
+    
+    if (result.success) {
+      setAccountStatus("Account details saved successfully. Refreshing all pages...");
+      // Dispatch event for other components to refresh
+      window.dispatchEvent(new Event("accountDetailsUpdated"));
+    } else {
+      setAccountStatus(result.message || "Failed to save account details.");
     }
+    setLoadingAccount(false);
   };
 
   return (

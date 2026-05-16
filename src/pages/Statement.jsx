@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./statement.css";
 // import html2pdf from "html2pdf.js"; // Lazy loaded
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Modal from "../components/Modal";
 import RoadingIcon from "../components/RoadingIcon";
+import { fetchAccountDetails } from "../utils/accountUtils";
 
 export default function Statement() {
   const [transactions, setTransactions] = useState([]);
@@ -20,7 +21,21 @@ export default function Statement() {
   const [modalTitle, setModalTitle] = useState("");
   const [modalMessage, setModalMessage] = useState("");
   const [modalType, setModalType] = useState("info");
+  const [accountNumber, setAccountNumber] = useState("");
+  const [accountName, setAccountName] = useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const loadAccountNumber = async () => {
+      const details = await fetchAccountDetails();
+      if (details) {
+        setAccountNumber(details.account_number);
+        setAccountName(details.account_name);
+        console.log("Loaded account number:", details);
+      }
+    };
+    loadAccountNumber();
+  }, []);
 
   const showModal = (title, message, type = "info") => {
     setModalTitle(title);
@@ -174,7 +189,7 @@ export default function Statement() {
             <div className="accountdetails">
               <div className="account-info">
                 <p>
-                  <span>Account No:</span> 3231362275
+                  <span>Account No:</span> {accountNumber || "Loading..."}
                 </p>
                 <p>
                   <span>Account Type:</span> SAVINGS A/C-PERSONAL
@@ -183,7 +198,8 @@ export default function Statement() {
                   <span>For the Period of:</span> {period}
                 </p>
                 <p>
-                  <span>Account Name:</span> Tijani Barakat Olayinka
+                  
+                  <span>Account Name:</span> {accountName || "Loading..."}
                 </p>
                 <p>
                   <span>Address:</span> 20 AJORE STREET, IKEJA, Lagos

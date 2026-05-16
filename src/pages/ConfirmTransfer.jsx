@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useBalance } from "../context/BalanceContext";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./ConfirmTransfer.css";
+import { fetchAccountDetails } from "../utils/accountUtils";
 
 export default function ConfirmTransfer() {
   const { state } = useLocation();
@@ -9,7 +10,18 @@ export default function ConfirmTransfer() {
   const data = state || {};
   const [pin, setPin] = useState("");
   const [saveBeneficiary, setSaveBeneficiary] = useState(false);
+  const [accountNumber, setAccountNumber] = useState("");
   console.log("ConfirmTransfer received data:", data);
+
+  useEffect(() => {
+    const loadAccountNumber = async () => {
+      const details = await fetchAccountDetails();
+      if (details) {
+        setAccountNumber(details.account_number);
+      }
+    };
+    loadAccountNumber();
+  }, []);
 
   const fee = 10.75;
   function formatDateTime(d) {
@@ -119,7 +131,7 @@ export default function ConfirmTransfer() {
         <div className="summary">
           <div className="row">
             <div className="label">From:</div>
-            <div className="value">{"SAVINGS ACCOUNT 3231362275"}</div>
+            <div className="value">{`SAVINGS ACCOUNT ${accountNumber || "Loading..."}`}</div>
           </div>
           <div className="row">
             <div className="label">To:</div>
