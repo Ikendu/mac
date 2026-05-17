@@ -58,7 +58,8 @@ export default function Dashboard() {
             </div>
             <div
               onClick={() => {
-                alert("Service not available ");
+                navigate("/edit-details");
+                // alert("Service not available ");
               }}
               className="dbicon"
             >
