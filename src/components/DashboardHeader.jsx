@@ -112,7 +112,7 @@ export default function DashboardHeader() {
             <img src="icons/loan.png" alt="" />
             <span>Loans</span>
           </div>
-          <div>
+          <div onClick={()=>navigate("/edit-details")}>
             <img src="icons/airtime.png" alt="" />
             <span>Airtime</span>
           </div>

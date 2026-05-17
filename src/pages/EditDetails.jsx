@@ -89,6 +89,11 @@ export default function EditDetails() {
   return (
     <main className="dashform dashboard">
       <DashboardHeader />
+      <div className="edit-details-footer">
+        <button type="button" className="p-2 px-10 bg-gray-300 text-black rounded-lg m-5" onClick={() => navigate(-1)}>
+          Back
+        </button>
+      </div>
       
       <div className="edit-details-container">
         {/* Login Details Section */}
@@ -148,11 +153,7 @@ export default function EditDetails() {
         </form>
       </div>
 
-      <div className="edit-details-footer">
-        <button type="button" className="p-2 px-10 bg-gray-300 text-black rounded-lg m-5" onClick={() => navigate(-1)}>
-          Back
-        </button>
-      </div>
+      
     </main>
   );
 }
