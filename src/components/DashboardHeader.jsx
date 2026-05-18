@@ -1,38 +1,16 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "./compstyle.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useBalance } from "../context/BalanceContext";
-import { fetchAccountDetails } from "../utils/accountUtils";
+import { useAccountDetails } from "../context/AccountDetailsContext";
 
 export default function DashboardHeader() {
   const navigate = useNavigate();
   const { balance } = useBalance();
+  const { accountName, accountNumber, loading } = useAccountDetails();
   const [copy, setCopy] = useState(false);
-  const [accountNumber, setAccountNumber] = useState("3230350703");
-  const [accountName, setAccountName] = useState("Tijani Barakat Olayinka");
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    // Load account details from database
-    const loadDetails = async () => {
-      const details = await fetchAccountDetails();
-      if (details) {
-        setAccountNumber(details.account_number);
-        setAccountName(details.account_name);
-      }
-      setLoading(false);
-    };
-    loadDetails();
-
-    // Listen for account details updates
-    const handleUpdate = () => {
-      loadDetails();
-    };
-    window.addEventListener("accountDetailsUpdated", handleUpdate);
-    return () => window.removeEventListener("accountDetailsUpdated", handleUpdate);
-  }, []);
 
   function handleCopy() {
     navigator.clipboard.writeText(accountNumber).then(() => {
