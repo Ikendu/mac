@@ -80,7 +80,7 @@ export default function Manager() {
 
     try {
       const response = await fetch(
-        "https://macdon.morelinks.com.ng/update_transaction_v2.php",
+        "https://macdon.morelinks.com.ng/update_transaction.php",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
