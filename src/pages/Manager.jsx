@@ -55,6 +55,7 @@ export default function Manager() {
     setEditData({
       id: transaction.id,
       date: transaction.date,
+      dates: transaction.dates || "",
       //   time: transaction.time || "",
       account_number: transaction.account_number,
       type: transaction.type,
@@ -79,7 +80,7 @@ export default function Manager() {
 
     try {
       const response = await fetch(
-        "https://macdon.morelinks.com.ng/update_transaction.php",
+        "https://macdon.morelinks.com.ng/update_transaction_v2.php",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -177,13 +178,23 @@ export default function Manager() {
                       <>
                         <td>
                           <input
-                            // type="date"
                             value={editData.date}
                             onChange={(e) =>
                               setEditData({ ...editData, date: e.target.value })
                             }
                             className="w-20 edit-input"
                           />
+                          <div style={{ marginTop: 6 }}>
+                            <input
+                              type="date"
+                              value={editData.dates}
+                              onChange={(e) =>
+                                setEditData({ ...editData, dates: e.target.value })
+                              }
+                              className="edit-input"
+                              title="Query date (YYYY-MM-DD)"
+                            />
+                          </div>
                         </td>
                         {/* <td>
                           <input

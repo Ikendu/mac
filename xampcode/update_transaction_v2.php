@@ -28,6 +28,8 @@ if (
 
 $id = intval($data['id']);
 $date = $data['date'];
+// query-format date (YYYY-MM-DD)
+$dates = isset($data['dates']) ? $data['dates'] : '';
 $time = isset($data['time']) ? $data['time'] : '';
 $account_number = isset($data['account_number']) ? $data['account_number'] : '';
 $type = isset($data['type']) ? $data['type'] : '';
@@ -36,14 +38,14 @@ $description = isset($data['description']) ? $data['description'] : '';
 $balance = isset($data['balance']) ? $data['balance'] : '';
 
 // Update transaction
-$stmt = $conn->prepare("UPDATE transactions SET dates = ?, time = ?, account_number = ?, type = ?, amount = ?, description = ?, balance = ? WHERE id = ?");
+$stmt = $conn->prepare("UPDATE transactions SET date = ?, dates = ?, time = ?, account_number = ?, type = ?, amount = ?, description = ?, balance = ? WHERE id = ?");
 
 if (!$stmt) {
     echo json_encode(["status" => "error", "message" => "Prepare failed: " . $conn->error]);
     exit();
 }
 
-$stmt->bind_param("sssssssi", $date, $time, $account_number, $type, $amount, $description, $balance, $id);
+$stmt->bind_param("ssssssssi", $date, $dates, $time, $account_number, $type, $amount, $description, $balance, $id);
 
 if ($stmt->execute()) {
     echo json_encode(["status" => "success", "message" => "Transaction updated successfully"]);
