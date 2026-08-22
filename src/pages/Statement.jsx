@@ -126,16 +126,20 @@ export default function Statement() {
         formData,
         { headers: { "Content-Type": "multipart/form-data" } },
       );
+      console.log("Upload response:", res.data);
 
-      showModal(
-        "Success",
-        res.data.message || "Email sent successfully!",
-        "success",
-      );
-      console.log("Upload success:", res.data);
+      if (res.data.status !== "success") {
+        throw new Error(res.data.message || "Upload failed");
+      } else {
+        showModal(
+          "Success",
+          res.data.message || "Email sent successfully!",
+          "success",
+        );
+      }
     } catch (err) {
       console.error("Upload failed:", err);
-      showModal("Error", "Failed to send statement.", "error");
+      showModal("Error", "Failed to send statement, " + err.message, "error");
     } finally {
       setIsSending(false);
     }
@@ -198,7 +202,6 @@ export default function Statement() {
                   <span>For the Period of:</span> {period}
                 </p>
                 <p>
-                  
                   <span>Account Name:</span> {accountName || "Loading..."}
                 </p>
                 <p>
@@ -320,8 +323,7 @@ export default function Statement() {
               alignItems: "center",
               justifyContent: "center",
               gap: "8px",
-            }}
-          >
+            }}>
             {isSending ? (
               <>
                 <span
@@ -333,8 +335,7 @@ export default function Statement() {
                     borderTop: "3px solid #333",
                     borderRadius: "50%",
                     animation: "spin 1s linear infinite",
-                  }}
-                ></span>
+                  }}></span>
                 Sending...
               </>
             ) : (
