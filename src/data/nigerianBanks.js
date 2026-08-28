@@ -11,6 +11,7 @@ const banks = [
   { code: "sterling", name: "Sterling Bank" },
   { code: "polaris", name: "Polaris Bank" },
   { code: "keystone", name: "Keystone Bank" },
+  { code: "nom", name: "Nombank Microfinance Bank" },
   { code: "wema", name: "Wema Bank" },
   { code: "alat", name: "ALAT by Wema" },
   { code: "ecobank", name: "Ecobank Nigeria" },
